@@ -2,6 +2,8 @@ drop database if exists cfb_statistics;
 create database cfb_statistics;
 use cfb_statistics;
 
+drop table if exists rushing_stat;
+drop table if exists roster;
 drop table if exists player;
 drop table if exists team;
 drop table if exists college;
@@ -54,5 +56,29 @@ create table player(
         references `position`(position_id)
 );
 
+create table roster(
+	roster_id int primary key auto_increment,
+    player_id int not null,
+    class_id int not null,
+    team_id int not null,
+    constraint fk_roster_player_id
+		foreign key (player_id)
+        references player(player_id),
+	constraint fk_roster_class_id
+		foreign key (class_id)
+        references class(class_id),
+	constraint fk_roster_team_id
+		foreign key (team_id)
+        references team(team_id)
+);
 
-
+create table rushing_stat(
+	rushing_stat_id int primary key auto_increment,
+    roster_id int not null,
+    games_played int not null,
+    rush_attempts int not null,
+    rush_yards int not null,
+    rush_yards_per_att decimal(10,1) not null,
+    rush_touchdowns int not null,
+    rush_yards_per_game decimal(10,1) not null
+);
