@@ -1,0 +1,786 @@
+first_name,last_name,suffix,Class,Pos,college_name,year
+Clune,Van,Andel,JR,K,Arkansas State,2024
+Jake,St.,Andre,JR,LB,Louisiana,2024
+Luis,Carlos,Aranda,JR,OL,UTEP,2024
+John,Ross,Ashley,SO,CB,Ole Miss,2024
+Carson,de,Avila,JR,S,Navy,2024
+Walter,Young,Bear,SR,OL,Tulsa,2024
+Brady,Van,Bennekum,SO,LB,San Jose State,2024
+John,David,Black,SO,QB,East Carolina,2024
+Brett,Le,Blanc,JR,LS,Missouri,2024
+Jah,Jah,Boyd,SO,DB,Indiana,2024
+Michael,Van,Buren,SO,QB,Mississippi State,2024
+Blake,Van,Buren,JR,TE,Northwestern,2024
+Zach,Jackson,CLEM,SR,WR,Clemson,2024
+Delfin,Xavier,Castillo,SR,OL,Vanderbilt,2024
+John,Hoyet,Chance,SO,P,Louisiana Tech,2024
+Ha'aheo,Dela,Cruz,SO,DL,Hawaii,2024
+John,Henry,Daley,JR,DE,Utah,2024
+Jordan,Van,Den,JR,DT,Georgia Tech,2024
+Charlie,Von,Der,SO,K,Arkansas,2024
+Carson,Van,Dinter,SO,DB,Iowa State,2024
+Tyler,Van,Dyke,SR,QB,Wisconsin,2024
+Evan,Van,Dyn,JR,LB,Wisconsin,2024
+Jay,Jay,Etheridge,SO,WR,Kent State,2024
+John,Henry,Flatt,SO,OL,Auburn,2024
+Ismael,Smith,Flores,SO,LB,Nebraska,2024
+John,Paul,Flores,SR,OL,Liberty,2024
+Luke,Yau,Gale,SO,DE,Buffalo,2024
+Pierce,St,Geme,SO,WR,Bowling Green,2024
+Harrison,Saint,Germain,JR,TE,Virginia Tech,2024
+Jace,J.,Gilbert,SO,DL,Iowa State,2024
+Na'eem,Abdul-Rahim,Gladding,SO,WR,Old Dominion,2024
+John,Curtis,Goodman,JR,OT,Louisiana-Monroe,2024
+Leonard,St.,Gourdin,SR,DB,Massachusetts,2024
+Nick,Del,Grande,JR,OL,Coastal Carolina,2024
+"\"Xavion","\"\"Tutu\"\"","Griffin\"",SO,DB,Western Kentucky,2024
+Tom,von,Grote,SO,QB,North Texas,2024
+John,Michael,Gyllenborg,SR,TE,Wyoming,2024
+Sam,Vander,Haar,JR,P,BYU,2024
+Sammy,El,Hadidi,SR,LS,Rutgers,2024
+Shane,Payton,Hodges,FR,DE,Jacksonville State,2024
+John,Wallace,Holladay,SO,WR,Louisiana-Monroe,2024
+Kimo,Holo,Holt-Mossman,SR,DB,Hawaii,2024
+Michael,De,Hoyos,JR,CB,SMU,2024
+Sterlng,Lane,II,SR,DE,Arizona,2024
+Brian,Doneghy,II,SR,RB,Cincinnati,2024
+Marlon,Corey,II,JR,OL,Coastal Carolina,2024
+Antonio,Molder,II,SO,DB,Coastal Carolina,2024
+Vince,Brown,II,SR,TE,Colorado State,2024
+Al,Wooten,II,SR,RB,Duke,2024
+James,Hopson,II,SR,WR,Duke,2024
+Brian,Parker,II,SR,OL,Duke,2024
+Melvin,Swindle,II,SR,DL,Eastern Michigan,2024
+Terrence,Ferguson,II,SR,OL,Florida State,2024
+Fentrell,Cypress,II,SR,DB,Florida State,2024
+Kevin,Knowles,II,SR,DB,Florida State,2024
+Roderick,Robinson,II,JR,RB,Georgia,2024
+Damon,Wilson,II,JR,LB,Georgia,2024
+Fuches,Lewis,II,SR,DL,Georgia State,2024
+Kenyatta,Watson,II,SR,S,Georgia State,2024
+Derek,Boyd,II,JR,LB,Hawaii,2024
+Virdel,Edwards,II,SR,DB,Hawaii,2024
+Cole,McConathy,II,SO,DL,Miami (FL),2024
+Danny,Zarco,II,SO,OL,Miami (OH),2024
+William,Goodvine,II,SO,DL,Miami (OH),2024
+Kenric,Lanier,II,SO,WR,Minnesota,2024
+Greg,Johnson,II,JR,CB,Navy,2024
+Hoke,Smith,II,JR,OC,Navy,2024
+Dwight,Bootle,II,SO,DB,Nebraska,2024
+Nate,Burleson,II,SO,WR,Nevada,2024
+Nijrell,Eason,II,SO,DB,Nevada-Las Vegas,2024
+Michael,Robinson,II,SR,DB,Rutgers,2024
+Dante,Wesley,II,SO,CB,SMU,2024
+Phillippe,Wesley,II,SR,WR,San Diego State,2024
+Reggie,Johnson,II,SR,LB,South Florida,2024
+Michael,Williams,II,SR,DE,South Florida,2024
+David,Amador,II,JR,WR,UTSA,2024
+Jamaal,Young,II,SO,WR,Arizona State,2024
+Keith,Abney,II,JR,DB,Arizona State,2024
+Chris,Johnson,II,SO,DB,Arizona State,2024
+Joseph,McGinnis,II,JR,DB,Arizona State,2024
+Mike,Sharpe,II,SR,RB,Arkansas State,2024
+Marvin,Ham,II,SR,LB,Arkansas State,2024
+Bryan,Whitehead,II,SR,DE,Arkansas State,2024
+Dion,Smith,II,SO,DL,Ball State,2024
+DD,Snyder,II,SR,DB,Ball State,2024
+RJ,Garcia,II,SR,WR,Bowling Green,2024
+Marcus,Scott,II,JR,DB,California,2024
+DeQuinder,Williams,II,SO,DB,Charlotte,2024
+Joseph,Roberto,II,SO,LB,Clemson,2024
+B.J.,Green,II,SR,DL,Colorado,2024
+Richard,Abood,II,SR,K,Florida,2024
+John,Bock,II,SR,OL,Florida International,2024
+Karim,McCune,II,SR,WR,Fresno State,2024
+Dexter,Williams,II,SR,QB,Georgia Southern,2024
+Marc,Stampley,II,SR,DB,Georgia Southern,2024
+Corey,Robinson,II,SR,OL,Georgia Tech,2024
+Cedric,Franklin,II,SO,DB,Georgia Tech,2024
+Re'Shaun,Sanford,II,SO,RB,Houston,2024
+Thomathan,Good,II,SR,DL,Houston,2024
+Maurice,Williams,II,SO,DB,Houston,2024
+Mario,Sanders,II,JR,WR,Illinois,2024
+Shawn,Asbury,II,SR,DB,Indiana,2024
+Antonio,Carter,II,SR,S,Jacksonville State,2024
+Fred,Davis,II,SR,CB,Jacksonville State,2024
+Fred,Farrier,II,SR,WR,Kentucky,2024
+Kenyatta,Hardge,II,SO,DL,Kentucky,2024
+Jerod,Smith,II,SO,DL,Kentucky,2024
+Connie,Hewitt,II,SO,TE,Liberty,2024
+Shadwel,Nkuba,II,SR,CB,Louisiana,2024
+Marc,Britt,II,SR,WR,Louisiana-Monroe,2024
+Ruban,Hyppolite,II,SR,LB,Maryland,2024
+Mao,Glynn,II,SR,OL,Massachusetts,2024
+Paul,Billups,II,SO,WR,North Carolina,2024
+Reggie,Love,II,SO,DB,North Carolina,2024
+Brian,Nelson,II,SO,CB,North Texas,2024
+Kerry,Williams,II,SO,CB,North Texas,2024
+Adrian,Thomas,II,SO,S,Northern Illinois,2024
+Joseph,Himon,II,JR,RB,Northwestern,2024
+CJ,Johnson,II,SR,WR,Northwestern,2024
+Hayden,Eligon,II,SO,WR,Northwestern,2024
+Jason,Reynolds,II,JR,LB,Northwestern,2024
+Rod,Heard,II,SR,S,Notre Dame,2024
+Rodney,Harris,II,JR,WR,Ohio,2024
+Michael,Mack,II,SR,CB,Ohio,2024
+Nigel,Smith,II,SO,DL,Oklahoma,2024
+Raymond,Gay,II,SR,CB,Oklahoma State,2024
+Will,Jones,II,SR,S,Old Dominion,2024
+Marcus,Harper,II,SR,OL,Oregon,2024
+Jermaine,Terry,II,SR,TE,Oregon State,2024
+Elliot,Washington,II,JR,CB,Penn State,2024
+Joseph,Jefferson,II,JR,DB,Purdue,2024
+Michael,Phoenix,II,JR,WR,Sam Houston,2024
+Terrence,Guillory,II,FR,WR,Sam Houston,2024
+James,Dawn,II,JR,OL,Sam Houston,2024
+Demetrius,Knight,II,SR,LB,South Carolina,2024
+Oronde,Gadsden,II,SR,TE,Syracuse,2024
+Chris,Brazzell,II,JR,WR,Tennessee,2024
+Mike,Bethea,II,SR,DL,Tennessee,2024
+Johntay,Cook,II,JR,WR,Texas,2024
+Reuben,Fatheree,II,SR,OL,Texas A&M,2024
+Terrence,Cooks,II,SR,LB,Texas Christian,2024
+Johncarlos,Miller,II,JR,TE,Texas Tech,2024
+Damon,Ollison,II,SR,LB,Toledo,2024
+Wayne,Peart,II,SO,DT,Toledo,2024
+Rodrek,Williams,II,SR,DB,Tulane,2024
+Baron,Franks,II,SR,OL,UAB,2024
+Sheldon,"Arnold,",II,SR,DB,UCF,2024
+Anthony,Frias,II,SR,RB,UCLA,2024
+Desman,Stephens,II,SO,LB,USC,2024
+Derrell,Johnson,II,JR,OL,Wake Forest,2024
+Eldrick,Robinson,II,JR,LB,Wake Forest,2024
+Sam,Adams,II,SR,RB,Washington,2024
+Russell,Davis,II,SR,DE,Washington,2024
+JD,Davis,II,SO,QB,Western Michigan,2024
+Rob,Booker,II,SO,TE,Wisconsin,2024
+Tim,Keenan,III,SR,DL,Alabama,2024
+Jordan,McCord,III,SO,WR,Arizona,2024
+Lloyd,Benson,III,JR,WR,Army,2024
+Elinus,Noel,III,SR,DL,Baylor,2024
+Tevin,Williams,III,SR,CB,Baylor,2024
+Patrick,Clacks,III,SO,WR,Buffalo,2024
+Eddie,Pleasant,III,JR,DB,Buffalo,2024
+Jesse,Prewitt,III,SR,WR,Central Michigan,2024
+Fernando,Sanchez,III,SR,LB,Central Michigan,2024
+Brian,Simms,III,SO,LB,Cincinnati,2024
+John,Grant,III,JR,TE,Coastal Carolina,2024
+Payne,Williams,III,SO,K,Colorado State,2024
+Beau,Lilly,III,JR,WR,Duke,2024
+Leon,Griffin,III,JR,S,Duke,2024
+JB,Mitchell,III,SR,WR,Eastern Michigan,2024
+Robert,Hammond,III,JR,K,Florida Atlantic,2024
+Chris,Tooley,III,JR,CB,Florida Atlantic,2024
+Mike,Wright,III,SO,S,Florida Atlantic,2024
+Ricky,Knight,III,SO,DB,Florida State,2024
+Charles,Lester,III,SO,DB,Florida State,2024
+Anthony,Evans,III,JR,WR,Georgia,2024
+Michael,Jackson,III,SR,WR,Georgia,2024
+Derrick,Maxey,III,JR,S,Georgia State,2024
+Jackie,Johnson,III,SR,DL,Hawaii,2024
+James,Monds,III,JR,DB,Middle Tennessee State,2024
+James,Madison,III,SO,WR,Missouri,2024
+Thomas,Fidone,III,SR,TE,Nebraska,2024
+Michael,Booker,III,SR,LB,Nebraska,2024
+Bobby,Arnold,III,JR,S,New Mexico,2024
+PJ,Johnson,III,SR,WR,New Mexico State,2024
+Henry,Davis,III,JR,DL,New Mexico State,2024
+Billy,Walton,III,SO,DL,SMU,2024
+J.D.,Coffey,III,SR,S,San Diego State,2024
+Gregory,McClendon,III,SO,LB,San Jose State,2024
+Jean,Boyd,III,SR,DB,San Jose State,2024
+Rico,Watson,III,SR,DL,South Florida,2024
+C.J.,Turner,III,SO,LB,Tulsa,2024
+John,Burris,III,SR,CB,UTEP,2024
+Will,Henderson,III,SO,RB,UTSA,2024
+Johnny,Bowens,III,SO,DL,UTSA,2024
+Steven,Losoya,III,SR,OL,Vanderbilt,2024
+Glenn,Seabrooks,III,SO,DL,Vanderbilt,2024
+George,Hart,III,SR,RB,Western Kentucky,2024
+Jean,Louis,III,SO,WR,Akron,2024
+Paul,Lewis,III,SR,CB,Akron,2024
+Randy,Marion,III,SO,LB,Appalachian State,2024
+Harold,Brooks,III,SR,DL,Arizona State,2024
+Albert,Smith,III,SO,DE,Arizona State,2024
+James,Reed,III,SR,CB,Arkansas State,2024
+R.J.,Mukes,III,JR,WR,Ball State,2024
+Lucian,Anderson,III,SO,QB,Bowling Green,2024
+Frederick,Williams,III,SO,OL,California,2024
+Joseph,Bearns,III,SR,TE,Charlotte,2024
+Robert,Gunn,III,JR,K,Clemson,2024
+Lee,Molette,III,SR,DB,Connecticut,2024
+Michael,Edwards,III,SR,LB,East Carolina,2024
+Eugene,Wilson,III,JR,WR,Florida,2024
+Scott,Isacks,III,SR,TE,Florida,2024
+Gregory,Smith,III,SO,S,Florida,2024
+Eddie,Walls,III,JR,DL,Florida International,2024
+Victor,Evans,III,JR,DB,Florida International,2024
+Robert,Edwards,III,JR,RB,Georgia Southern,2024
+Alan,Woods,III,SO,RB,Georgia Southern,2024
+Steven,Scott,III,SO,OL,Illinois,2024
+Vernon,Woodward,III,SO,DB,Illinois,2024
+Patrick,Mahoney,III,SO,LS,Illinois,2024
+Alonza,Barnett,III,SO,QB,James Madison,2024
+Lloyd,Summerall,III,SR,DL,James Madison,2024
+Harry,Stewart,III,SO,RB,Kansas,2024
+Joe,Hall,III,JR,CB,Kansas State,2024
+Earl,Woods,III,FR,QB,Kennesaw State,2024
+Greg,Penn,III,SR,LB,LSU,2024
+Bernard,Causey,III,SO,CB,LSU,2024
+Larry,Jones,III,JR,DE,Liberty,2024
+KJ,Riley,III,SO,DE,Louisiana,2024
+Alvino,Carbajal,III,SR,DL,Louisiana-Monroe,2024
+Monroe,Beard,III,SR,LB,Marshall,2024
+Lloyd,Irvin,III,SO,DB,Maryland,2024
+Ronnie,"Royal,",III,SO,S,North Carolina State,2024
+Harold,Nash,III,SR,S,North Texas,2024
+Albert,Kunickis,III,JR,RB,Northwestern,2024
+Howard,Cross,III,SR,DL,Notre Dame,2024
+Anthony,Tyus,III,SR,RB,Ohio,2024
+Reggie,Powers,III,SO,DB,Oklahoma,2024
+Emmett,Jones,III,SO,DB,Oklahoma,2024
+Charles,Christopher,III,SO,LB,Oklahoma State,2024
+Anthony,Robinson,III,SO,S,Ole Miss,2024
+Jimmy,Valsin,III,SR,WR,Oregon State,2024
+Harrison,Wallace,III,SR,WR,Penn State,2024
+Reggie,Love,III,SR,RB,Purdue,2024
+Darrick,Bladsoe,III,FR,WR,Sam Houston,2024
+Oscar,Adaway,III,SR,RB,South Carolina,2024
+Neil,Savage,III,SO,RB,South Carolina,2024
+Buddy,Mack,III,SR,DB,South Carolina,2024
+Berry,Buxton,III,SR,DB,Syracuse,2024
+Tommy,Winton,III,JR,WR,Tennessee,2024
+Larry,Johnson,III,JR,OL,Tennessee,2024
+Rickey,Gibson,III,JR,DB,Tennessee,2024
+Melvin,Hills,III,SO,DL,Texas,2024
+Ronnie,Crosby,III,SO,RB,Texas A&M,2024
+Moose,Muhammad,III,SR,WR,Texas A&M,2024
+Trey,Zuhn,III,SR,OL,Texas A&M,2024
+Will,Lee,III,SR,DB,Texas A&M,2024
+Michael,Boudoin,III,SR,DB,Texas State,2024
+Harvey,Dyson,III,JR,DL,Texas Tech,2024
+Charles,Esters,III,SR,DL,Texas Tech,2024
+Oliver,Miles,III,SO,DB,Texas Tech,2024
+RJ,Johnson,III,SO,QB,Toledo,2024
+Willie,Shaw,III,SR,RB,Toledo,2024
+Junior,Vandeross,III,SR,WR,Toledo,2024
+Arnold,Barnes,III,JR,RB,Tulane,2024
+Kevin,Adams,III,JR,DB,Tulane,2024
+Ricky,Lee,III,JR,CB,UAB,2024
+Ray,Thornton,III,SR,S,UAB,2024
+Gary,Smith,III,SR,DL,UCLA,2024
+Larry,Edwards,III,SO,LB,UCLA,2024
+Ben,Smiley,III,SR,DE,Virginia,2024
+Joseph,Holland,III,SR,DE,Virginia,2024
+William,Watson,III,SO,QB,Virginia Tech,2024
+Mose,Phillips,III,JR,S,Virginia Tech,2024
+Andrew,Hines,III,SO,LB,Wake Forest,2024
+Kenny,Worthy,III,SO,DB,Washington State,2024
+Raleigh,Collins,III,JR,S,West Virginia,2024
+Versie,Walker,III,JR,CB,Western Michigan,2024
+Ronald,Delancy,III,SR,CB,Wisconsin,2024
+Carl,Williams,IV,JR,CB,Baylor,2024
+Henry,Belvin,IV,SR,QB,Duke,2024
+Harold,Stubbs,IV,JR,DB,Florida State,2024
+Ellis,Robinson,IV,SO,DB,Georgia,2024
+Tommy,Kinsler,IV,JR,OL,Miami (FL),2024
+Andrew,Brinson,IV,SO,DB,Michigan State,2024
+John,Howse,IV,SR,S,Middle Tennessee State,2024
+James,Shellman,IV,SR,CB,Middle Tennessee State,2024
+Albert,Reese,IV,SR,OL,Mississippi State,2024
+Willis,McGahee,IV,SO,LB,Nebraska,2024
+DJ,Gordon,IV,SR,LB,South Florida,2024
+George,Brown,IV,SO,DB,South Florida,2024
+Dallas,Walker,IV,SR,DL,Western Kentucky,2024
+Malcom,DeWalt,IV,SR,DB,Akron,2024
+Curlee,Thomas,IV,JR,DL,California,2024
+Lawrence,Wright,IV,SO,QB,Florida,2024
+Troy,Stevenson,IV,SO,DB,Georgia Tech,2024
+Joseph,Manjack,IV,SR,WR,Houston,2024
+TJ,Crews,IV,SO,QB,Kansas,2024
+Hardley,Gilmore,IV,SO,WR,Kentucky,2024
+Wallace,Foster,IV,SO,CB,LSU,2024
+Maxie,Baudoin,IV,SR,DL,Louisiana,2024
+Frank,Covey,IV,SO,WR,Northwestern,2024
+Ulysses,Bentley,IV,SR,RB,Ole Miss,2024
+Melvin,Jordan,IV,JR,LB,Oregon State,2024
+Larry,DeBose,IV,SO,RB,Rice,2024
+Ed,Smith,IV,SR,DL,South Alabama,2024
+William,Felton,IV,SO,LB,South Alabama,2024
+Sammy,Morris,IV,SR,DB,Texas Tech,2024
+Robert,Freeman,IV,SR,WR,Utah State,2024
+Johnny,Williams,IV,SO,OL,West Virginia,2024
+Hammond,Russell,IV,SR,DL,West Virginia,2024
+Jacob,De,Jesus,SR,WR,Nevada-Las Vegas,2024
+Parker,St.,John,SR,WR,Air Force,2024
+Jalen,St.,John,SR,OL,Nevada-Las Vegas,2024
+Garvin,St.,John,SO,LB,Syracuse,2024
+Tanner,Duke,Johnson,JR,S,Mississippi State,2024
+"\"Fred","\"\"JayR\"\"","Johnson\"",SO,LB,South Carolina,2024
+Ny'Len,Ramon,Jones,SR,LB,Old Dominion,2024
+Ray,Ray,Joseph,JR,WR,Miami (FL),2024
+Jean,Claude,Joseph,JR,LB,Tulane,2024
+Eric,Brantley,Jr,SO,DL,Florida Atlantic,2024
+Quentis,Griffin,Jr,JR,OL,Louisiana-Monroe,2024
+Anthony,Dunn,Jr,SR,DL,Toledo,2024
+Carlos,Mitchell,Jr,SO,CB,Western Michigan,2024
+Lukia,"Rawls,",Jr.,JR,DL,Air Force,2024
+Jerome,Gaillard,Jr.,SR,DB,Air Force,2024
+Jay,Loper,Jr.,SR,WR,Alabama,2024
+Damon,Payne,Jr.,SR,DL,Alabama,2024
+Dre,Kirkpatrick,Jr.,SO,DB,Alabama,2024
+Tyrell,Reed,Jr.,JR,RB,Arkansas,2024
+Stephen,Dix,Jr.,SR,LB,Arkansas,2024
+Xavian,Sorey,Jr.,SR,LB,Arkansas,2024
+Fernando,Carmona,Jr.,SR,OT,Arkansas,2024
+Quincy,Rhodes,Jr.,JR,DE,Arkansas,2024
+Corey,Singleton,Jr.,JR,RB,Army,2024
+Larry,Pickett,Jr.,SO,S,Army,2024
+Ketron,Jackson,Jr.,SR,WR,Baylor,2024
+David,Marshall,Jr.,SR,DL,Baylor,2024
+Corey,Gordon,Jr.,JR,S,Baylor,2024
+LeVar,Thornton,Jr.,JR,CB,Baylor,2024
+MJ,Artmore,Jr.,JR,CB,Baylor,2024
+Victor,Nelson,Jr.,SR,DB,Boston College,2024
+Bert,Emanuel,Jr.,JR,QB,Central Michigan,2024
+Mark-Allen,Gay,Jr.,SO,DB,Central Michigan,2024
+Barry,Jackson,Jr.,SO,WR,Cincinnati,2024
+Antwan,Peek,Jr.,JR,S,Cincinnati,2024
+Derrick,Brown,Jr.,SO,LB,Duke,2024
+Nick,Morris,Jr.,SR,LB,Duke,2024
+Vincent,Anthony,Jr.,SR,DE,Duke,2024
+Terry,Simmons,Jr.,JR,DT,Duke,2024
+Terry,Lockett,Jr.,SR,WR,Eastern Michigan,2024
+Jere,Getzinger,Jr.,SR,TE,Eastern Michigan,2024
+David,Carter,Jr.,SR,DB,Eastern Michigan,2024
+Tremonte,"Underwood,",Jr.,SO,RB,Florida Atlantic,2024
+Jabari,Smith,Jr.,SO,WR,Florida Atlantic,2024
+Leon,"Washington,",Jr.,SO,WR,Florida Atlantic,2024
+Prince,Boyd,Jr.,SR,DL,Florida Atlantic,2024
+Richard,Thomas,Jr.,JR,DL,Florida Atlantic,2024
+Samuel,Singleton,Jr.,SO,RB,Florida State,2024
+Robert,Scott,Jr.,SR,OL,Florida State,2024
+Lamont,Green,Jr.,SO,DL,Florida State,2024
+Marvin,Jones,Jr.,SR,DL,Florida State,2024
+Omar,Graham,Jr.,JR,LB,Florida State,2024
+Peter,Warrick,Jr.,SR,DB,Florida State,2024
+Dwight,Phillips,Jr.,SO,RB,Georgia,2024
+Gabe,Harris,Jr.,JR,LB,Georgia,2024
+Smael,Mondon,Jr.,SR,LB,Georgia,2024
+DJ,Murray,Jr.,SO,RB,Georgia State,2024
+Chris,Davis,Jr.,SR,DE,Georgia State,2024
+Carlito,Capanang,Jr.,SR,WR,Hawaii,2024
+Armando,Lewis,Jr.,SO,WR,Hawaii,2024
+Chad,Owens,Jr.,JR,WR,Hawaii,2024
+Aristides,Angelo,Jr.,JR,QB,Miami (FL),2024
+Mark,Fletcher,Jr.,JR,RB,Miami (FL),2024
+Chris,Johnson,Jr.,JR,RB,Miami (FL),2024
+Antonio,Tripp,Jr.,JR,OL,Miami (FL),2024
+Rueben,Bain,Jr.,JR,DL,Miami (FL),2024
+Booker,"Pickett,",Jr.,SO,DL,Miami (FL),2024
+Raul,Aguirre,Jr.,JR,LB,Miami (FL),2024
+Bobby,Washington,Jr.,JR,LB,Miami (FL),2024
+Romanas,"Frederique,",Jr.,SO,DB,Miami (FL),2024
+Daryl,Porter,Jr.,SR,CB,Miami (FL),2024
+Antonio,Gates,Jr.,JR,WR,Michigan State,2024
+Justin,Denson,Jr.,SO,DB,Michigan State,2024
+Kevin,Coleman,Jr.,SR,WR,Mississippi State,2024
+Jimothy,Lewis,Jr.,SO,OL,Mississippi State,2024
+Joseph,Head,Jr.,SO,DL,Mississippi State,2024
+Jaden,Abongo,Jr.,JR,WR,Missouri,2024
+Corey,Flagg,Jr.,SR,LB,Missouri,2024
+Toriano,Pride,Jr.,SR,CB,Missouri,2024
+Johhny,Walker,Jr.,SR,DE,Missouri,2024
+Gerald,Lacy,Jr.,JR,S,Missouri,2024
+Gabe,Ervin,Jr.,SR,RB,Nebraska,2024
+Jacory,Barney,Jr.,SO,WR,Nebraska,2024
+Vincent,Shavers,Jr.,SO,LB,Nebraska,2024
+Marques,Buford,Jr.,SR,DB,Nebraska,2024
+Larry,Tarver,Jr.,SO,DB,Nebraska,2024
+Anthony,Grigsby,Jr.,JR,QB,Nevada,2024
+Terrell,Cooks,Jr.,SO,WR,Nevada,2024
+Jason,Douglas,Jr.,SO,DL,Nevada,2024
+David,Paine,Jr.,SO,DL,Nevada,2024
+Michael,Coats,Jr.,SR,DB,Nevada,2024
+Tooni,Ikahihifo,Jr.,SR,DB,Nevada,2024
+DeAngelo,Irvin,Jr.,JR,WR,Nevada-Las Vegas,2024
+Corey,Thompson,Jr.,JR,WR,Nevada-Las Vegas,2024
+Keith,Conley,Jr.,SR,DL,Nevada-Las Vegas,2024
+Antonio,Doyle,Jr.,SR,DL,Nevada-Las Vegas,2024
+Saadite,Green,Jr.,SR,DB,Nevada-Las Vegas,2024
+Antoineo,Harris,Jr.,SR,DL,New Mexico,2024
+Lanar,Kelley,Jr.,SR,DB,New Mexico State,2024
+Shedrick,Rhodes,Jr.,SR,OL,Rutgers,2024
+Henry,Hughes,Jr.,SR,DL,Rutgers,2024
+Vilay,Nakkoun,Jr.,JR,DB,Rutgers,2024
+Antonio,White,Jr.,SO,DB,Rutgers,2024
+LJ,Johnson,Jr.,SR,RB,SMU,2024
+Roderick,Daniels,Jr.,SR,WR,SMU,2024
+Anthony,Booker,Jr.,SR,DL,SMU,2024
+Tarian,Lee,Jr.,SR,LB,SMU,2024
+William,Nimmo,Jr.,SR,S,San Diego State,2024
+Denaris,DeRosa,Jr.,JR,OL,San Jose State,2024
+Kejuan,Bullard,Jr.,JR,DB,San Jose State,2024
+Kelley,Joiner,Jr.,SR,RB,South Florida,2024
+Rashad,Cheney,Jr.,SR,DL,South Florida,2024
+Gabe,Cavazos,Jr.,SR,OL,Southern Mississippi,2024
+Eric,Thomas,Jr.,SR,DL,Southern Mississippi,2024
+Micheal,Caraway,Jr.,SR,DB,Southern Mississippi,2024
+Bart,"Edmiston,",Jr.,JR,P,Southern Mississippi,2024
+Viron,Ellison,Jr.,SO,RB,Tulsa,2024
+R.J.,Jackson,Jr.,JR,DL,Tulsa,2024
+Chris,Thompson,Jr.,SR,LB,Tulsa,2024
+Maruio,White,Jr.,SO,DE,Tulsa,2024
+Wondame,Davis,Jr.,SO,WR,UTEP,2024
+Michael,Ray,Jr.,SR,S,UTEP,2024
+Joseph,Ugwu,Jr.,SO,OL,UTSA,2024
+Timothy,Huff,Jr.,JR,DL,UTSA,2024
+Donald,Quaite,Jr.,SO,DL,UTSA,2024
+James,Walley,Jr.,SO,LB,UTSA,2024
+Ronald,Link-Milam,Jr.,SR,S,UTSA,2024
+Quincy,Skinner,Jr.,SR,WR,Vanderbilt,2024
+Maurice,Hampton,Jr.,SR,DB,Vanderbilt,2024
+Alvin,Williamson,Jr.,SO,CB,Vanderbilt,2024
+Rodney,Tisdale,Jr.,SO,QB,Western Kentucky,2024
+Willie,Taggart,Jr.,SR,WR,Western Kentucky,2024
+Melvin,Collins,Jr.,SR,OL,Western Kentucky,2024
+Darrell,Johnson,Jr.,SR,OL,Western Kentucky,2024
+Reginald,Allen,Jr.,JR,LB,Western Kentucky,2024
+Jai,Eugene,Jr.,SO,DB,Western Kentucky,2024
+Anthony,Johnson,Jr.,SR,DB,Western Kentucky,2024
+Devin,Boddie,Jr.,SR,WR,Wyoming,2024
+Marcus,Moore,Jr.,SO,DL,Akron,2024
+Chris,Lawson,Jr.,SO,WR,Appalachian State,2024
+Franklin,Baret,Jr.,SO,WR,Appalachian State,2024
+Jason,Brown,Jr.,SO,RB,Arizona State,2024
+Rodney,Bimage,Jr.,SO,DB,Arizona State,2024
+Joe,Frazier,Jr.,JR,DL,Auburn,2024
+Darron,Reed,Jr.,SO,DL,Auburn,2024
+Robert,Woodyard,Jr.,JR,LB,Auburn,2024
+Paul,Thompson,Jr.,JR,S,Auburn,2024
+DeJuan,Echoles,Jr.,JR,LB,Ball State,2024
+Dantu,Gardner,Jr.,SO,LB,Ball State,2024
+Herbert,Gums,Jr.,SR,DL,Boise State,2024
+Franklyn,Johnson,Jr.,SO,CB,Boise State,2024
+Demanuel,Brown,Jr.,SO,DE,Boise State,2024
+Malcolm,Johnson,Jr.,SR,WR,Bowling Green,2024
+Harold,Fannin,Jr.,SR,TE,Bowling Green,2024
+Joseph,Sipp,Jr.,SR,LB,Bowling Green,2024
+James,Thomas,Jr.,SO,OG,Bowling Green,2024
+Rod,Gainey,Jr.,SO,RB,Charlotte,2024
+Duane,Thomas,Jr.,JR,WR,Charlotte,2024
+Mo,Clipper,Jr.,JR,OL,Charlotte,2024
+Antonio,Cotman,Jr.,SO,DB,Charlotte,2024
+Keith,Adams,Jr.,JR,RB,Clemson,2024
+Wise,Segars,Jr.,SR,RB,Clemson,2024
+Bryant,Wesco,Jr.,SO,WR,Clemson,2024
+Sherrod,Covil,Jr.,SR,S,Clemson,2024
+Jimmy,Horn,Jr.,SR,WR,Colorado,2024
+Anquin,Barnes,Jr.,SR,DL,Colorado,2024
+Johnny,Chaney,Jr.,SR,LB,Colorado,2024
+Timothy,Passmore,Jr.,JR,DL,Connecticut,2024
+Marlon,Gunn,Jr.,SR,RB,East Carolina,2024
+TJ,Engleman,Jr.,SO,RB,East Carolina,2024
+Sam,Riddy,Jr.,SO,OL,East Carolina,2024
+DJ,Johnson,Jr.,SO,LB,East Carolina,2024
+Brian,Green,Jr.,JR,WR,Florida,2024
+Damieon,George,Jr.,SR,OL,Florida,2024
+Brien,Taylor,Jr.,SR,DL,Florida,2024
+Jason,Marshall,Jr.,SR,CB,Florida,2024
+Luby,Maurice,Jr.,JR,WR,Florida International,2024
+Nicholas,Smith,Jr.,SO,WR,Florida International,2024
+Percy,Courtney,Jr.,JR,LB,Florida International,2024
+Charles,Greer,Jr.,SO,RB,Fresno State,2024
+Tim,Grear,Jr.,SR,WR,Fresno State,2024
+Isiah,Chala,Jr.,SO,DL,Fresno State,2024
+Marcus,Sanders,Jr.,SR,WR,Georgia Southern,2024
+Derwin,Burgess,Jr.,SR,WR,Georgia Southern,2024
+Robert,Wright,Jr.,SO,OL,Georgia Southern,2024
+Tracy,Hill,Jr.,JR,DB,Georgia Southern,2024
+Temirez,Williams,Jr.,SO,DB,Georgia Southern,2024
+Eric,Singleton,Jr.,JR,WR,Georgia Tech,2024
+Patrick,Screws,Jr.,JR,OL,Georgia Tech,2024
+Stephon,Johnson,Jr.,SR,WR,Houston,2024
+Traville,Frederick,Jr.,SO,TE,Houston,2024
+Keith,Cooper,Jr.,SR,DL,Houston,2024
+Anthony,Holmes,Jr.,JR,DL,Houston,2024
+Corey,Platt,Jr.,JR,LB,Houston,2024
+Dennis,Briggs,Jr.,SR,DL,Illinois,2024
+Torrie,Cox,Jr.,SR,DB,Illinois,2024
+Omar,Cooper,Jr.,JR,WR,Indiana,2024
+Marcus,Burris,Jr.,SR,DL,Indiana,2024
+DJ,Warnell,Jr.,SR,S,Indiana,2024
+Terrell,Washington,Jr.,SO,RB,Iowa,2024
+Rashad,Godfrey,Jr.,SO,DB,Iowa,2024
+Ryan,Robinson,Jr.,SO,DB,Iowa State,2024
+Tar'Varish,Dawson,Jr.,JR,WR,Jacksonville State,2024
+Travis,Franklin,Jr.,SO,S,Jacksonville State,2024
+Curley,Young,Jr.,SR,DE,Jacksonville State,2024
+Daniel,Hishaw,Jr.,SR,RB,Kansas,2024
+Johnny,Thompson,Jr.,SO,RB,Kansas,2024
+Michael,Ford,Jr.,SR,OL,Kansas,2024
+Tommy,Dunn,Jr.,SR,DL,Kansas,2024
+Terry,Kirksey,Jr.,SR,LB,Kansas State,2024
+Marlo,East,Jr.,FR,DL,Kennesaw State,2024
+JeRico,Washington,Jr.,FR,DB,Kennesaw State,2024
+Kevin,Toth,Jr.,SR,OL,Kent State,2024
+David,Washington,Jr.,SO,WR,Kentucky,2024
+Marc,Nave,Jr.,SO,OL,Kentucky,2024
+Alex,Afari,Jr.,SR,LB,Kentucky,2024
+Steven,Soles,Jr.,SO,LB,Kentucky,2024
+John,Emery,Jr.,SR,RB,LSU,2024
+Chris,Hilton,Jr.,SR,WR,LSU,2024
+Khayree,Lee,Jr.,SO,OL,LSU,2024
+Michael,Turner,Jr.,SO,CB,LSU,2024
+Craig,Walton,Jr.,SO,CB,LSU,2024
+Donte,Lee,Jr.,JR,WR,Liberty,2024
+Victor,Jones,Jr.,JR,WR,Liberty,2024
+Jerome,Jolly,Jr.,SR,LB,Liberty,2024
+CJ,Bazile,Jr.,SR,DE,Liberty,2024
+Ronald,"Moore,",Jr.,SO,S,Liberty,2024
+Dexter,Ricks,Jr.,JR,CB,Liberty,2024
+Charles,Yates,Jr.,SR,CB,Liberty,2024
+Djay,Williams,Jr.,SO,OL,Louisiana,2024
+Fitzgerald,West,Jr.,JR,DL,Louisiana,2024
+Tyrone,Lewis,Jr.,SR,S,Louisiana,2024
+Tamarcus,Gray,Jr.,SO,WR,Louisiana Tech,2024
+Alonzo,Jackson,Jr.,SO,LB,Louisiana Tech,2024
+Roderick,Roberson,Jr.,SR,DB,Louisiana Tech,2024
+Jhamal,Shelby,Jr.,JR,DB,Louisiana Tech,2024
+Carl,Fauntroy,Jr.,SR,DB,Louisiana-Monroe,2024
+Wydett,"Williams,",Jr.,SR,DB,Louisiana-Monroe,2024
+David,Godsey,Jr.,SR,CB,Louisiana-Monroe,2024
+Donald,Chaney,Jr.,SR,RB,Louisville,2024
+Adam,Vinatieri,Jr.,SO,K,Louisville,2024
+Moses,Gray,Jr.,SO,RB,Marshall,2024
+Chris,Thomas,Jr.,SR,DL,Marshall,2024
+Gary,Jones,Jr.,SO,LB,Marshall,2024
+Anthony,"Richard,",Jr.,JR,CB,Marshall,2024
+Billy,Edwards,Jr.,SR,QB,Maryland,2024
+Octavian,Smith,Jr.,SR,WR,Maryland,2024
+Robert,Smith,Jr.,SR,WR,Maryland,2024
+Ricardo,Cooper,Jr.,JR,WR,Maryland,2024
+Leon,Haughton,Jr.,SR,TE,Maryland,2024
+Andre,Roye,Jr.,SR,OL,Maryland,2024
+Frank,Ladson,Jr.,SR,WR,Massachusetts,2024
+Benjamin,Roy,Jr.,SR,OL,Massachusetts,2024
+Jermaine,Wiggins,Jr.,JR,DL,Massachusetts,2024
+Jerrod,Cameron,Jr.,JR,CB,Massachusetts,2024
+Steven,Ortiz,Jr.,SR,CB,Massachusetts,2024
+Mario,Robinson,Jr.,SO,RB,Memphis,2024
+Patrick,Lucas,Jr.,SR,DL,Memphis,2024
+William,Whitlow,Jr.,SR,DL,Memphis,2024
+Marcus,Lee,Jr.,JR,DB,Memphis,2024
+Shawn,Pepp,Jr.,SR,DB,Memphis,2024
+Cameron,Upshaw,Jr.,JR,DB,Memphis,2024
+Andres,Miyares,Jr.,SO,QB,North Carolina,2024
+Kevin,Hester,Jr.,SR,DL,North Carolina,2024
+Asaad,"Brown,",Jr.,SO,RB,North Carolina State,2024
+Anthony,Carter,Jr.,SR,OL,North Carolina State,2024
+Corey,Coley,Jr.,SR,DB,North Carolina State,2024
+Kerry,Martin,Jr.,SR,S,North Carolina State,2024
+Brandon,Young,Jr.,SO,TE,North Texas,2024
+BJ,Allen,Jr.,JR,S,North Texas,2024
+Chris,Gant,Jr.,SO,S,North Texas,2024
+Sultan,El-Amin,Jr.,SO,CB,North Texas,2024
+Telly,Johnson,Jr.,SO,RB,Northern Illinois,2024
+Rickey,Taylor,Jr.,SO,WR,Northern Illinois,2024
+Ivan,Moore,Jr.,SO,DE,Northern Illinois,2024
+Kenny,Soares,Jr.,JR,LB,Northwestern,2024
+Tito,Williams,Jr.,SO,DB,Northwestern,2024
+Sean,Sevillano,Jr.,SO,DL,Notre Dame,2024
+Aginon,Wilson,Jr.,SO,RB,Ohio,2024
+Adonis,Williams,Jr.,SR,S,Ohio,2024
+Gee,Scott,Jr.,SR,TE,Ohio State,2024
+Will,Smith,Jr.,JR,DL,Ohio State,2024
+Keenan,Nelson,Jr.,JR,DB,Ohio State,2024
+Jermaine,Matthews,Jr.,JR,CB,Ohio State,2024
+Aaron,Scott,Jr.,SO,CB,Ohio State,2024
+Lorenzo,Styles,Jr.,SR,CB,Ohio State,2024
+Michael,Hawkins,Jr.,SO,QB,Oklahoma,2024
+Rodney,Fields,Jr.,SO,RB,Oklahoma State,2024
+Marcus,Dockins,Jr.,JR,WR,Oklahoma State,2024
+Jason,Brooks,Jr.,SR,OL,Oklahoma State,2024
+Jacobi,Oliphant,Jr.,SO,CB,Oklahoma State,2024
+Tywon,Wray,Jr.,SO,S,Oklahoma State,2024
+Ricardo,Williams,Jr.,SR,DL,Old Dominion,2024
+Angelo,Rankin,Jr.,SR,DB,Old Dominion,2024
+Henry,Parrish,Jr.,SR,RB,Ole Miss,2024
+Antwane,Wells,Jr.,SR,WR,Ole Miss,2024
+Chris,Paul,Jr.,SR,LB,Ole Miss,2024
+Mark,Trigg,Jr.,SO,LB,Ole Miss,2024
+Chris,Graves,Jr.,JR,CB,Ole Miss,2024
+DeeJay,Holmes,Jr.,SO,DE,Ole Miss,2024
+John,Saunders,Jr.,SR,S,Ole Miss,2024
+Gary,Bryant,Jr.,SR,WR,Oregon,2024
+Josh,Conerly,Jr.,SR,OL,Oregon,2024
+Cornell,Hatcher,Jr.,SO,RB,Oregon State,2024
+David,Wells,Jr.,SO,WR,Oregon State,2024
+Montrel,Hatten,Jr.,JR,WR,Oregon State,2024
+Tyrice,Ivy,Jr.,SR,DB,Oregon State,2024
+Derrick,Davis,Jr.,SR,RB,Pitt,2024
+Rodney,Hammond,Jr.,SR,RB,Pitt,2024
+Terrence,Enos,Jr.,SR,OL,Pitt,2024
+Jaremiah,Anglin,Jr.,SO,DB,Pitt,2024
+John,Randle,Jr.,SO,OL,Purdue,2024
+Joshua,Sales,Jr.,SR,OL,Purdue,2024
+Derrick,Rogers,Jr.,JR,DB,Purdue,2024
+Justin,Williams,Jr.,SO,WR,Rice,2024
+Elroyal,Morris,Jr.,SR,DL,Rice,2024
+Kenny,Seymour,Jr.,SR,LB,Rice,2024
+Jacquis,Ishmeal,Jr.,JR,LB,Sam Houston,2024
+Chris,Holifield,Jr.,SR,WR,South Alabama,2024
+Stacey,Boykins,Jr.,SO,WR,South Alabama,2024
+RJ,Moss,Jr.,SO,DL,South Alabama,2024
+Maurice,Strong,Jr.,SR,DL,South Alabama,2024
+Christopher,Wallace,Jr.,SR,DB,South Alabama,2024
+Rickey,Hyatt,Jr.,SR,S,South Alabama,2024
+Lardarius,Webb,Jr.,SR,S,South Alabama,2024
+Mazeo,Bennett,Jr.,SO,WR,South Carolina,2024
+Jamian,Risher,Jr.,JR,LB,South Carolina,2024
+Bryan,Thomas,Jr.,SR,DE,South Carolina,2024
+Chris,Davis,Jr.,SO,RB,Stanford,2024
+Michael,Johnson,Jr.,SR,QB,Syracuse,2024
+Darrell,Gill,Jr.,JR,WR,Syracuse,2024
+Enrique,Cruz,Jr.,SR,OL,Syracuse,2024
+David,Wohlabaugh,Jr.,SR,OL,Syracuse,2024
+Denis,Jaquez,Jr.,SR,DL,Syracuse,2024
+Kevin,Jobity,Jr.,SR,DL,Syracuse,2024
+Dion,Wilson,Jr.,SR,DL,Syracuse,2024
+James,Heard,Jr.,SO,LB,Syracuse,2024
+Jahide,Lesaine,Jr.,SO,LB,Syracuse,2024
+Marcellus,Barnes,Jr.,SO,DB,Syracuse,2024
+Braheem,Long,Jr.,SO,DB,Syracuse,2024
+Marcus,Washington,Jr.,JR,DB,Syracuse,2024
+Eric,Wilson,Jr.,SR,RB,Temple,2024
+Allan,Haye,Jr.,SR,DT,Temple,2024
+John,Campbell,Jr.,SR,OL,Tennessee,2024
+James,Pearce,Jr.,SR,DL,Tennessee,2024
+Marcus,Goree,Jr.,SO,DB,Tennessee,2024
+DeAndre,Moore,Jr.,JR,WR,Texas,2024
+Kelvin,Banks,Jr.,SR,OL,Texas,2024
+Brooks,Kieschnick,Jr.,JR,OL,Texas,2024
+Anthony,Hill,Jr.,JR,LB,Texas,2024
+Morice,Blackwell,Jr.,SR,DB,Texas,2024
+Derek,Williams,Jr.,JR,DB,Texas,2024
+Martrell,Harris,Jr.,SR,LB,Texas A&M,2024
+Danny,Lockhart,Jr.,SR,LB,Texas A&M,2024
+Jevon,McIver,Jr.,SR,CB,Texas Christian,2024
+Torrance,Burgess,Jr.,SR,RB,Texas State,2024
+Chris,Dawn,Jr.,JR,WR,Texas State,2024
+Amipeleasi,Langi,Jr.,SR,DL,Texas State,2024
+Derick,Mourning,Jr.,SR,LB,Texas State,2024
+Alonzo,Edwards,Jr.,SR,CB,Texas State,2024
+Jermy,Jackson,Jr.,SO,DE,Texas State,2024
+LJ,Johnson,Jr.,SO,WR,Texas Tech,2024
+Charles,Anderson,Jr.,SO,LB,Texas Tech,2024
+Miquel,Dingle,Jr.,JR,LB,Texas Tech,2024
+Quincy,Ledet,Jr.,SR,DT,Texas Tech,2024
+Daryl,Barnett,Jr.,SO,WR,Toledo,2024
+Allen,"Jones,",Jr.,SR,OL,Toledo,2024
+C.J.,Wilson,Jr.,SR,LB,Toledo,2024
+Doran,Ray,Jr.,SR,DT,Toledo,2024
+Sam,Smith,Jr.,SO,S,Toledo,2024
+DeWhitt,Betterson,Jr.,JR,RB,Troy,2024
+Zycarl,Lewis,Jr.,SO,WR,Tulane,2024
+Eric,Hicks,Jr.,SR,DL,Tulane,2024
+Mandel,Eugene,Jr.,SR,LB,Tulane,2024
+BJ,Hawkins,Jr.,SR,WR,UAB,2024
+Jason,Riles,Jr.,SR,LB,UAB,2024
+Everett,Roussaw,Jr.,JR,LB,UAB,2024
+Phillip,Davison,Jr.,SO,LB,UAB,2024
+Keon,Handley,Jr.,JR,S,UAB,2024
+Randy,Pittman,Jr.,JR,TE,UCF,2024
+Troy,Ford,Jr.,SO,LB,UCF,2024
+Cedrick,Hawkins,Jr.,SO,DB,UCF,2024
+Rico,Flores,Jr.,JR,WR,UCLA,2024
+Joseph,Firebaugh,Jr.,SR,K,UCLA,2024
+Anthony,Beavers,Jr.,SR,S,USC,2024
+Jarvis,Boatwright,Jr.,SO,S,USC,2024
+John,Randle,Jr.,JR,CB,Utah,2024
+Herschel,Turner,Jr.,SO,RB,Utah State,2024
+EJ,Fisk,Jr.,SR,CB,Utah State,2024
+Davis,Lane,Jr.,SR,RB,Virginia,2024
+Andre,Greene,Jr.,JR,WR,Virginia,2024
+Sackett,Wood,Jr.,SR,TE,Virginia,2024
+Kevin,Chadwick,Jr.,JR,DB,Virginia,2024
+Chico,Bennett,Jr.,SR,DE,Virginia,2024
+Corey,Thomas,Jr.,SR,S,Virginia,2024
+Micah,Mays,Jr.,SO,WR,Wake Forest,2024
+Chris,Marable,Jr.,SO,DL,Wake Forest,2024
+William,Tackie,Jr.,SO,DB,Wake Forest,2024
+Antonio,Robinson,Jr.,SO,DB,Wake Forest,2024
+Demond,Williams,Jr.,SO,QB,Washington,2024
+Kevin,Green,Jr.,JR,WR,Washington,2024
+Jason,Robinson,Jr.,SO,WR,Washington,2024
+Milton,Hopkins,Jr.,SR,LB,Washington,2024
+Rahim,Wright,Jr.,SO,S,Washington,2024
+Paul,Mencke,Jr.,SO,S,Washington,2024
+Leon,Neal,Jr.,SR,WR,Washington State,2024
+Warren,Smith,Jr.,SO,DB,Washington State,2024
+Corey,McIntyre,Jr.,SO,DL,West Virginia,2024
+Curtis,Jones,Jr.,SO,LB,West Virginia,2024
+Garnett,Hollis,Jr.,SR,CB,West Virginia,2024
+Jason,Cross,Jr.,SO,S,West Virginia,2024
+Michael,Gravely,Jr.,SR,S,Western Michigan,2024
+CJ,Miles,Jr.,SO,S,Western Michigan,2024
+Brandon,Lane,Jr.,SR,DL,Wisconsin,2024
+Jamel,Howard,Jr.,JR,DL,Wisconsin,2024
+Ernest,Willor,Jr.,SO,DL,Wisconsin,2024
+James,Thompson,Jr.,SR,DE,Wisconsin,2024
+Jon,Jon,Kamara,SO,LB,Kansas,2024
+Landyn,Van,Kekerix,JR,LB,Iowa,2024
+Ty,Son,Lawton,SR,RB,Indiana,2024
+Gio,De,Leon,SR,LB,Buffalo,2024
+Owen,van,Loben,SO,WR,Stanford,2024
+Lance,St.,Louis,SR,LS,Texas,2024
+Eddie,Lee,Marburger,SR,QB,UTSA,2024
+Tautai,Li'O,Marks,SR,OL,Tulsa,2024
+D',Sean,Martinez,JR,CB,New Mexico,2024
+Jon,Ross,Maye,SR,LB,Utah State,2024
+D',Angelo,Mayes,SO,WR,New Mexico,2024
+Tyrone,D.,McDuffie,SO,OL,UTEP,2024
+William,Grier,McDuffie,SO,LB,Auburn,2024
+Sione,I,Moa,SO,RB,BYU,2024
+Christian,de,Moor,SO,DL,SMU,2024
+Brandon,Lawhorn,Moore,SR,OL,Miami (OH),2024
+Ty,Anthony,Morris,JR,LB,Rice,2024
+Devan,Van,Ness,SO,LB,Iowa,2024
+John,Wayne,Oliver,SO,OL,Ole Miss,2024
+Ott,Eric,Ottender,SO,WR,Massachusetts,2024
+Jalen,Saint,Paul,SO,WR,Oregon,2024
+Billy,Van,Pelt,SR,LB,Boston College,2024
+James,Della,Pesca,SR,TE,Temple,2024
+John,Paul,Pickens,JR,DB,Arkansas,2024
+Fidel,Tau,Pitts,SR,WR,Old Dominion,2024
+Riley,Van,Poppel,JR,DL,Nebraska,2024
+Djibril,Abdou,Rahman,JR,DL,Rutgers,2024
+Scott,Taylor,Renfroe,SR,K,Troy,2024
+John,Paul,Richardson,SR,WR,Texas Christian,2024
+John,Martin,Richter,SO,DE,Auburn,2024
+John,Alan,Richter,JR,QB,Toledo,2024
+Carlos,Del,Rio-Wilson,SR,QB,Syracuse,2024
+Dante,De,Rosa,SR,LB,Tulane,2024
+Magnus,von,Saldern,JR,TE,Massachusetts,2024
+Mike,Yoan,Sandjo-Njiki,SR,DT,SMU,2024
+Ian,Ver,Steeg,JR,WR,Wake Forest,2024
+J.,Michael,Sturdivant,SR,WR,UCLA,2024
+R,Mason,Thomas,SR,DL,Oklahoma,2024
+"Coleman,",Jr.,Toney,SO,DB,Miami (OH),2024
+Jalen,Rashad,Turner,JR,RB,Air Force,2024
+Samuel,Brown,V,SR,RB,Rutgers,2024
+Stephens,Sings,V,SR,DE,Charlotte,2024
+Emmett,Mosley,V,SO,WR,Stanford,2024
+Wesley,Campbell,VI,JR,TE,Louisiana-Monroe,2024
+Kyson,Van,Vugt,JR,OL,Iowa,2024
+Jonathan,Vande,Walle,SO,WR,Iowa State,2024
+Michael,Levelle,Watkins,SO,OL,Washington,2024
+Jack,Carson,Wentz,JR,LS,Michigan State,2024
+Rex,Van,Wyhe,JR,LB,Kansas State,2024
+Trenton,Alan,Yowe,SR,DB,Appalachian State,2024
+Jax,Van,Zandt,JR,LB,UAB,2024
+Reece,Vander,Zee,SO,WR,Iowa,2024
+Nate,Van,Zelst,SR,K,Wisconsin,2024
+Kellen,Grave,de,SR,P,Navy,2024
+Ian,van,der,JR,DL,Bowling Green,2024
+Theo,Melin,Ã–hrstrÃ¶m,JR,TE,Texas A&M,2024

@@ -1,0 +1,62 @@
+services:
+  airflow:
+    image: apache/airflow:latest
+    container_name: af-cfb
+    hostname: af-cfb
+    command: airflow standalone
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./dags:/opt/airflow/dags
+  
+  spark-leader:
+    build: ./leader
+    container_name: spark-leader-cfb
+    hostname: spark-leader-cfb
+    environment:
+      - SPARK_MASTER_LOG=/opt/spark/logs
+    ports:
+      - 8081:8080 # Spark Web UI
+      - 7077:7077 # Spark Leader Port
+    volumes:
+      - ./work-dir:/opt/spark/work-dir
+      - ./output:/opt/spark/files/out
+      - ./input:/opt/spark/files/in
+      - ./conf:/opt/spark/conf
+    networks:
+      - spark-network
+  
+  spark-worker-1:
+    build: ./worker
+    container_name: spark-worker-1-cfb
+    hostname: spark-worker-1-cfb
+    command: /opt/spark/bin/spark-class org.apache.spark.deploy.worker.Worker spark://spark-leader:7077
+    ports:
+      - 8082:8081 # Worker UI
+    volumes:
+      - ./output:/opt/spark/files/out
+      - ./input:/opt/spark/files/in
+    networks:
+      - spark-network
+    depends_on:
+      - spark-leader
+  
+  spark-worker-2:
+    build: ./worker
+    container_name: spark-worker-2-cfb
+    hostname: spark-worker-2-cfb
+    command: /opt/spark/bin/spark-class org.apache.spark.deploy.worker.Worker spark://spark-leader:7077
+    ports:
+      - 8083:8081 # Worker UI
+    volumes:
+      - ./output:/opt/spark/files/out
+      - ./input:/opt/spark/files/in
+    networks:
+      - spark-network
+    depends_on:
+      - spark-leader
+
+networks:
+  spark-network:
+    driver: bridge
+
