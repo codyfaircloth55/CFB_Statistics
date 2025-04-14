@@ -289,6 +289,14 @@ file_extension_to_college = {
     "wyoming":"Wyoming", 
 }
 
+# Maps college shorthand to standard name
+college_shorthand_to_name = {
+  "Brigham Young": "BYU",
+  "Bowling Green State": "Bowling Green",
+  "TCU": "Texas Christian",
+  "UNLV": "Nevada-Las Vegas"
+}
+
 # Maps position abbreviation to full name
 position_name = {
     "CB": "Cornerback",
