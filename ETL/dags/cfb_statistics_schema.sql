@@ -43,16 +43,16 @@ create table college(
     college_mascot varchar(100) not null
 );
 create table team(
-team_id int primary key auto_increment,
-`year` int not null,
-college_id int not null,
-conference_id int not null,
-constraint fk_team_college_id
-	foreign key (college_id)
-    references college(college_id),
-constraint fk_team_conference_id
-	foreign key (conference_id)
-    references conference(conference_id)
+    team_id int primary key auto_increment,
+    `year` int not null,
+    college_id int not null,
+    conference_id int not null,
+    constraint fk_team_college_id
+	    foreign key (college_id)
+        references college(college_id),
+    constraint fk_team_conference_id
+	    foreign key (conference_id)
+        references conference(conference_id)
 );
 
 create table player(

@@ -1,0 +1,11 @@
+dash
+dash_daq
+pandas
+plotly
+numpy
+scikit-learn
+scipy
+SQLAlchemy
+dynaconf
+mysql-connector-python
+statsmodels

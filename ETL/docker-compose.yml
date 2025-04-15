@@ -8,6 +8,8 @@ services:
       - "8080:8080"
     volumes:
       - ./dags:/opt/airflow/dags
+    networks:
+      - spark-network
   
   spark-leader:
     build: ./leader
@@ -30,7 +32,7 @@ services:
     build: ./worker
     container_name: spark-worker-1-cfb
     hostname: spark-worker-1-cfb
-    command: /opt/spark/bin/spark-class org.apache.spark.deploy.worker.Worker spark://spark-leader:7077
+    command: /opt/spark/bin/spark-class org.apache.spark.deploy.worker.Worker spark://spark-leader-cfb:7077
     ports:
       - 8082:8081 # Worker UI
     volumes:
@@ -45,7 +47,7 @@ services:
     build: ./worker
     container_name: spark-worker-2-cfb
     hostname: spark-worker-2-cfb
-    command: /opt/spark/bin/spark-class org.apache.spark.deploy.worker.Worker spark://spark-leader:7077
+    command: /opt/spark/bin/spark-class org.apache.spark.deploy.worker.Worker spark://spark-leader-cfb:7077
     ports:
       - 8083:8081 # Worker UI
     volumes:
@@ -55,6 +57,19 @@ services:
       - spark-network
     depends_on:
       - spark-leader
+
+  dash-app:
+    build:
+      context: ./app
+    container_name: dash-app-cfb
+    ports:
+      - "8050:8050"
+    volumes:
+      - ./app:/app
+    depends_on:
+      - spark-leader
+    networks:
+      - spark-network
 
 networks:
   spark-network:

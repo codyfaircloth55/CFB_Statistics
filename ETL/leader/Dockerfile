@@ -16,4 +16,4 @@ RUN apt-get clean && \
 
 EXPOSE 22 8080 7077
 
-CMD service ssh start && /opt/spark/bin/spark-class org.apache.spark.deploy.master.Master -h spark-leader
+CMD service ssh start && /opt/spark/bin/spark-class org.apache.spark.deploy.master.Master -h spark-leader-cfb
