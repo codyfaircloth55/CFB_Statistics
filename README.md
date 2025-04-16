@@ -2,13 +2,27 @@
   - Work In Progress
 
 # Technologies Used:
-  - Python
-  - Docker
-  - MySQL
-  - Apache Spark
-  - Apache Airflow
-  - 
+  - Programming Language:
+    - Python
+  - Relational Database Management System (RDBMS):
+    - MySQL
+  - Containerization Platform:
+    - Docker
+  - Docker Images:
+    - Alpine
+    - Apache Airflow
+    - Apache Spark
+  - Python Libraries:
+    - Airflow
+    - Dash
+    - DynaConf
+    - SQLAlchemy
+    - SSHOperator
+    - Pandas
+    - Pendulum
+    - Plotly Express
+    - PySpark
 
 # References
   - All datasets collected from Sports Reference College Football Website
-    - https://www.sports-reference.com/cfb/
+    - Link: https://www.sports-reference.com/cfb/
