@@ -964,6 +964,236 @@ def render_national_individual_stats_tab():
                 html.H3(id='national_individual_rushing_title')
             ]
         ),
+        html.Div(
+            [
+                dash_table.DataTable(
+                    id='national_individual_rushing_table',
+                    page_size=25,
+                    sort_action='native',
+                    tooltip_header={
+                        "Player": "Player",
+                        "College": "College",
+                        "Conf": "Conference",
+                        "GP": "Games Played",
+                        "Att": "Rushing Attempts",
+                        "Yds": "Rushing Yards",
+                        "Y/A": "Rushing Yards Per Attempt",
+                        "TD": "Rushing Touchdowns",
+                        "Y/G": "Rushing Yards Per Game"
+                    },
+                    tooltip_delay=0,
+                    tooltip_duration=None,
+                    style_cell={
+                        'textAlign': 'center',
+                        'width': '11.111%'
+                    },
+                    style_header={
+                        'backgroundColor': 'lightgrey',
+                        'fontWeight': 'bold',
+                        'textAlign': 'center'
+                    },
+                )
+            ]
+        ),
+        html.Div(
+            [
+                html.H3(id='national_individual_receiving_title')
+
+            ]
+        ),
+        html.Div(
+            [
+                dash_table.DataTable(
+                    id='national_individual_receiving_table',
+                    page_size=25,
+                    sort_action='native',
+                    tooltip_header={
+                        "Player": "Player",
+                        "College": "College",
+                        "Conf": "Conference",
+                        "GP": "Games Played",
+                        "Rec": "Receptions",
+                        "Yds": "Receiving Yards",
+                        "Y/R": "Receiving Yards Per Reception",
+                        "TD": "Receiving Touchdowns",
+                        "Y/G": "Receiving Yards Per Game"
+                    },
+                    tooltip_delay=0,
+                    tooltip_duration=None,
+                    style_cell={
+                        'textAlign': 'center',
+                        'width': '11.111%'
+                    },
+                    style_header={
+                        'backgroundColor': 'lightgrey',
+                        'fontWeight': 'bold',
+                        'textAlign': 'center'
+                    },
+                )
+            ]
+        ),
+        html.Div(
+            [
+                html.H3(id='national_individual_passing_title')
+            ]
+        ),
+        html.Div(
+            [
+                dash_table.DataTable(
+                    id='national_individual_passing_table',
+                    page_size=25,
+                    sort_action='native',
+                    tooltip_header={
+                        "Player": "Player",
+                        "College": "College",
+                        "Conf": "Conference",
+                        "GP": "Games Played",
+                        "Cmp": "Completions",
+                        "Att": "Passing Attempts",
+                        "Cmp%": "Completion Percentage",
+                        "Yds": "Passing Yards",
+                        "TD": "Passing Touchdowns",
+                        "TD%": "Touchdown Percentage",
+                        "Int": "Interceptions",
+                        "Int%": "Interception Percentage",
+                        "Y/A": "Passing Yards Per Attempt",
+                        "Y/C": "Passing Yards Per Completion",
+                        "Y/G": "Passing Yards Per Game",
+                        "Rating": "Passer Rating"
+                    },
+                    tooltip_delay=0,
+                    tooltip_duration=None,
+                    style_cell={
+                        'textAlign': 'center',
+                        'width': '6.25%'
+                    },
+                    style_header={
+                        'backgroundColor': 'lightgrey',
+                        'fontWeight': 'bold',
+                        'textAlign': 'center'
+                    },
+                )
+            ]
+        ),
+        html.Div(
+            [
+                html.H3(id='national_individual_kicking_title')
+            ]
+        ),
+        html.Div(
+            [
+                dash_table.DataTable(
+                    id='national_individual_kicking_table',
+                    page_size=25,
+                    sort_action='native',
+                    tooltip_header={
+                        "Player": "Player",
+                        "College": "College",
+                        "Conf": "Conference",
+                        "GP": "Games Played",
+                        "XPM": "Extra Points Made",
+                        "XPA": "Extra Points Attempted",
+                        "XP%": "Extra Point Percentage",
+                        "FGM": "Field Goals Made",
+                        "FGA": "Field Goals Attempted",
+                        "FG%": "Field Goal Percentage",
+                        "Pts": "Points Scored"
+                    },
+                    tooltip_delay=0,
+                    tooltip_duration=None,
+                    style_cell={
+                        'textAlign': 'center',
+                        'width': '9.09%'
+                    },
+                    style_header={
+                        'backgroundColor': 'lightgrey',
+                        'fontWeight': 'bold',
+                        'textAlign': 'center'
+                    },
+                )
+            ]
+        ),
+        html.Div(
+            [
+                html.H3(id='national_individual_punting_title')
+            ]
+        ),
+        html.Div(
+            [
+                dash_table.DataTable(
+                    id='national_individual_punting_table',
+                    page_size=25,
+                    sort_action='native',
+                    tooltip_header={
+                        "Player": "Player",
+                        "College": "College",
+                        "Conf": "Conference",
+                        "GP": "Games Played",
+                        "Punt": "Punts",
+                        "Yds": "Punt Yards",
+                        "Y/P": "Yards Per Punt"
+                    },
+                    tooltip_delay=0,
+                    tooltip_duration=None,
+                    style_cell={
+                        'textAlign': 'center',
+                        'width': '14.285%'
+                    },
+                    style_header={
+                        'backgroundColor': 'lightgrey',
+                        'fontWeight': 'bold',
+                        'textAlign': 'center'
+                    },
+                )
+            ]
+        ),
+        html.Div(
+            [
+                html.H3(id='national_individual_scoring_title')
+            ]
+        ),
+        html.Div(
+            [
+                dash_table.DataTable(
+                    id='national_individual_scoring_table',
+                    page_size=25,
+                    sort_action='native',
+                    tooltip_header={
+                        "Player": "Player",
+                        "College": "College",
+                        "Conf": "Conference",
+                        "GP": "Games Played",
+                        "RTD": "Rushing Touchdowns",
+                        "RecTD": "Receiving Touchdowns",
+                        "PRTD": "Punt Return Touchdowns",
+                        "KRTD": "Kickoff Return Touchdowns",
+                        "FRTD": "Fumble Recovery Touchdowns",
+                        "ITD": "Interception Return Touchdowns",
+                        "OTD": "Other Touchdowns",
+                        "TTD": "Total Touchdowns",
+                        "XPM": "Extra Points Made",
+                        "XPA": "Extra Points Attempted",
+                        "FGM": "Field Goals Made",
+                        "FGA": "Field Goals Attempted",
+                        "2Pt": "Two Point Conversions Made",
+                        "SFY": "Safeties",
+                        "Pts": "Points Scored",
+                        "P/G": "Points Per Game"
+                    },
+                    tooltip_delay=0,
+                    tooltip_duration=None,
+                    style_cell={
+                        'textAlign': 'center',
+                        'width': '5%'
+                    },
+                    style_header={
+                        'backgroundColor': 'lightgrey',
+                        'fontWeight': 'bold',
+                        'textAlign': 'center'
+                    },
+                )
+            ]
+        )
     ]
 
 # Main Tabs
@@ -2260,6 +2490,7 @@ def update_national_team_offense_table(selected_year):
     columns = [{'name': col, 'id': col} for col in df.columns]
     return df.to_dict('records'), columns
 
+
 @callback(
     Output(component_id='national_team_defense_title', component_property='children'),
     Input(component_id='national_year_dropdown', component_property='value')
@@ -2376,5 +2607,259 @@ def update_national_individual_rushing_title(selected_year):
         raise PreventUpdate
     return f"{selected_year} National Rushing"
 
+@callback(
+    Output(component_id='national_individual_rushing_table', component_property='data'),
+    Output(component_id='national_individual_rushing_table', component_property='columns'),
+    Input(component_id='national_year_dropdown', component_property='value')
+)
+def update_national_individual_rushing_table(selected_year):
+    if not selected_year:
+        raise PreventUpdate
+    query = f"""
+            select
+                p.player_name as Player,
+                c.college_name as College,
+                con.conference_shorthand as Conf,
+                rs.games_played as GP,
+                rs.rushing_attempts as Att,
+                rs.rushing_yards as Yds,
+                rs.rushing_yards_per_attempt as "Y/A",
+                rs.rushing_touchdowns as TD,
+                rs.rushing_yards_per_game as "Y/G"
+            from rushing_stat rs
+            inner join roster r on rs.roster_id = r.roster_id
+            inner join player p on r.player_id = p.player_id
+            inner join team t on r.team_id = t.team_id
+            inner join college c on t.college_id = c.college_id
+            inner join conference con on t.conference_id = con.conference_id
+            where t.`year` = {selected_year}
+            order by rs.rushing_yards desc;
+            """
+    df = load_data_query(query)
+    columns = [{'name': col, 'id': col} for col in df.columns]
+    return df.to_dict('records'), columns
+
+@callback(
+    Output(component_id='national_individual_receiving_title', component_property='children'),
+    Input(component_id='national_year_dropdown', component_property='value')
+)
+def update_national_individual_receiving_title(selected_year):
+    if not selected_year:
+        raise PreventUpdate
+    return f"{selected_year} National Receiving"
+
+@callback(
+    Output(component_id='national_individual_receiving_table', component_property='data'),
+    Output(component_id='national_individual_receiving_table', component_property='columns'),
+    Input(component_id='national_year_dropdown', component_property='value')
+)
+def update_national_individual_receiving_table(selected_year):
+    if not selected_year:
+        raise PreventUpdate
+    query = f"""
+            select
+                p.player_name as Player,
+                c.college_name as College,
+                con.conference_shorthand as Conf,
+                rs.games_played as GP,
+                rs.receptions as Rec,
+                rs.receiving_yards as Yds,
+                rs.receiving_yards_per_reception as "Y/R",
+                rs.receiving_touchdowns as TD,
+                rs.receiving_yards_per_game as "Y/G"
+            from receiving_stat rs
+            inner join roster r on rs.roster_id = r.roster_id
+            inner join player p on r.player_id = p.player_id
+            inner join team t on r.team_id = t.team_id
+            inner join college c on t.college_id = c.college_id
+            inner join conference con on t.conference_id = con.conference_id
+            where t.`year` = {selected_year}
+            order by rs.receiving_yards desc;
+            """
+    df = load_data_query(query)
+    columns = [{'name': col, 'id': col} for col in df.columns]
+    return df.to_dict('records'), columns
+
+@callback(
+    Output(component_id='national_individual_passing_title', component_property='children'),
+    Input(component_id='national_year_dropdown', component_property='value')
+)
+def update_national_individual_passing_title(selected_year):
+    if not selected_year:
+        raise PreventUpdate
+    return f"{selected_year} National Passing"
+
+@callback(
+    Output(component_id='national_individual_passing_table', component_property='data'),
+    Output(component_id='national_individual_passing_table', component_property='columns'),
+    Input(component_id='national_year_dropdown', component_property='value')
+)
+def update_national_individual_passing_table(selected_year):
+    if not selected_year:
+        raise PreventUpdate
+    query = f"""
+            select
+                p.player_name as Player,
+                c.college_name as College,
+                con.conference_shorthand as Conf,
+                ps.games_played as GP,
+                ps.completions as Cmp,
+                ps.passing_attempts as Att,
+                ps.completion_percentage as "Cmp%",
+                ps.passing_yards as Yds,
+                ps.passing_touchdowns as TD,
+                ps.touchdown_percentage as "TD%",
+                ps.interceptions as `Int`,
+                ps.interception_percentage as "Int%",
+                ps.passing_yards_per_attempt as "Y/A",
+                ps.passing_yards_per_completion as "Y/C",
+                ps.passing_yards_per_game as "Y/G",
+                ps.passer_rating as Rating
+            from passing_stat ps
+            inner join roster r on ps.roster_id = r.roster_id
+            inner join player p on r.player_id = p.player_id
+            inner join team t on r.team_id = t.team_id
+            inner join college c on t.college_id = c.college_id
+            inner join conference con on t.conference_id = con.conference_id
+            where t.`year` = {selected_year}
+            order by ps.passing_yards desc;
+            """
+    df = load_data_query(query)
+    columns = [{'name': col, 'id': col} for col in df.columns]
+    return df.to_dict('records'), columns
+
+@callback(
+    Output(component_id='national_individual_kicking_title', component_property='children'),
+    Input(component_id='national_year_dropdown', component_property='value')
+)
+def update_national_individual_kicking_title(selected_year):
+    if not selected_year:
+        raise PreventUpdate
+    return f"{selected_year} National Kicking"
+
+@callback(
+    Output(component_id='national_individual_kicking_table', component_property='data'),
+    Output(component_id='national_individual_kicking_table', component_property='columns'),
+    Input(component_id='national_year_dropdown', component_property='value')
+)
+def update_national_individual_kicking_table(selected_year):
+    if not selected_year:
+        raise PreventUpdate
+    query = f"""
+            select
+                p.player_name as Player,
+                c.college_name as College,
+                con.conference_shorthand as Conf,
+                ks.games_played as GP,
+                ks.extra_points_made as XPM,
+                ks.extra_points_attempted as XPA,
+                ks.extra_point_percentage as "XP%",
+                ks.field_goals_made as FGM,
+                ks.field_goals_attempted as FGA,
+                ks.Field_goal_percentage as "FG%",
+                ks.points_scored as Pts
+            from kicking_stat ks
+            inner join roster r on ks.roster_id = r.roster_id
+            inner join player p on r.player_id = p.player_id
+            inner join team t on r.team_id = t.team_id
+            inner join college c on t.college_id = c.college_id
+            inner join conference con on t.conference_id = con.conference_id
+            where t.`year` = {selected_year}
+            order by ks.points_scored desc;
+            """
+    df = load_data_query(query)
+    columns = [{'name': col, 'id': col} for col in df.columns]
+    return df.to_dict('records'), columns
+
+@callback(
+    Output(component_id='national_individual_punting_title', component_property='children'),
+    Input(component_id='national_year_dropdown', component_property='value')
+)
+def update_national_individual_punting_title(selected_year):
+    if not selected_year:
+        raise PreventUpdate
+    return f"{selected_year} National Punting"
+
+@callback(
+    Output(component_id='national_individual_punting_table', component_property='data'),
+    Output(component_id='national_individual_punting_table', component_property='columns'),
+    Input(component_id='national_year_dropdown', component_property='value')
+)
+def update_national_individual_punting_table(selected_year):
+    if not selected_year:
+        raise PreventUpdate
+    query = f"""
+            select
+                p.player_name as Player,
+                c.college_name as College,
+                con.conference_shorthand as Conf,
+                ps.games_played as GP,
+                ps.punts as Punt,
+                ps.punt_yards as Yds,
+                ps.yards_per_punt as "Y/P"
+            from punting_stat ps
+            inner join roster r on ps.roster_id = r.roster_id
+            inner join player p on r.player_id = p.player_id
+            inner join team t on r.team_id = t.team_id
+            inner join college c on t.college_id = c.college_id
+            inner join conference con on t.conference_id = con.conference_id
+            where t.`year` = {selected_year}
+            order by ps.punt_yards desc;
+            """
+    df = load_data_query(query)
+    columns = [{'name': col, 'id': col} for col in df.columns]
+    return df.to_dict('records'), columns
+
+@callback(
+    Output(component_id='national_individual_scoring_title', component_property='children'),
+    Input(component_id='national_year_dropdown', component_property='value')
+)
+def update_national_individual_scoring_title(selected_year):
+    if not selected_year:
+        raise PreventUpdate
+    return f"{selected_year} National Scoring"
+
+@callback(
+    Output(component_id='national_individual_scoring_table', component_property='data'),
+    Output(component_id='national_individual_scoring_table', component_property='columns'),
+    Input(component_id='national_year_dropdown', component_property='value')
+)
+def update_national_individual_scoring_table(selected_year):
+    if not selected_year:
+        raise PreventUpdate
+    query = f"""
+            select
+                p.player_name as Player,
+                c.college_name as College,
+                con.conference_shorthand as Conf,
+                ss.games_played as GP,
+                ss.rushing_touchdowns as RTD,
+                ss.receiving_touchdowns as RecTD,
+                ss.punt_return_touchdowns as PRTD,
+                ss.kickoff_return_touchdowns as KRTD,
+                ss.fumble_recovery_touchdowns as FRTD,
+                ss.interception_return_touchdowns as ITD,
+                ss.other_touchdowns as OTD,
+                ss.total_touchdowns as TTD,
+                ss.extra_points_made as XPM,
+                ss.extra_points_attempted as XPA,
+                ss.field_goals_made as FGM,
+                ss.field_goals_attempted as FGA,
+                ss.two_point_conversions_made as "2Pt",
+                ss.safeties as SFY,
+                ss.points_scored as Pts,
+                ss.points_per_game as "P/G"
+            from scoring_stat as ss
+            inner join roster r on ss.roster_id = r.roster_id
+            inner join player p on r.player_id = p.player_id
+            inner join team t on r.team_id = t.team_id
+            inner join college c on t.college_id = c.college_id
+            inner join conference con on t.conference_id = con.conference_id
+            where t.`year` = {selected_year}
+            order by ss.points_scored desc;
+            """
+    df = load_data_query(query)
+    columns = [{'name': col, 'id': col} for col in df.columns]
+    return df.to_dict('records'), columns
 
 app.run(debug=True, host='0.0.0.0', port=8050)

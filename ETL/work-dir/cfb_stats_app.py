@@ -45,33 +45,49 @@ def remove_asterisk(value):
     return value.strip('*')
 remove_asterisk_udf = udf(remove_asterisk, StringType())
 
-# Function to aggregate player dataframe
-def create_player_dataframe(year):
-    for k, v in file_extension_to_college.items():
-        if k == "air_force":
-            master_players = spark.read.csv(f"/opt/spark/files/in/rosters/{year}_{k}.csv", header=True, inferSchema=True)
-            master_players = master_players.withColumn("college_name", lit(v))
-            master_players = master_players.withColumn("year", lit(year))
-            master_players = master_players.drop(col("Summary"))
-        else:
-            next_df = spark.read.csv(f"/opt/spark/files/in/rosters/{year}_{k}.csv", header=True, inferSchema=True)
-            next_df = next_df.withColumn("college_name", lit(v))
-            next_df = next_df.withColumn("year", lit(year))
-            next_df = next_df.drop(col("Summary"))
-            master_players = master_players.union(next_df)
-    return master_players
+def remove_comma(value):
+    return value.strip(',')
+remove_comma_udf = udf(remove_comma, StringType())
 
 # Functions to build dataframes for ETL process
-def build_master_college_conf(year):
-    master = spark.read.csv(f"/opt/spark/files/in/ind-stats/{year}_rushing.csv", header=True, inferSchema=True)
-    master = master.withColumn("year", lit(year))
-    master = master.select("Team", "Conf", "year")
-    master = master.withColumnRenamed("Team", "college_name") \
-        .withColumnRenamed("Conf", "conference_shorthand")
+def build_master_college_conf(years):
+    for year in years:
+        if year == 2024:
+            master = spark.read.csv(f"/opt/spark/files/in/ind-stats/{year}_rushing.csv", header=True, inferSchema=True)
+            master = master.withColumn("year", lit(year))
+            master = master.select("Team", "Conf", "year")
+            master = master.withColumnRenamed("Team", "college_name") \
+                .withColumnRenamed("Conf", "conference_shorthand")
+        else:
+            next_df = spark.read.csv(f"/opt/spark/files/in/ind-stats/{year}_rushing.csv", header=True, inferSchema=True)
+            next_df = next_df.withColumn("year", lit(year))
+            next_df = next_df.select("Team", "Conf", "year")
+            next_df = next_df.withColumnRenamed("Team", "college_name") \
+                .withColumnRenamed("Conf", "conference_shorthand")
+            master = master.union(next_df)
     return master
 
-def build_master_players(year):
-    master = create_player_dataframe(year)
+def build_master_players(year, teams):
+    not_found_list = []
+    for year in years:
+        years_df = teams.filter(col("year") == year).select("college_name")
+        for k, v in file_extension_to_college.items():
+            college_df = years_df.filter(col("college_name") == v)
+            if college_df.count() > 0:
+                if year == 2024 and k == "air_force":
+                    master = spark.read.csv(f"/opt/spark/files/in/rosters/{year}_{k}.csv", header=True, inferSchema=True)
+                    master = master.select("Player", "Class", "Pos")
+                    master = master.withColumn("college_name", lit(v))
+                    master = master.withColumn("year", lit(year))
+                else:
+                    next_df = spark.read.csv(f"/opt/spark/files/in/rosters/{year}_{k}.csv", header=True, inferSchema=True)
+                    next_df = next_df.select("Player", "Class", "Pos")
+                    next_df = next_df.withColumn("college_name", lit(v))
+                    next_df = next_df.withColumn("year", lit(year))
+                    master = master.union(next_df)
+            else:
+                entry = f"{v} not found in {year}"
+                not_found_list.append(entry)
     master = master.withColumnRenamed("Player", "player_name") \
         .withColumnRenamed("Class", "class_abbr") \
         .withColumnRenamed("Pos", "position_abbr")
@@ -83,8 +99,6 @@ def build_master_players(year):
     
 def build_conferences(master):
     conferences = master.select("conference_shorthand").distinct()
-    pac12 = spark.createDataFrame([("Pac-12",)], ["conference_shorthand"])
-    conferences = conferences.union(pac12)
     conferences = conferences.sort("conference_shorthand")
     conferences = conferences.withColumn("conference_name", map_conference_name_udf(col("conference_shorthand")))
     return conferences
@@ -116,7 +130,7 @@ def build_classes(master):
     return classes
 
 def build_players(master, positions):
-    players = master.select("player_name", "position_abbr")
+    players = master.select("player_name", "position_abbr").distinct()
     players = players.join(positions, "position_abbr", "inner")
     players = players.select("player_name", "position_id")
     players = players.sort("player_name")
@@ -131,29 +145,44 @@ def build_rosters(master, players, teams, classes):
     rosters = rosters.sort("team_id", "player_id")
     return rosters
 
-def build_rushing(year,rosters):
-    rushing = spark.read.csv(f"/opt/spark/files/in/ind-stats/{year}_rushing.csv", header=True, inferSchema=True)
-    rushing = rushing.select(*rushing.columns[1:10])
+def build_rushing(years,rosters):
+    for year in years:
+        if year == 2024: 
+            rushing = spark.read.csv(f"/opt/spark/files/in/ind-stats/{year}_rushing.csv", header=True, inferSchema=True)
+            rushing = rushing.select(*rushing.columns[1:10])
+            rushing = rushing.withColumn("year", lit(year))
+        else:
+            next_df = spark.read.csv(f"/opt/spark/files/in/ind-stats/{year}_rushing.csv", header=True, inferSchema=True)
+            next_df = next_df.select(*next_df.columns[1:10])
+            next_df = next_df.withColumn("year", lit(year))
+            rushing = rushing.union(next_df)
     rushing = rushing.withColumnRenamed("Player", "player_name") \
-        .withColumnRenamed("Team", "college_name") \
-        .withColumnRenamed("Conf", "conference_shorthand") \
-        .withColumnRenamed("G", "games_played") \
-        .withColumnRenamed("Att", "rushing_attempts") \
-        .withColumnRenamed("Yds6", "rushing_yards") \
-        .withColumnRenamed("Y/A", "rushing_yards_per_attempt") \
-        .withColumnRenamed("TD8", "rushing_touchdowns") \
-        .withColumnRenamed("Y/G9", "rushing_yards_per_game")
-    rushing = rushing.withColumn("year", lit(year))
+                .withColumnRenamed("Team", "college_name") \
+                .withColumnRenamed("Conf", "conference_shorthand") \
+                .withColumnRenamed("G", "games_played") \
+                .withColumnRenamed("Att", "rushing_attempts") \
+                .withColumnRenamed("Yds6", "rushing_yards") \
+                .withColumnRenamed("Y/A", "rushing_yards_per_attempt") \
+                .withColumnRenamed("TD8", "rushing_touchdowns") \
+                .withColumnRenamed("Y/G9", "rushing_yards_per_game")     
     rushing = rushing.withColumn("player_name", when(col("player_name").contains('*'), remove_asterisk_udf(col("player_name"))).otherwise(col("player_name")))
     rushing = rushing.withColumn("player_name", when(col("player_name").contains('"'), remove_quotes_udf(col("player_name"))).otherwise(col("player_name")))
     rushing = rushing.join(rosters, on=["player_name", "college_name", "conference_shorthand", "year"], how="inner")
     rushing = rushing.select("roster_id", "games_played", "rushing_attempts", "rushing_yards", "rushing_yards_per_attempt", "rushing_touchdowns", "rushing_yards_per_game")
-    rushing = rushing.sort("rushing_yards", ascending=False)
+    rushing = rushing.orderBy("rushing_yards", ascending=False)
     return rushing
 
-def build_receiving(year, rosters):
-    receiving = spark.read.csv(f"/opt/spark/files/in/ind-stats/{year}_receiving.csv", header=True, inferSchema=True)
-    receiving = receiving.select(*receiving.columns[1:10])
+def build_receiving(years, rosters):
+    for year in years:
+        if year == 2024:
+            receiving = spark.read.csv(f"/opt/spark/files/in/ind-stats/{year}_receiving.csv", header=True, inferSchema=True)
+            receiving = receiving.select(*receiving.columns[1:10])
+            receiving = receiving.withColumn("year", lit(year))
+        else:
+            next_df = spark.read.csv(f"/opt/spark/files/in/ind-stats/{year}_receiving.csv", header=True, inferSchema=True)
+            next_df = next_df.select(*next_df.columns[1:10])
+            next_df = next_df.withColumn("year", lit(year))
+            receiving = receiving.union(next_df)
     receiving = receiving.withColumnRenamed("Player", "player_name") \
         .withColumnRenamed("Team", "college_name") \
         .withColumnRenamed("Conf", "conference_shorthand") \
@@ -163,7 +192,6 @@ def build_receiving(year, rosters):
         .withColumnRenamed("Y/R", "receiving_yards_per_reception") \
         .withColumnRenamed("TD8", "receiving_touchdowns") \
         .withColumnRenamed("Y/G9", "receiving_yards_per_game")
-    receiving = receiving.withColumn("year", lit(year))
     receiving = receiving.withColumn("player_name", when(col("player_name").contains('*'), remove_asterisk_udf(col("player_name"))).otherwise(col("player_name")))
     receiving = receiving.withColumn("player_name", when(col("player_name").contains('"'), remove_quotes_udf(col("player_name"))).otherwise(col("player_name")))
     receiving = receiving.join(rosters, on=["player_name", "college_name", "conference_shorthand", "year"], how="inner")
@@ -171,8 +199,15 @@ def build_receiving(year, rosters):
     receiving = receiving.sort("receiving_yards", ascending=False)
     return receiving
 
-def build_passing(year, rosters):
-    passing = spark.read.csv(f"/opt/spark/files/in/ind-stats/{year}_passing.csv", header=True, inferSchema=True)
+def build_passing(years, rosters):
+    for year in years:
+        if year == 2024:
+            passing = spark.read.csv(f"/opt/spark/files/in/ind-stats/{year}_passing.csv", header=True, inferSchema=True)
+            passing = passing.withColumn("year", lit(year))
+        else:
+            next_df = spark.read.csv(f"/opt/spark/files/in/ind-stats/{year}_passing.csv", header=True, inferSchema=True)
+            next_df = next_df.withColumn("year", lit(year))
+            passing = passing.union(next_df)
     passing = passing.withColumnRenamed("Player", "player_name") \
         .withColumnRenamed("Team", "college_name") \
         .withColumnRenamed("Conf", "conference_shorthand") \
@@ -189,18 +224,23 @@ def build_passing(year, rosters):
         .withColumnRenamed("Y/C", "passing_yards_per_completion") \
         .withColumnRenamed("Y/G", "passing_yards_per_game") \
         .withColumnRenamed("Rate", "passer_rating")
-    passing = passing.withColumn("year", lit(year))
     passing = passing.withColumn("player_name", when(col("player_name").contains('*'), remove_asterisk_udf(col("player_name"))).otherwise(col("player_name")))
     passing = passing.withColumn("player_name", when(col("player_name").contains('"'), remove_quotes_udf(col("player_name"))).otherwise(col("player_name")))
     passing = passing.withColumn("passing_yards_per_completion", when(col("passing_yards_per_completion").isNull(), 0.0).otherwise(col("passing_yards_per_completion")))
     passing = passing.join(rosters, on=["player_name", "college_name", "conference_shorthand", "year"], how="inner")
     passing = passing.select("roster_id", "games_played", "completions", "passing_attempts", "completion_percentage", "passing_yards", "passing_touchdowns", "touchdown_percentage", "interceptions", "interception_percentage", "passing_yards_per_attempt", "passing_yards_per_completion", "passing_yards_per_game", "passer_rating")
     passing = passing.sort("passing_yards", ascending=False)
-
     return passing
 
-def build_scoring(year, rosters):
-    scoring = spark.read.csv(f"/opt/spark/files/in/ind-stats/{year}_scoring.csv", header=True, inferSchema=True)
+def build_scoring(years, rosters):
+    for year in years:
+        if year == 2024:
+            scoring = spark.read.csv(f"/opt/spark/files/in/ind-stats/{year}_scoring.csv", header=True, inferSchema=True)
+            scoring = scoring.withColumn("year", lit(year))
+        else:
+            next_df = spark.read.csv(f"/opt/spark/files/in/ind-stats/{year}_scoring.csv", header=True, inferSchema=True)
+            next_df = next_df.withColumn("year", lit(year))
+            scoring = scoring.union(next_df)
     scoring = scoring.withColumnRenamed("Player", "player_name") \
         .withColumnRenamed("Team", "college_name") \
         .withColumnRenamed("Conf", "conference_shorthand") \
@@ -221,7 +261,6 @@ def build_scoring(year, rosters):
         .withColumnRenamed("Sfty", "safeties") \
         .withColumnRenamed("Pts", "points_scored") \
         .withColumnRenamed("Pts/G", "points_per_game")
-    scoring = scoring.withColumn("year", lit(year))
     scoring = scoring.withColumn("player_name", when(col("player_name").contains('*'), remove_asterisk_udf(col("player_name"))).otherwise(col("player_name")))
     scoring = scoring.withColumn("player_name", when(col("player_name").contains('"'), remove_quotes_udf(col("player_name"))).otherwise(col("player_name")))
     scoring = scoring.join(rosters, on=["player_name", "college_name", "conference_shorthand", "year"], how="inner")
@@ -229,8 +268,15 @@ def build_scoring(year, rosters):
     scoring = scoring.sort("points_scored", ascending=False)
     return scoring
 
-def build_punting(year, rosters):
-    punting = spark.read.csv(f"/opt/spark/files/in/ind-stats/{year}_punting.csv", header=True, inferSchema=True)
+def build_punting(years, rosters):
+    for year in years:
+        if year == 2024:
+            punting = spark.read.csv(f"/opt/spark/files/in/ind-stats/{year}_punting.csv", header=True, inferSchema=True)
+            punting = punting.withColumn("year", lit(year))
+        else:
+            next_df = spark.read.csv(f"/opt/spark/files/in/ind-stats/{year}_punting.csv", header=True, inferSchema=True)
+            next_df = next_df.withColumn("year", lit(year))
+            punting = punting.union(next_df)
     punting = punting.withColumnRenamed("Player", "player_name") \
         .withColumnRenamed("Team", "college_name") \
         .withColumnRenamed("Conf", "conference_shorthand") \
@@ -238,7 +284,6 @@ def build_punting(year, rosters):
         .withColumnRenamed("Pnt", "punts") \
         .withColumnRenamed("Yds", "punt_yards") \
         .withColumnRenamed("Y/P", "yards_per_punt")
-    punting = punting.withColumn("year", lit(year))
     punting = punting.withColumn("player_name", when(col("player_name").contains('*'), remove_asterisk_udf(col("player_name"))).otherwise(col("player_name")))
     punting = punting.withColumn("player_name", when(col("player_name").contains('"'), remove_quotes_udf(col("player_name"))).otherwise(col("player_name")))
     punting = punting.join(rosters, on=["player_name", "college_name", "conference_shorthand", "year"], how="inner")
@@ -246,8 +291,15 @@ def build_punting(year, rosters):
     punting = punting.sort("punt_yards", ascending=False)
     return punting
 
-def build_kicking(year, rosters):
-    kicking = spark.read.csv(f"/opt/spark/files/in/ind-stats/{year}_kicking.csv", header=True, inferSchema=True)
+def build_kicking(years, rosters):
+    for year in years:
+        if year == 2024:
+            kicking = spark.read.csv(f"/opt/spark/files/in/ind-stats/{year}_kicking.csv", header=True, inferSchema=True)
+            kicking = kicking.withColumn("year", lit(year))
+        else:
+            next_df = spark.read.csv(f"/opt/spark/files/in/ind-stats/{year}_kicking.csv", header=True, inferSchema=True)
+            next_df = next_df.withColumn("year", lit(year))
+            kicking = kicking.union(next_df)
     kicking = kicking.withColumnRenamed("Player", "player_name") \
         .withColumnRenamed("Team", "college_name") \
         .withColumnRenamed("Conf", "conference_shorthand") \
@@ -259,7 +311,6 @@ def build_kicking(year, rosters):
         .withColumnRenamed("FGA", "field_goals_attempted") \
         .withColumnRenamed("FG%", "field_goal_percentage") \
         .withColumnRenamed("Pts", "Points_scored")
-    kicking = kicking.withColumn("year", lit(year))
     kicking = kicking.withColumn("player_name", when(col("player_name").contains('*'), remove_asterisk_udf(col("player_name"))).otherwise(col("player_name")))
     kicking = kicking.withColumn("player_name", when(col("player_name").contains('"'), remove_quotes_udf(col("player_name"))).otherwise(col("player_name")))
     kicking = kicking.join(rosters, on=["player_name", "college_name", "conference_shorthand", "year"], how="inner")
@@ -269,7 +320,7 @@ def build_kicking(year, rosters):
     kicking = kicking.sort("points_scored", ascending=False)
     return kicking
 
-def build_team_offense(year, teams):
+def build_team_offense(years, teams):
     team_offense = spark.read.csv(f"/opt/spark/files/in/team-stats/{year}_offense.csv", header=True, inferSchema=True)
     team_offense = team_offense.withColumnRenamed("School", "college_name") \
         .withColumnRenamed("G", "games_played") \
@@ -302,7 +353,7 @@ def build_team_offense(year, teams):
     team_offense = team_offense.sort("points_per_game", ascending=False)
     return team_offense
 
-def build_team_defense(year, teams):
+def build_team_defense(years, teams):
     team_defense = spark.read.csv(f"/opt/spark/files/in/team-stats/{year}_defense.csv", header=True, inferSchema=True)
     team_defense = team_defense.withColumnRenamed("School", "college_name") \
         .withColumnRenamed("G", "games_played") \
@@ -335,7 +386,7 @@ def build_team_defense(year, teams):
     team_defense = team_defense.sort("opponent_points_per_game", ascending=True)
     return team_defense  
 
-def build_team_special(year, teams):
+def build_team_special(years, teams):
     team_special = spark.read.csv(f"/opt/spark/files/in/team-stats/{year}_special_teams.csv", header=True, inferSchema=True)
     team_special = team_special.withColumnRenamed("School", "college_name") \
         .withColumnRenamed("G", "games_played") \
@@ -365,54 +416,59 @@ def build_team_special(year, teams):
         
     return team_special
 
-# Create master dataframes
-master_college_conf = build_master_college_conf(2024)
-master_players = build_master_players(2024)
+# List of years to process
+years = [2024, 2023]
+
+# Create master dataframe for college and conference
+##master_college_conf = build_master_college_conf(years)
 
 # ETL process for conference table
-conferences = build_conferences(master_college_conf)
-conferences.write.format("jdbc").options(**jdbc_options, dbtable="conference").mode("append").save()
+##conferences = build_conferences(master_college_conf)
+##conferences.write.format("jdbc").options(**jdbc_options, dbtable="conference").mode("append").save()
 
 # ETL Process for college table
-colleges = build_colleges(master_college_conf)
-colleges.write.format("jdbc").options(**jdbc_options, dbtable="college").mode("append").save()
+##colleges = build_colleges(master_college_conf)
+##colleges.write.format("jdbc").options(**jdbc_options, dbtable="college").mode("append").save()
 
 # ETL Process for team table
 # - Read college and conference tables
 conferences = spark.read.format("jdbc").options(**jdbc_options, dbtable="conference").load()
 colleges = spark.read.format("jdbc").options(**jdbc_options, dbtable="college").load()
 # - Build and write teams dataframe
-teams = build_teams(master_college_conf, colleges, conferences)
-teams.write.format("jdbc").options(**jdbc_options, dbtable="team").mode("append").save()
+##teams = build_teams(master_college_conf, colleges, conferences)
+##teams.write.format("jdbc").options(**jdbc_options, dbtable="team").mode("append").save()
+
+# Create master dataframe for players
+# - Read team table join with college and conference tables
+teams = spark.read.format("jdbc").options(**jdbc_options, dbtable="team").load()
+teams = teams.join(colleges, "college_id", "inner")
+teams = teams.join(conferences, "conference_id", "inner")
+##master_players = build_master_players(years, teams)
 
 # ETL Process for position table
-positions = build_positions(master_players)
-positions.write.format("jdbc").options(**jdbc_options, dbtable="`position`").mode("append").save()
+##positions = build_positions(master_players)
+##positions.write.format("jdbc").options(**jdbc_options, dbtable="`position`").mode("append").save()
 
 # ETL Process for class table
-classes = build_classes(master_players)
-classes.write.format("jdbc").options(**jdbc_options, dbtable="class").mode("append").save()
+##classes = build_classes(master_players)
+##classes.write.format("jdbc").options(**jdbc_options, dbtable="class").mode("append").save()
 
 # ETL Process for player table
 # - Read position table
 positions = spark.read.format("jdbc").options(**jdbc_options, dbtable="`position`").load()
 # - Build and write players dataframe
-players = build_players(master_players, positions)
-players.write.format("jdbc").options(**jdbc_options, dbtable="player").mode("append").save()
+##players = build_players(master_players, positions)
+##players.write.format("jdbc").options(**jdbc_options, dbtable="player").mode("append").save()
 
 # ETL Process for roster table
 # - Read player table, join with position table
 players = spark.read.format("jdbc").options(**jdbc_options, dbtable="player").load()
 players = players.join(positions, "position_id", "inner")
-# - Read team table join with college and conference tables
-teams = spark.read.format("jdbc").options(**jdbc_options, dbtable="team").load()
-teams = teams.join(colleges, "college_id", "inner")
-teams = teams.join(conferences, "conference_id", "inner")
 # - Read class table
 classes = spark.read.format("jdbc").options(**jdbc_options, dbtable="class").load()
 # - Build and write roster dataframe
-rosters = build_rosters(master_players, players, teams, classes)
-rosters.write.format("jdbc").options(**jdbc_options, dbtable="roster").mode("append").save()
+##rosters = build_rosters(master_players, players, teams, classes)
+##rosters.write.format("jdbc").options(**jdbc_options, dbtable="roster").mode("append").save()
 
 # ETL Process for rushing table
 # - Read rosters from SQL join with players, teams, classes
@@ -421,39 +477,39 @@ rosters = rosters.join(players, "player_id", "inner")
 rosters = rosters.join(teams, "team_id", "inner")
 rosters = rosters.join(classes, "class_id", "inner")
 # - Build and write rushing dataframe
-rushing = build_rushing(2024, rosters)
-rushing.write.format("jdbc").options(**jdbc_options, dbtable="rushing_stat").mode("append").save()
+##rushing = build_rushing(years, rosters)
+##rushing.write.format("jdbc").options(**jdbc_options, dbtable="rushing_stat").mode("append").save()
 
 # ETL Process for receiving table
-receiving = build_receiving(2024, rosters)
-receiving.write.format("jdbc").options(**jdbc_options, dbtable="receiving_stat").mode("append").save()
+##receiving = build_receiving(years, rosters)
+##receiving.write.format("jdbc").options(**jdbc_options, dbtable="receiving_stat").mode("append").save()
 
 # ETL process for passing table
-passing = build_passing(2024, rosters)
-passing.write.format("jdbc").options(**jdbc_options, dbtable="passing_stat").mode("append").save()
+##passing = build_passing(years, rosters)
+##passing.write.format("jdbc").options(**jdbc_options, dbtable="passing_stat").mode("append").save()
 
 # ETL process for scoring table
-scoring = build_scoring(2024, rosters)
-scoring.write.format("jdbc").options(**jdbc_options, dbtable="scoring_stat").mode("append").save()
+##scoring = build_scoring(years, rosters)
+##scoring.write.format("jdbc").options(**jdbc_options, dbtable="scoring_stat").mode("append").save()
 
 # ETL process for punting table
-punting = build_punting(2024, rosters)
-punting.write.format("jdbc").options(**jdbc_options, dbtable="punting_stat").mode("append").save()
+##punting = build_punting(years, rosters)
+##punting.write.format("jdbc").options(**jdbc_options, dbtable="punting_stat").mode("append").save()
 
 # ETL process for kicking table
-kicking = build_kicking(2024, rosters)
-kicking.write.format("jdbc").options(**jdbc_options, dbtable="kicking_stat").mode("append").save()
+##kicking = build_kicking(years, rosters)
+##kicking.write.format("jdbc").options(**jdbc_options, dbtable="kicking_stat").mode("append").save()
 
 # ETL process for team offense table
-team_offense = build_team_offense(2024, teams)
-team_offense.write.format("jdbc").options(**jdbc_options, dbtable="team_offense").mode("append").save()
+team_offense = build_team_offense(years, teams)
+##team_offense.write.format("jdbc").options(**jdbc_options, dbtable="team_offense").mode("append").save()
 
 # ETL process for team defense table
-team_defense = build_team_defense(2024, teams)
-team_defense.write.format("jdbc").options(**jdbc_options, dbtable="team_defense").mode("append").save()
+##team_defense = build_team_defense(years, teams)
+##team_defense.write.format("jdbc").options(**jdbc_options, dbtable="team_defense").mode("append").save()
 
 # ETL process for team special table
-team_special = build_team_special(2024, teams)
-team_special.write.format("jdbc").options(**jdbc_options, dbtable="team_special").mode("append").save()
+##team_special = build_team_special(years, teams)
+##team_special.write.format("jdbc").options(**jdbc_options, dbtable="team_special").mode("append").save()
 
 spark.stop()
