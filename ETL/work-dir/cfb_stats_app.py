@@ -1,5 +1,5 @@
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import col, when, udf, lit, split
+from pyspark.sql.functions import col, when, udf, lit, split, regexp_replace
 from pyspark.sql.types import StringType
 from additional_data import conference_name, college_mascot, file_extension_to_college, position_name, class_name, college_shorthand_to_name
 
@@ -104,6 +104,7 @@ def build_conferences(master):
     return conferences
 
 def build_colleges(master):
+    colleges = master.select("college_name")
     colleges = master.select("college_name").distinct()
     colleges = colleges.sort("college_name")
     colleges = colleges.withColumn("college_mascot", map_college_mascot_udf(col("college_name")))
@@ -321,7 +322,15 @@ def build_kicking(years, rosters):
     return kicking
 
 def build_team_offense(years, teams):
-    team_offense = spark.read.csv(f"/opt/spark/files/in/team-stats/{year}_offense.csv", header=True, inferSchema=True)
+    for year in years:
+        if year is 2024:
+            team_offense = spark.read.csv(f"/opt/spark/files/in/team-stats/{year}_offense.csv", header=True, inferSchema=True)
+            team_offense = team_offense.withColumn("year", lit(year))
+        else:
+            next_df = spark.read.csv(f"/opt/spark/files/in/team-stats/{year}_offense.csv", header=True, inferSchema=True)
+            next_df = next_df.withColumn("year", lit(year))
+            team_offense = team_offense.union(next_df)
+
     team_offense = team_offense.withColumnRenamed("School", "college_name") \
         .withColumnRenamed("G", "games_played") \
         .withColumnRenamed("Pts", "points_per_game") \
@@ -346,7 +355,6 @@ def build_team_offense(years, teams):
         .withColumnRenamed("Fum", "fumbles_lost_per_game") \
         .withColumnRenamed("Int", "interceptions_per_game") \
         .withColumnRenamed("Tot24", "turnovers_per_game")
-    team_offense = team_offense.withColumn("year", lit(year))
     team_offense = team_offense.withColumn("college_name", when(col("college_name").isin(list(college_shorthand_to_name.keys())), map_college_name_udf(col("college_name"))).otherwise(col("college_name")))
     team_offense = team_offense.join(teams, on=["college_name", "year"], how="inner")
     team_offense = team_offense.select("team_id", "games_played", "points_per_game", "completions_per_game", "passing_attempts_per_game", "completion_percentage_per_game", "passing_yards_per_game", "passing_touchdowns_per_game", "rushing_attempts_per_game", "rushing_yards_per_game", "rushing_yards_per_attempt_per_game", "rushing_touchdowns_per_game", "total_plays_per_game", "total_yards_per_game", "yards_per_play_per_game", "passing_first_downs_per_game", "rushing_first_downs_per_game", "penalty_first_downs_per_game", "total_first_downs_per_game", "penalties_per_game", "penalty_yards_per_game", "fumbles_lost_per_game", "interceptions_per_game", "turnovers_per_game")
@@ -354,7 +362,14 @@ def build_team_offense(years, teams):
     return team_offense
 
 def build_team_defense(years, teams):
-    team_defense = spark.read.csv(f"/opt/spark/files/in/team-stats/{year}_defense.csv", header=True, inferSchema=True)
+    for year in years:
+        if year == 2024:
+            team_defense = spark.read.csv(f"/opt/spark/files/in/team-stats/{year}_defense.csv", header=True, inferSchema=True)
+            team_defense = team_defense.withColumn("year", lit(year))
+        else:
+            next_df = spark.read.csv(f"/opt/spark/files/in/team-stats/{year}_defense.csv", header=True, inferSchema=True)
+            next_df = next_df.withColumn("year", lit(year))
+            team_defense = team_defense.union(next_df)
     team_defense = team_defense.withColumnRenamed("School", "college_name") \
         .withColumnRenamed("G", "games_played") \
         .withColumnRenamed("Pts", "opponent_points_per_game") \
@@ -379,7 +394,6 @@ def build_team_defense(years, teams):
         .withColumnRenamed("Fum", "opponent_fumbles_lost_per_game") \
         .withColumnRenamed("Int", "opponent_interceptions_per_game") \
         .withColumnRenamed("TO", "opponent_turnovers_per_game")
-    team_defense = team_defense.withColumn("year", lit(year))
     team_defense = team_defense.withColumn("college_name", when(col("college_name").isin(list(college_shorthand_to_name.keys())), map_college_name_udf(col("college_name"))).otherwise(col("college_name")))
     team_defense = team_defense.join(teams, on=["college_name", "year"], how="inner")
     team_defense = team_defense.select("team_id", "games_played", "opponent_points_per_game", "opponent_completions_per_game", "opponent_passing_attempts_per_game", "opponent_completion_percentage_per_game", "opponent_passing_yards_per_game", "opponent_passing_touchdowns_per_game", "opponent_rushing_attempts_per_game", "opponent_rushing_yards_per_game", "opponent_rushing_yards_per_attempt_per_game", "opponent_rushing_touchdowns_per_game", "opponent_total_plays_per_game", "opponent_total_yards_per_game", "opponent_yards_per_play_per_game", "opponent_passing_first_downs_per_game", "opponent_rushing_first_downs_per_game", "opponent_penalty_first_downs_per_game", "opponent_total_first_downs_per_game", "opponent_penalties_per_game", "opponent_penalty_yards_per_game", "opponent_fumbles_lost_per_game", "opponent_interceptions_per_game", "opponent_turnovers_per_game")
@@ -387,7 +401,14 @@ def build_team_defense(years, teams):
     return team_defense  
 
 def build_team_special(years, teams):
-    team_special = spark.read.csv(f"/opt/spark/files/in/team-stats/{year}_special_teams.csv", header=True, inferSchema=True)
+    for year in years:
+        if year == 2024:
+            team_special = spark.read.csv(f"/opt/spark/files/in/team-stats/{year}_special_teams.csv", header=True, inferSchema=True)
+            team_special = team_special.withColumn("year", lit(year))
+        else:
+            next_df = spark.read.csv(f"/opt/spark/files/in/team-stats/{year}_special_teams.csv", header=True, inferSchema=True)
+            next_df = next_df.withColumn("year", lit(year))
+            team_special = team_special.union(next_df)
     team_special = team_special.withColumnRenamed("School", "college_name") \
         .withColumnRenamed("G", "games_played") \
         .withColumnRenamed("XPM", "extra_points_made_per_game") \
@@ -408,7 +429,6 @@ def build_team_special(years, teams):
         .withColumnRenamed("Yds18", "punt_return_yards_per_game") \
         .withColumnRenamed("Avg19", "return_yards_per_punt_per_game") \
         .withColumnRenamed("TD20", "punt_return_touchdowns_per_game")
-    team_special = team_special.withColumn("year", lit(year))
     team_special = team_special.withColumn("college_name", when(col("college_name").isin(list(college_shorthand_to_name.keys())), map_college_name_udf(col("college_name"))).otherwise(col("college_name")))
     team_special = team_special.join(teams, on=["college_name", "year"], how="inner")
     team_special = team_special.select("team_id", "games_played", "extra_points_made_per_game", "extra_points_attempted_per_game", "extra_point_percentage", "field_goals_made_per_game", "field_goals_attempted_per_game", "field_goal_percentage", "kicking_points_scored_per_game", "punts_per_game", "punt_yards_per_game", "yards_per_punt_per_game", "kickoff_returns_per_game", "kickoff_return_yards_per_game", "return_yards_per_kickoff_per_game", "kickoff_return_touchdowns_per_game", "punt_returns_per_game", "punt_return_yards_per_game", "return_yards_per_punt_per_game", "punt_return_touchdowns_per_game")
@@ -416,49 +436,82 @@ def build_team_special(years, teams):
         
     return team_special
 
+def build_standings(years, teams):
+    for year in years:
+        if year == 2024:
+            standings = spark.read.csv(f"/opt/spark/files/in/standings/{year}_standings.csv", header=True, inferSchema=True)
+            standings = standings.withColumn("year", lit(year))
+        else:
+            next_df = spark.read.csv(f"/opt/spark/files/in/standings/{year}_standings.csv", header=True, inferSchema=True)
+            next_df = next_df.withColumn("year", lit(year))
+            standings = standings.union(next_df)
+    standings = standings.withColumnRenamed("School", "college_name") \
+        .withColumnRenamed("Conf", "conference_shorthand") \
+        .withColumnRenamed("W3", "total_wins") \
+        .withColumnRenamed("L4", "total_losses") \
+        .withColumnRenamed("Pct5", "total_win_percentage") \
+        .withColumnRenamed("W6", "conference_wins") \
+        .withColumnRenamed("L7", "conference_losses") \
+        .withColumnRenamed("Pct8", "conference_win_percentage") \
+        .withColumnRenamed("Off", "points_scored_per_game") \
+        .withColumnRenamed("Def", "points_allowed_per_game") \
+        .withColumnRenamed("SRS", "simple_rating_system") \
+        .withColumnRenamed("SOS", "strength_of_schedule") \
+        .withColumnRenamed("AP Pre", "ap_preseason_rank") \
+        .withColumnRenamed("AP High", "ap_highest_rank") \
+        .withColumnRenamed("AP Post", "ap_final_rank") 
+    standings = standings.withColumn("conference_shorthand", regexp_replace("conference_shorthand", r"\s*\(.*?\)", ""))
+    standings = standings.withColumn("conference_wins", when(col("conference_wins").isNull(), 0).otherwise(col("conference_wins")))
+    standings = standings.withColumn("conference_losses", when(col("conference_losses").isNull(), 0).otherwise(col("conference_losses")))
+    standings = standings.withColumn("conference_win_percentage", when(col("conference_win_percentage").isNull(), 0.0).otherwise(col("conference_win_percentage")))
+    standings = standings.join(teams, on=["college_name", "conference_shorthand", "year"], how="inner")
+    standings = standings.select("team_id", "total_wins", "total_losses", "total_win_percentage", "conference_wins", "conference_losses", "conference_win_percentage", "points_scored_per_game", "points_allowed_per_game", "simple_rating_system", "strength_of_schedule", "ap_preseason_rank", "ap_highest_rank", "ap_final_rank")
+    return standings
+
 # List of years to process
 years = [2024, 2023]
 
 # Create master dataframe for college and conference
-##master_college_conf = build_master_college_conf(years)
+master_college_conf = build_master_college_conf(years)
 
 # ETL process for conference table
-##conferences = build_conferences(master_college_conf)
-##conferences.write.format("jdbc").options(**jdbc_options, dbtable="conference").mode("append").save()
+conferences = build_conferences(master_college_conf)
+conferences.write.format("jdbc").options(**jdbc_options, dbtable="conference").mode("append").save()
 
 # ETL Process for college table
-##colleges = build_colleges(master_college_conf)
-##colleges.write.format("jdbc").options(**jdbc_options, dbtable="college").mode("append").save()
+colleges = build_colleges(master_college_conf)
+colleges.write.format("jdbc").options(**jdbc_options, dbtable="college").mode("append").save()
 
 # ETL Process for team table
 # - Read college and conference tables
 conferences = spark.read.format("jdbc").options(**jdbc_options, dbtable="conference").load()
 colleges = spark.read.format("jdbc").options(**jdbc_options, dbtable="college").load()
 # - Build and write teams dataframe
-##teams = build_teams(master_college_conf, colleges, conferences)
-##teams.write.format("jdbc").options(**jdbc_options, dbtable="team").mode("append").save()
+teams = build_teams(master_college_conf, colleges, conferences)
+teams.write.format("jdbc").options(**jdbc_options, dbtable="team").mode("append").save()
 
 # Create master dataframe for players
 # - Read team table join with college and conference tables
 teams = spark.read.format("jdbc").options(**jdbc_options, dbtable="team").load()
 teams = teams.join(colleges, "college_id", "inner")
 teams = teams.join(conferences, "conference_id", "inner")
-##master_players = build_master_players(years, teams)
+# - Build master players dataframe for future ETL processes
+master_players = build_master_players(years, teams)
 
 # ETL Process for position table
-##positions = build_positions(master_players)
-##positions.write.format("jdbc").options(**jdbc_options, dbtable="`position`").mode("append").save()
+positions = build_positions(master_players)
+positions.write.format("jdbc").options(**jdbc_options, dbtable="`position`").mode("append").save()
 
 # ETL Process for class table
-##classes = build_classes(master_players)
-##classes.write.format("jdbc").options(**jdbc_options, dbtable="class").mode("append").save()
+classes = build_classes(master_players)
+classes.write.format("jdbc").options(**jdbc_options, dbtable="class").mode("append").save()
 
 # ETL Process for player table
 # - Read position table
 positions = spark.read.format("jdbc").options(**jdbc_options, dbtable="`position`").load()
 # - Build and write players dataframe
-##players = build_players(master_players, positions)
-##players.write.format("jdbc").options(**jdbc_options, dbtable="player").mode("append").save()
+players = build_players(master_players, positions)
+players.write.format("jdbc").options(**jdbc_options, dbtable="player").mode("append").save()
 
 # ETL Process for roster table
 # - Read player table, join with position table
@@ -467,8 +520,8 @@ players = players.join(positions, "position_id", "inner")
 # - Read class table
 classes = spark.read.format("jdbc").options(**jdbc_options, dbtable="class").load()
 # - Build and write roster dataframe
-##rosters = build_rosters(master_players, players, teams, classes)
-##rosters.write.format("jdbc").options(**jdbc_options, dbtable="roster").mode("append").save()
+rosters = build_rosters(master_players, players, teams, classes)
+rosters.write.format("jdbc").options(**jdbc_options, dbtable="roster").mode("append").save()
 
 # ETL Process for rushing table
 # - Read rosters from SQL join with players, teams, classes
@@ -477,39 +530,43 @@ rosters = rosters.join(players, "player_id", "inner")
 rosters = rosters.join(teams, "team_id", "inner")
 rosters = rosters.join(classes, "class_id", "inner")
 # - Build and write rushing dataframe
-##rushing = build_rushing(years, rosters)
-##rushing.write.format("jdbc").options(**jdbc_options, dbtable="rushing_stat").mode("append").save()
+rushing = build_rushing(years, rosters)
+rushing.write.format("jdbc").options(**jdbc_options, dbtable="rushing_stat").mode("append").save()
 
 # ETL Process for receiving table
-##receiving = build_receiving(years, rosters)
-##receiving.write.format("jdbc").options(**jdbc_options, dbtable="receiving_stat").mode("append").save()
+receiving = build_receiving(years, rosters)
+receiving.write.format("jdbc").options(**jdbc_options, dbtable="receiving_stat").mode("append").save()
 
 # ETL process for passing table
-##passing = build_passing(years, rosters)
-##passing.write.format("jdbc").options(**jdbc_options, dbtable="passing_stat").mode("append").save()
+passing = build_passing(years, rosters)
+passing.write.format("jdbc").options(**jdbc_options, dbtable="passing_stat").mode("append").save()
 
 # ETL process for scoring table
-##scoring = build_scoring(years, rosters)
-##scoring.write.format("jdbc").options(**jdbc_options, dbtable="scoring_stat").mode("append").save()
+scoring = build_scoring(years, rosters)
+scoring.write.format("jdbc").options(**jdbc_options, dbtable="scoring_stat").mode("append").save()
 
 # ETL process for punting table
-##punting = build_punting(years, rosters)
-##punting.write.format("jdbc").options(**jdbc_options, dbtable="punting_stat").mode("append").save()
+punting = build_punting(years, rosters)
+punting.write.format("jdbc").options(**jdbc_options, dbtable="punting_stat").mode("append").save()
 
 # ETL process for kicking table
-##kicking = build_kicking(years, rosters)
-##kicking.write.format("jdbc").options(**jdbc_options, dbtable="kicking_stat").mode("append").save()
+kicking = build_kicking(years, rosters)
+kicking.write.format("jdbc").options(**jdbc_options, dbtable="kicking_stat").mode("append").save()
 
 # ETL process for team offense table
 team_offense = build_team_offense(years, teams)
-##team_offense.write.format("jdbc").options(**jdbc_options, dbtable="team_offense").mode("append").save()
+team_offense.write.format("jdbc").options(**jdbc_options, dbtable="team_offense").mode("append").save()
 
 # ETL process for team defense table
-##team_defense = build_team_defense(years, teams)
-##team_defense.write.format("jdbc").options(**jdbc_options, dbtable="team_defense").mode("append").save()
+team_defense = build_team_defense(years, teams)
+team_defense.write.format("jdbc").options(**jdbc_options, dbtable="team_defense").mode("append").save()
 
 # ETL process for team special table
-##team_special = build_team_special(years, teams)
-##team_special.write.format("jdbc").options(**jdbc_options, dbtable="team_special").mode("append").save()
+team_special = build_team_special(years, teams)
+team_special.write.format("jdbc").options(**jdbc_options, dbtable="team_special").mode("append").save()
+
+#ETL process for standings table
+standings = build_standings(years, teams)
+standings.write.format("jdbc").options(**jdbc_options, dbtable="team_standing").mode("append").save()
 
 spark.stop()

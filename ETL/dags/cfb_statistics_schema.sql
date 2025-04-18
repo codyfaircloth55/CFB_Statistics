@@ -270,3 +270,24 @@ create table team_offense(
         foreign key (team_id)
         references team(team_id)
 );
+
+create table team_standing(
+    team_standing_id int primary key auto_increment,
+    team_id int not null,
+    total_wins int not null,
+    total_losses int not null,
+    total_win_percentage decimal(10,3) not null,
+    conference_wins int not null,
+    conference_losses int not null,
+    conference_win_percentage decimal(10,3) not null,
+    points_scored_per_game decimal(10,1) not null,
+    points_allowed_per_game decimal(10,1) not null,
+    simple_rating_system decimal(10,2) not null,
+    strength_of_schedule decimal(10,2) not null,
+    ap_preseason_rank int null,
+    ap_highest_rank int null,
+    ap_final_rank int null,
+    constraint fk_team_standing_team_id
+        foreign key (team_id)
+        references team(team_id)
+);

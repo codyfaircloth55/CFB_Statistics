@@ -1227,6 +1227,11 @@ def render_by_team_tab():
         ),
         html.Div(
             [
+                html.Img(src='assets/air_force.png', style={'height': '10%', 'width': '10%', 'align': 'center'}),
+            ]
+        ),
+        html.Div(
+            [
                 html.H2(id='college_page_title')
             ],
             style={'textAlign': 'center'}
@@ -1304,9 +1309,27 @@ def render_by_conference_tab():
                 dash_table.DataTable(
                     id='conference_teams_table',
                     sort_action='native',
+                    tooltip_header={
+                        "College": "College",
+                        "TW": "Total Wins",
+                        "TL": "Total Losses",
+                        "TW%": "Total Win Percentage",
+                        "CW": "Conference Wins",
+                        "CL": "Conference Losses",
+                        "CW%": "Conference Win Percentage",
+                        "PS/G": "Points Scored Per Game",
+                        "PA/G": "Points Allowed Per Game",
+                        "SRS": "Simple Rating System",
+                        "SOS": "Strength of Schedule",
+                        "APPre": "AP Preseason Rank",
+                        "APHigh": "AP Highest Rank",
+                        "APPost": "AP Final Rank"
+                    },
+                    tooltip_delay=0,
+                    tooltip_duration=None,
                     style_cell={
                         'textAlign': 'center',
-                        'width': '50%'
+                        'width': '7.142%'
                     },
                     style_header={
                         'backgroundColor': 'lightgrey',
@@ -1353,9 +1376,28 @@ def render_national_tab():
                     id='national_teams_table',
                     page_size=25,
                     sort_action='native',
+                    tooltip_header={
+                        "College": "College",
+                        "Conf": "Conference",
+                        "TW": "Total Wins",
+                        "TL": "Total Losses",
+                        "TW%": "Total Win Percentage",
+                        "CW": "Conference Wins",
+                        "CL": "Conference Losses",
+                        "CW%": "Conference Win Percentage",
+                        "PS/G": "Points Scored Per Game",
+                        "PA/G": "Points Allowed Per Game",
+                        "SRS": "Simple Rating System",
+                        "SOS": "Strength of Schedule",
+                        "APPre": "AP Preseason Rank",
+                        "APHigh": "AP Highest Rank",
+                        "APPost": "AP Final Rank"
+                    },
+                    tooltip_delay=0,
+                    tooltip_duration=None,
                     style_cell={
                         'textAlign': 'center',
-                        'width': '33.333%'
+                        'width': '6.666%'
                     },
                     style_header={
                         'backgroundColor': 'lightgrey',
@@ -1941,6 +1983,7 @@ def update_conferences_page_title(selected_year, selected_conference):
 @callback(
     Output(component_id='conference_teams_table', component_property='data'),
     Output(component_id='conference_teams_table', component_property='page_size'),
+    Output(component_id='conference_teams_table', component_property='columns'),
     Input(component_id='conference_year_dropdown', component_property='value'),
     Input(component_id='conference_dropdown', component_property='value')
 )
@@ -1948,18 +1991,32 @@ def update_conference_teams_table(selected_year, selected_conference):
     if not selected_year or not selected_conference:
         raise PreventUpdate
     query = f"""
-            select
+            select 
                 c.college_name as College,
-                c.college_mascot as Mascot
-            from team t
+                ts.total_wins as TW,
+                ts.total_losses as TL,
+                ts.total_win_percentage as "TW%",
+                ts.conference_wins as CW,
+                ts.conference_losses as CL,
+                ts.conference_win_percentage as "CW%",
+                ts.points_scored_per_game as "PS/G",
+                ts.points_allowed_per_game as "PA/G",
+                ts.simple_rating_system as SRS,
+                ts.strength_of_schedule as SOS,
+                ts.ap_preseason_rank as APPre,
+                ts.ap_highest_rank as APHigh,
+                ts.ap_final_rank as APPost
+            from team_standing ts
+            inner join team t on ts.team_id = t.team_id
             inner join college c on t.college_id = c.college_id
             inner join conference con on t.conference_id = con.conference_id
             where con.conference_shorthand = "{selected_conference}" and t.`year` = {selected_year}
-            order by c.college_name asc;
+            order by ts.total_wins desc;
             """
     df = load_data_query(query)
     page_size = len(df)
-    return df.to_dict('records'), page_size
+    columns = [{'name': col, 'id': col} for col in df.columns]
+    return df.to_dict('records'), page_size, columns
 
 # - Callbacks for by conference/team stats tab
 @callback(
@@ -2415,6 +2472,7 @@ def update_national_page_title(selected_year):
 
 @callback(
     Output(component_id='national_teams_table', component_property='data'),
+    Output(component_id='national_teams_table', component_property='columns'),
     Input(component_id='national_year_dropdown', component_property='value')
 )
 def update_national_teams_table(selected_year):
@@ -2423,16 +2481,30 @@ def update_national_teams_table(selected_year):
     query = f"""
             select 
                 c.college_name as College,
-                c.college_mascot as Mascot,
-                con.conference_shorthand as Conference
-            from team t
+                con.conference_shorthand as Conf,
+                ts.total_wins as TW,
+                ts.total_losses as TL,
+                ts.total_win_percentage as "TW%",
+                ts.conference_wins as CW,
+                ts.conference_losses as CL,
+                ts.conference_win_percentage as "CW%",
+                ts.points_scored_per_game as "PS/G",
+                ts.points_allowed_per_game as "PA/G",
+                ts.simple_rating_system as SRS,
+                ts.strength_of_schedule as SOS,
+                ts.ap_preseason_rank as APPre,
+                ts.ap_highest_rank as APHigh,
+                ts.ap_final_rank as APPost
+            from team_standing ts
+            inner join team t on ts.team_id = t.team_id
             inner join college c on t.college_id = c.college_id
             inner join conference con on t.conference_id = con.conference_id
             where t.`year` = {selected_year}
-            order by c.college_name asc;
+            order by ts.total_wins desc;
             """
     df = load_data_query(query)
-    return df.to_dict('records')
+    columns = [{'name': col, 'id': col} for col in df.columns]
+    return df.to_dict('records'), columns
 
 # - Callbacks for national/team stats tab
 @callback(
