@@ -5,6 +5,7 @@ from additional_data import conference_name, college_mascot, file_extension_to_c
 
 # Create Spark Session
 spark = SparkSession.builder.appName("CFBStatsETL").getOrCreate()
+spark.sparkContext.setLogLevel("ERROR")
 
 # Set JDBC options for MySQL connection
 jdbc_options = {
@@ -323,7 +324,7 @@ def build_kicking(years, rosters):
 
 def build_team_offense(years, teams):
     for year in years:
-        if year is 2024:
+        if year == 2024:
             team_offense = spark.read.csv(f"/opt/spark/files/in/team-stats/{year}_offense.csv", header=True, inferSchema=True)
             team_offense = team_offense.withColumn("year", lit(year))
         else:
@@ -469,7 +470,7 @@ def build_standings(years, teams):
     return standings
 
 # List of years to process
-years = [2024, 2023]
+years = [2024, 2023, 2022]
 
 # Create master dataframe for college and conference
 master_college_conf = build_master_college_conf(years)
