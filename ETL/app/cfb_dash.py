@@ -7,6 +7,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 
 from processor import Processor
+from reference import college_to_extension, conference_to_extension
 
 app = Dash()
 
@@ -1227,8 +1228,9 @@ def render_by_team_tab():
         ),
         html.Div(
             [
-                html.Img(src='assets/air_force.png', style={'height': '10%', 'width': '10%', 'align': 'center'}),
-            ]
+                html.Img(id="college_logo", style={'height': '15%', 'width': '15%', 'align': 'center'}),
+            ],
+            style={'textAlign': 'center'}
         ),
         html.Div(
             [
@@ -1300,9 +1302,15 @@ def render_by_conference_tab():
         ),
         html.Div(
             [
-                html.H2(id='conferences_page_title')
+                html.Img(id="conference_logo", style={'height': '15%', 'width': '15%', 'align': 'center'}),
             ],
             style={'textAlign': 'center'}
+        ),
+        html.Div(
+            [
+                html.H2(id='conferences_page_title')
+            ],
+            style={'padding': '1%', 'textAlign': 'center'}
         ),
         html.Div(
             [
@@ -1363,6 +1371,12 @@ def render_national_tab():
                 )
             ],
             style={"padding": "1%"}
+        ),
+        html.Div(
+            [
+                html.Img(id="national_logo", src='assets/conference_logos/ncaa.png', style={'height': '15%', 'width': '15%', 'align': 'center'}),
+            ],
+            style={'textAlign': 'center'}
         ),
         html.Div(
             [
@@ -1448,6 +1462,19 @@ def update_college_dropdown(selected_year):
     options = create_options(colleges_df, 'college_name')
     value = options[0]
     return options, value
+
+@callback(
+    Output(component_id='college_logo', component_property='src'),
+    Input(component_id='college_dropdown', component_property='value')
+)
+def update_college_logo(selected_college):
+    if not selected_college:
+        raise PreventUpdate
+    extension = college_to_extension.get(selected_college)
+    if not extension:
+        raise PreventUpdate
+    logo_path = f"assets/college_logos/{extension}.png"
+    return logo_path
 
 @callback(
     Output(component_id='college_page_title', component_property='children'),
@@ -1966,6 +1993,19 @@ def update_conference_dropdown(selected_year):
     options = create_options(conferences_df, 'conference_shorthand')
     value = options[0]
     return options, value
+
+@callback(
+    Output(component_id='conference_logo', component_property='src'),
+    Input(component_id='conference_dropdown', component_property='value')
+)
+def update_conference_logo(selected_conference):
+    if not selected_conference:
+        raise PreventUpdate
+    extension = conference_to_extension.get(selected_conference)
+    if extension is None:
+        raise PreventUpdate
+    logo_path = f"assets/conference_logos/{extension}.png"
+    return logo_path
 
 @callback(
     Output(component_id='conferences_page_title', component_property='children'),
