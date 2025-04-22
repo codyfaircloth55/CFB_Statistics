@@ -470,7 +470,7 @@ def build_standings(years, teams):
     return standings
 
 # List of years to process
-years = [2024, 2023, 2022]
+years = [2024, 2023, 2022, 2021, 2020]
 
 # Create master dataframe for college and conference
 master_college_conf = build_master_college_conf(years)

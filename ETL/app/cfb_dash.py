@@ -1206,7 +1206,7 @@ def render_by_team_tab():
                 dcc.Dropdown(
                     id='year_dropdown',
                     options = create_options(teams, 'year'),
-                    value = teams['year'].unique()[0],
+                    value = teams['year'].unique()[-1],
                     multi = False,
                     clearable = False,
                 )
@@ -1282,7 +1282,7 @@ def render_by_conference_tab():
                 dcc.Dropdown(
                     id='conference_year_dropdown',
                     options = create_options(teams, 'year'),
-                    value = teams['year'].unique()[0],
+                    value = teams['year'].unique()[-1],
                     multi = False,
                     clearable = False,
                 )
@@ -1365,7 +1365,7 @@ def render_national_tab():
                 dcc.Dropdown(
                     id='national_year_dropdown',
                     options = create_options(teams, 'year'),
-                    value = teams['year'].unique()[0],
+                    value = teams['year'].unique()[-1],
                     multi = False,
                     clearable = False,
                 )

@@ -1,5 +1,5 @@
 # Summary
-  - This project uses data from the Sports Reference College Football website to generate a dashboard that is on par with ESPN or other sports statistic sites. There are currently (x) years used in the data set but the ETL pipeline and dashboard callbacks are scalable to allow for more years. This dashboard only allows for data pertaining to individual player statistics, team statistics, and team standings.
+  - This project uses data from the Sports Reference College Football website to generate a dashboard that is on par with ESPN or other sports statistic sites. There are currently 5 years used in the data set but the ETL pipeline and dashboard callbacks are scalable to allow for more years. This dashboard only allows for data pertaining to individual player statistics, team statistics, and team standings.
 
 # Technologies Used:
   - Programming Language:
