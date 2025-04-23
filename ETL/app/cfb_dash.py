@@ -417,6 +417,337 @@ def render_individual_stats_tab():
         )
     ]
 
+def render_team_stats_over_time_tab():
+    return [
+        html.Div(
+            [
+                html.H3(id='team_stats_over_time_title')
+            ]
+        ),
+        html.Div(
+            [
+                html.Label("Select an offensive stat to view over time:"),
+                dcc.Dropdown(
+                    id='team_offense_dropdown',
+                    options=[
+                        {'label': "Points per Game", 'value': "points_per_game"},
+                        {'label': "Completions per Game", 'value': "completions_per_game"},
+                        {'label': "Passing Attempts per Game", 'value': "passing_attempts_per_game"},
+                        {'label': "Completion Percentage per Game", 'value': "completion_percentage_per_game"},
+                        {'label': "Passing Yards per Game", 'value': "passing_yards_per_game"},
+                        {'label': "Passing Touchdowns per Game", 'value': "passing_touchdowns_per_game"},
+                        {'label': "Rushing Attempts per Game", 'value': "rushing_attempts_per_game"},
+                        {'label': "Rushing Yards per Game", 'value': "rushing_yards_per_game"},
+                        {'label': "Rushing Yards per Attempt per Game", 'value': "rushing_yards_per_attempt_per_game"},
+                        {'label': "Rushing Touchdowns per Game", 'value': "rushing_touchdowns_per_game"},
+                        {'label': "Total Plays per Game", 'value': "total_plays_per_game"},
+                        {'label': "Total Yards per Game", 'value': "total_yards_per_game"},
+                        {'label': "Yards per Play per Game", 'value': "yards_per_play_per_game"},
+                        {'label': "Passing First Downs per Game", 'value': "passing_first_downs_per_game"},
+                        {'label': "Rushing First Downs per Game", 'value': "rushing_first_downs_per_game"},
+                        {'label': "Penalty First Downs per Game", 'value': "penalty_first_downs_per_game"},
+                        {'label': "Total First Downs per Game", 'value': "total_first_downs_per_game"},
+                        {'label': "Penalties per Game", 'value': "penalties_per_game"},
+                        {'label': "Penalty Yards per Game", 'value': "penalty_yards_per_game"},
+                        {'label': "Fumbles Lost per Game", 'value': "fumbles_lost_per_game"},
+                        {'label': "Interceptions per Game", 'value': "interceptions_per_game"},
+                        {'label': "Turnovers per Game", 'value': "turnovers_per_game"}
+                    ],
+                    value = "points_per_game",
+                    multi = False,
+                    clearable = False,              
+                )
+            ],
+            style={"width": "48%", "display": "inline-block", "padding": "1%", "verticalAlign": "top"}
+        ),
+        html.Div(
+            [
+                dcc.Checklist(
+                    id='team_offense_overlay',
+                    options=[
+                        {'label': 'Show Conference Average', 'value': 'conference_average'},
+                        {'label': 'Show National Average', 'value': 'national_average'}
+                    ]
+                    ,
+                    value=[],
+                    inline=False
+                ),
+            ],
+            style={"width": "48%", "display": "inline-block", "padding": "1%", "verticalAlign": "top"}
+        ),
+        html.Div(
+            [
+                dcc.Graph(id='team_offense_over_time_graph')
+            ]
+        ),
+        html.Div(
+            [
+                html.Label("Select a defensive stat to view over time:"),
+                dcc.Dropdown(
+                    id='team_defense_dropdown',
+                    options=[
+                        {'label': 'Opponent Points per Game', 'value': 'opponent_points_per_game'},
+                        {'label': 'Opponent Completions per Game', 'value': 'opponent_completions_per_game'},
+                        {'label': 'Opponent Passing Attempts per Game', 'value': 'opponent_passing_attempts_per_game'},
+                        {'label': 'Opponent Completion Percentage per Game', 'value': 'opponent_completion_percentage_per_game'},
+                        {'label': 'Opponent Passing Yards per Game', 'value': 'opponent_passing_yards_per_game'},
+                        {'label': 'Opponent Passing Touchdowns per Game', 'value': 'opponent_passing_touchdowns_per_game'},
+                        {'label': 'Opponent Rushing Attempts per Game', 'value': 'opponent_rushing_attempts_per_game'},
+                        {'label': 'Opponent Rushing Yards per Game', 'value': 'opponent_rushing_yards_per_game'},
+                        {'label': 'Opponent Rushing Yards per Attempt per Game', 'value': 'opponent_rushing_yards_per_attempt_per_game'},
+                        {'label': 'Opponent Rushing Touchdowns per Game', 'value': 'opponent_rushing_touchdowns_per_game'},
+                        {'label': 'Opponent Total Plays per Game', 'value': 'opponent_total_plays_per_game'},
+                        {'label': 'Opponent Total Yards per Game', 'value': 'opponent_total_yards_per_game'},
+                        {'label': 'Opponent Yards per Play per Game', 'value': 'opponent_yards_per_play_per_game'},
+                        {'label': 'Opponent Passing First Downs per Game', 'value': 'opponent_passing_first_downs_per_game'},
+                        {'label': 'Opponent Rushing First Downs per Game', 'value': 'opponent_rushing_first_downs_per_game'},
+                        {'label': 'Opponent Penalty First Downs per Game', 'value': 'opponent_penalty_first_downs_per_game'},
+                        {'label': 'Opponent Total First Downs per Game', 'value': 'opponent_total_first_downs_per_game'},
+                        {'label': 'Opponent Penalties per Game', 'value': 'opponent_penalties_per_game'},
+                        {'label': 'Opponent Penalty Yards per Game', 'value': 'opponent_penalty_yards_per_game'},
+                        {'label': 'Opponent Fumbles Lost per Game', 'value': 'opponent_fumbles_lost_per_game'},
+                        {'label': 'Opponent Interceptions per Game', 'value': 'opponent_interceptions_per_game'},
+                        {'label': 'Opponent Turnovers per Game', 'value': 'opponent_turnovers_per_game'}
+                    ],
+                    value = "opponent_points_per_game",
+                    multi = False,
+                    clearable = False,
+                ),
+            ],
+            style={"width": "48%", "display": "inline-block", "padding": "1%", "verticalAlign": "top"}
+        ),
+        html.Div(
+            [
+                dcc.Checklist(
+                    id='team_defense_overlay',
+                    options=[
+                        {'label': 'Show Conference Average', 'value': 'conference_average'},
+                        {'label': 'Show National Average', 'value': 'national_average'}
+                    ]
+                    ,
+                    value=[],
+                    inline=False
+                ),
+            ],
+            style={"width": "48%", "display": "inline-block", "padding": "1%", "verticalAlign": "top"}
+        ),
+        html.Div(
+            [
+                dcc.Graph(id='team_defense_over_time_graph')
+            ]
+        ),
+        html.Div(
+            [
+                html.Label("Select a special teams stat to view over time:"),
+                dcc.Dropdown(
+                    id='team_special_dropdown',
+                    options=[
+                        {'label': 'Extra Points Made per Game', 'value': 'extra_points_made_per_game'},
+                        {'label': 'Extra Points Attempted per Game', 'value': 'extra_points_attempted_per_game'},
+                        {'label': 'Extra Point Percentage', 'value': 'extra_point_percentage'},
+                        {'label': 'Field Goals Made per Game', 'value': 'field_goals_made_per_game'},
+                        {'label': 'Field Goals Attempted per Game', 'value': 'field_goals_attempted_per_game'},
+                        {'label': 'Field Goal Percentage', 'value': 'field_goal_percentage'},
+                        {'label': 'Kicking Points Scored per Game', 'value': 'kicking_points_scored_per_game'},
+                        {'label': 'Punts per Game', 'value': 'punts_per_game'},
+                        {'label': 'Punt Yards per Game', 'value': 'punt_yards_per_game'},
+                        {'label': 'Yards Per Punt per Game', 'value': 'yards_per_punt_per_game'},
+                        {'label': 'Kickoff Returns per Game', 'value': 'kickoff_returns_per_game'},
+                        {'label': 'Kickoff Return Yards per Game', 'value': 'kickoff_return_yards_per_game'},
+                        {'label': 'Return Yards Per Kickoff Return per Game', 'value': 'return_yards_per_kickoff_return_per_game'},
+                        {'label': "Kickoff Return Touchdowns per Game", "value": "kickoff_return_touchdowns_per_game"},
+                        {'label': "Punt Returns per Game", "value": "punt_returns_per_game"},
+                        {'label': "Punt Return Yards per Game", "value": "punt_return_yards_per_game"},
+                        {'label': "Return Yards Per Punt Return per Game", "value": "return_yards_per_punt_return_per_game"},
+                        {'label': "Punt Return Touchdowns per Game", "value": "punt_return_touchdowns_per_game"}
+                    ],
+                    value = "extra_points_made_per_game",
+                    multi = False,
+                    clearable = False,
+                )
+            ],
+            style={"width": "48%", "display": "inline-block", "padding": "1%", "verticalAlign": "top"}
+        ),
+        html.Div(
+            [
+                dcc.Checklist(
+                    id='team_special_overlay',
+                    options=[
+                        {'label': 'Show Conference Average', 'value': 'conference_average'},
+                        {'label': 'Show National Average', 'value': 'national_average'}
+                    ]
+                    ,
+                    value=[],
+                    inline=False
+                ),
+            ],
+            style={"width": "48%", "display": "inline-block", "padding": "1%", "verticalAlign": "top"}
+        ),
+        html.Div(
+            [
+                dcc.Graph(id='team_special_over_time_graph')
+            ]
+        ),
+        html.Div(
+            [
+                html.Label("Select a standings stat to view over time:"),
+                dcc.Dropdown(
+                    id='team_standings_dropdown',
+                    options=[
+                        {'label': 'Total Wins', 'value': 'total_wins'},
+                        {'label': 'Total Losses', 'value': 'total_losses'},
+                        {'label': 'Total Win Percentage', 'value': 'total_win_percentage'},
+                        {'label': 'Conference Wins', 'value': 'conference_wins'},
+                        {'label': 'Conference Losses', 'value': 'conference_losses'},
+                        {'label': 'Conference Win Percentage', 'value': 'conference_win_percentage'},
+                        {'label': 'Simple Rating System', 'value': 'simple_rating_system'},
+                        {'label': 'Strength of Schedule', 'value': 'strength_of_schedule'}
+                    ],
+                    value = "total_wins",
+                    multi = False,
+                    clearable = False,
+                )
+            ],
+            style={"width": "48%", "display": "inline-block", "padding": "1%", "verticalAlign": "top"}
+        ),
+        html.Div(
+            [
+                dcc.Checklist(
+                    id='team_standings_overlay',
+                    options=[
+                        {'label': 'Show Conference Average', 'value': 'conference_average'},
+                        {'label': 'Show National Average', 'value': 'national_average'}
+                    ]
+                    ,
+                    value=[],
+                    inline=False
+                ),
+            ],
+            style={"width": "48%", "display": "inline-block", "padding": "1%", "verticalAlign": "top"}
+        ),
+        html.Div(
+            [
+                dcc.Graph(id='team_standings_over_time_graph')
+            ]
+        ),
+    ]
+
+def render_team_player_stat_distribution():
+    return [
+        html.Div(
+            [
+                html.H3(id='team_player_stat_distribution_title')
+            ]
+        ),
+        html.Div(
+            [
+                html.Label("Select a rushing stat to view distribution:"),
+                dcc.Dropdown(
+                    id='player_rushing_stat_dropdown',
+                    options=[
+                        {'label': 'Rushing Attempts', 'value': 'rushing_attempts'},
+                        {'label': 'Rushing Yards', 'value': 'rushing_yards'},
+                        {'label': 'Rushing Touchdowns', 'value': 'rushing_touchdowns'}
+                    ],
+                    value = "rushing_attempts",
+                    multi = False,
+                    clearable = False,
+                )
+            ]
+        ),
+        html.Div(
+            [
+                dcc.Graph(id='player_rushing_stat_pie_graph')
+            ],
+            style={"width": "48%", "display": "inline-block", "padding": "1%", "verticalAlign": "top"}
+        ),
+        html.Div(
+            [
+                dcc.Graph(id='player_rushing_stat_bar_graph')
+            ],
+            style={"width": "48%", "display": "inline-block", "padding": "1%", "verticalAlign": "top"}
+        ),
+        html.Div(
+            [
+                html.Label("Select a receiving stat to view distribution:"),
+                dcc.Dropdown(
+                    id='player_receiving_stat_dropdown',
+                    options=[
+                        {'label': 'Receptions', 'value': 'receptions'},
+                        {'label': 'Receiving Yards', 'value': 'receiving_yards'},
+                        {'label': 'Receiving Touchdowns', 'value': 'receiving_touchdowns'}
+                    ],
+                    value = "receptions",
+                    multi = False,
+                    clearable = False,
+                )
+            ]
+        ),
+        html.Div(
+            [
+                dcc.Graph(id='player_receiving_stat_pie_graph')
+            ],
+            style={"width": "48%", "display": "inline-block", "padding": "1%", "verticalAlign": "top"}
+        ),
+        html.Div(
+            [
+                dcc.Graph(id='player_receiving_stat_bar_graph')
+            ],
+            style={"width": "48%", "display": "inline-block", "padding": "1%", "verticalAlign": "top"}
+        ),
+        html.Div(
+            [
+                html.Label("Select a passing stat to view distribution:"),
+                dcc.Dropdown(
+                    id='player_passing_stat_dropdown',
+                    options=[
+                        {'label': 'Completions', 'value': 'completions'},
+                        {'label': 'Passing Attempts', 'value': 'passing_attempts'},
+                        {'label': 'Passing Yards', 'value': 'passing_yards'},
+                        {'label': 'Passing Touchdowns', 'value': 'passing_touchdowns'},
+                        {'label': 'Interceptions', 'value': 'interceptions'}
+                    ],
+                    value = "completions",
+                    multi = False,
+                    clearable = False,
+                )
+            ]
+        ),
+        html.Div(
+            [
+                dcc.Graph(id='player_passing_stat_pie_graph')
+            ],
+            style={"width": "48%", "display": "inline-block", "padding": "1%", "verticalAlign": "top"}
+        ),
+        html.Div(
+            [
+                dcc.Graph(id='player_passing_stat_bar_graph')
+            ],
+            style={"width": "48%", "display": "inline-block", "padding": "1%", "verticalAlign": "top"}
+        ),
+        html.Div(
+            [
+                html.Label("Select a stat to compare rushing vs. passing distribution:"),
+                dcc.Dropdown(
+                    id='team_rushing_vs_passing_stat_dropdown',
+                    options=[
+                        {'label': 'Attempts', 'value': 'attempts'},
+                        {'label': 'Yards', 'value': 'yards'},
+                        {'label': 'Touchdowns', 'value': 'touchdowns'}
+                    ],
+                    value = "attempts",
+                    multi = False,
+                    clearable = False,
+                )
+            ]
+        ),
+        html.Div(
+            [
+                dcc.Graph(id='team_rushing_vs_passing_stat_pie_graph')
+            ]
+        ),
+    ]
+
 # By conference subtabs
 def render_conference_team_stats_tab():
     return [
@@ -798,6 +1129,329 @@ def render_conference_individual_stats_tab():
                 )
             ]
         )
+    ]
+
+def render_conference_stats_over_time_tab():
+    return [
+        html.Div(
+            [
+                html.H3(id='conference_stats_over_time_title')
+            ]
+        ),
+        html.Div(
+            [
+                html.Label("Select a conference average offensive stat to view over time:"),
+                dcc.Dropdown(
+                    id='conference_offense_dropdown',
+                    options=[
+                        {'label': "Points per Game", 'value': "points_per_game"},
+                        {'label': "Completions per Game", 'value': "completions_per_game"},
+                        {'label': "Passing Attempts per Game", 'value': "passing_attempts_per_game"},
+                        {'label': "Completion Percentage per Game", 'value': "completion_percentage_per_game"},
+                        {'label': "Passing Yards per Game", 'value': "passing_yards_per_game"},
+                        {'label': "Passing Touchdowns per Game", 'value': "passing_touchdowns_per_game"},
+                        {'label': "Rushing Attempts per Game", 'value': "rushing_attempts_per_game"},
+                        {'label': "Rushing Yards per Game", 'value': "rushing_yards_per_game"},
+                        {'label': "Rushing Yards per Attempt per Game", 'value': "rushing_yards_per_attempt_per_game"},
+                        {'label': "Rushing Touchdowns per Game", 'value': "rushing_touchdowns_per_game"},
+                        {'label': "Total Plays per Game", 'value': "total_plays_per_game"},
+                        {'label': "Total Yards per Game", 'value': "total_yards_per_game"},
+                        {'label': "Yards per Play per Game", 'value': "yards_per_play_per_game"},
+                        {'label': "Passing First Downs per Game", 'value': "passing_first_downs_per_game"},
+                        {'label': "Rushing First Downs per Game", 'value': "rushing_first_downs_per_game"},
+                        {'label': "Penalty First Downs per Game", 'value': "penalty_first_downs_per_game"},
+                        {'label': "Total First Downs per Game", 'value': "total_first_downs_per_game"},
+                        {'label': "Penalties per Game", 'value': "penalties_per_game"},
+                        {'label': "Penalty Yards per Game", 'value': "penalty_yards_per_game"},
+                        {'label': "Fumbles Lost per Game", 'value': "fumbles_lost_per_game"},
+                        {'label': "Interceptions per Game", 'value': "interceptions_per_game"},
+                        {'label': "Turnovers per Game", 'value': "turnovers_per_game"}
+                    ],
+                    value = "points_per_game",
+                    multi = False,
+                    clearable = False,
+                )
+            ],
+            style={"width": "48%", "display": "inline-block", "padding": "1%", "verticalAlign": "top"}
+        ),
+        html.Div(
+            [
+                dcc.Checklist(
+                    id='conference_offense_overlay',
+                    options=[
+                        {'label': 'Show National Average', 'value': 'national_average'}
+                    ],
+                    value=[],
+                    inline=False
+                ),
+            ],
+            style={"width": "48%", "display": "inline-block", "padding": "1%", "verticalAlign": "top"}
+        ),
+        html.Div(
+            [
+                dcc.Graph(id='conference_offense_over_time_graph')
+            ]
+        ),
+        html.Div(
+            [
+                html.Label("Select a conference average defensive stat to view over time:"),
+                dcc.Dropdown(
+                    id='conference_defense_dropdown',
+                    options=[
+                        {'label': 'Opponent Points per Game', 'value': 'opponent_points_per_game'},
+                        {'label': 'Opponent Completions per Game', 'value': 'opponent_completions_per_game'},
+                        {'label': 'Opponent Passing Attempts per Game', 'value': 'opponent_passing_attempts_per_game'},
+                        {'label': 'Opponent Completion Percentage per Game', 'value': 'opponent_completion_percentage_per_game'},
+                        {'label': 'Opponent Passing Yards per Game', 'value': 'opponent_passing_yards_per_game'},
+                        {'label': 'Opponent Passing Touchdowns per Game', 'value': 'opponent_passing_touchdowns_per_game'},
+                        {'label': 'Opponent Rushing Attempts per Game', 'value': 'opponent_rushing_attempts_per_game'},
+                        {'label': 'Opponent Rushing Yards per Game', 'value': 'opponent_rushing_yards_per_game'},
+                        {'label': 'Opponent Rushing Yards per Attempt per Game', 'value': 'opponent_rushing_yards_per_attempt_per_game'},
+                        {'label': 'Opponent Rushing Touchdowns per Game', 'value': 'opponent_rushing_touchdowns_per_game'},
+                        {'label': 'Opponent Total Plays per Game', 'value': 'opponent_total_plays_per_game'},
+                        {'label': 'Opponent Total Yards per Game', 'value': 'opponent_total_yards_per_game'},
+                        {'label': 'Opponent Yards per Play per Game', 'value': 'opponent_yards_per_play_per_game'},
+                        {'label': 'Opponent Passing First Downs per Game', 'value': 'opponent_passing_first_downs_per_game'},
+                        {'label': 'Opponent Rushing First Downs per Game', 'value': 'opponent_rushing_first_downs_per_game'},
+                        {'label': "Opponent Penalty First Downs per Game", "value": "opponent_penalty_first_downs_per_game"},
+                        {'label': "Opponent Total First Downs per Game", "value": "opponent_total_first_downs_per_game"},
+                        {'label': "Opponent Penalties per Game", "value": "opponent_penalties_per_game"},
+                        {'label': "Opponent Penalty Yards per Game", "value": "opponent_penalty_yards_per_game"},
+                        {'label': "Opponent Fumbles Lost per Game", "value": "opponent_fumbles_lost_per_game"},
+                        {'label': "Opponent Interceptions per Game", "value": "opponent_interceptions_per_game"},
+                        {'label': "Opponent Turnovers per Game", "value": "opponent_turnovers_per_game"}
+                    ],
+                    value = "opponent_points_per_game",
+                    multi = False,
+                    clearable = False,
+                ),
+            ],
+            style={"width": "48%", "display": "inline-block", "padding": "1%", "verticalAlign": "top"}
+        ),
+        html.Div(
+            [
+                dcc.Checklist(
+                    id='conference_defense_overlay',
+                    options=[
+                        {'label': 'Show National Average', 'value': 'national_average'}
+                    ],
+                    value=[],
+                    inline=False
+                ),
+            ],
+            style={"width": "48%", "display": "inline-block", "padding": "1%", "verticalAlign": "top"}
+        ),
+        html.Div(
+            [
+                dcc.Graph(id='conference_defense_over_time_graph')
+            ]
+        ),
+        html.Div(
+            [
+                html.Label("Select a conference average special teams stat to view over time:"),
+                dcc.Dropdown(
+                    id='conference_special_dropdown',
+                    options=[
+                        {'label': 'Extra Points Made per Game', 'value': 'extra_points_made_per_game'},
+                        {'label': 'Extra Points Attempted per Game', 'value': 'extra_points_attempted_per_game'},
+                        {'label': 'Extra Point Percentage', 'value': 'extra_point_percentage'},
+                        {'label': 'Field Goals Made per Game', 'value': 'field_goals_made_per_game'},
+                        {'label': 'Field Goals Attempted per Game', 'value': 'field_goals_attempted_per_game'},
+                        {'label': 'Field Goal Percentage', 'value': 'field_goal_percentage'},
+                        {'label': 'Kicking Points Scored per Game', 'value': 'kicking_points_scored_per_game'},
+                        {'label': 'Punts per Game', 'value': 'punts_per_game'},
+                        {'label': 'Punt Yards per Game', 'value': 'punt_yards_per_game'},
+                        {'label': "Yards Per Punt per Game", "value": "yards_per_punt_per_game"},
+                        {'label': "Kickoff Returns per Game", "value": "kickoff_returns_per_game"},
+                        {'label': "Kickoff Return Yards per Game", "value": "kickoff_return_yards_per_game"},
+                        {'label': "Return Yards Per Kickoff Return per Game", "value": "return_yards_per_kickoff_return_per_game"},
+                        {'label': "Kickoff Return Touchdowns per Game", "value": "kickoff_return_touchdowns_per_game"},
+                        {'label': "Punt Returns per Game", "value": "punt_returns_per_game"},
+                        {'label': "Punt Return Yards per Game", "value": "punt_return_yards_per_game"},
+                        {'label': "Return Yards Per Punt Return per Game", "value": "return_yards_per_punt_return_per_game"},
+                        {'label': "Punt Return Touchdowns per Game", "value": "punt_return_touchdowns_per_game"}
+                    ],
+                    value = "extra_points_made_per_game",
+                    multi = False,
+                    clearable = False,
+                )
+            ],
+            style={"width": "48%", "display": "inline-block", "padding": "1%", "verticalAlign": "top"}
+        ),
+        html.Div(
+            [
+                dcc.Checklist(
+                    id='conference_special_overlay',
+                    options=[
+                        {'label': 'Show National Average', 'value': 'national_average'}
+                    ],
+                    value=[],
+                    inline=False
+                ),
+            ],
+            style={"width": "48%", "display": "inline-block", "padding": "1%", "verticalAlign": "top"}
+        ),
+        html.Div(
+            [
+                dcc.Graph(id='conference_special_over_time_graph')
+            ]
+        ),
+        html.Div(
+            [
+                html.Label("Select a conference average standings stat to view over time:"),
+                dcc.Dropdown(
+                    id='conference_standings_dropdown',
+                    options=[
+                        {'label': 'Total Wins', 'value': 'total_wins'},
+                        {'label': 'Total Losses', 'value': 'total_losses'},
+                        {'label': 'Total Win Percentage', 'value': 'total_win_percentage'},
+                        {'label': 'Conference Wins', 'value': 'conference_wins'},
+                        {'label': 'Conference Losses', 'value': 'conference_losses'},
+                        {'label': 'Conference Win Percentage', 'value': 'conference_win_percentage'},
+                        {'label': 'Simple Rating System', 'value': 'simple_rating_system'},
+                        {'label': 'Strength of Schedule', 'value': 'strength_of_schedule'}
+                    ],
+                    value = "total_wins",
+                    multi = False,
+                    clearable = False,
+                )
+            ],
+            style={"width": "48%", "display": "inline-block", "padding": "1%", "verticalAlign": "top"}
+        ),
+        html.Div(
+            [
+                dcc.Checklist(
+                    id='conference_standings_overlay',
+                    options=[
+                        {'label': 'Show National Average', 'value': 'national_average'}
+                    ],
+                    value=[],
+                    inline=False
+                ),
+            ],
+            style={"width": "48%", "display": "inline-block", "padding": "1%", "verticalAlign": "top"}
+        ),
+        html.Div(
+            [
+                dcc.Graph(id='conference_standings_over_time_graph')
+            ]
+        )
+    ]
+
+def render_conference_team_stat_distribution_tab():
+    return [
+        html.Div(
+            [
+                html.H3(id='conference_team_stat_distribution_title')
+            ]
+        ),
+        html.Div(
+            [
+                html.Label("Select a rushing stat to view distribution:"),
+                dcc.Dropdown(
+                    id='conference_rushing_stat_dropdown',
+                    options=[
+                        {'label': 'Rushing Attempts', 'value': 'rushing_attempts'},
+                        {'label': 'Rushing Yards', 'value': 'rushing_yards'},
+                        {'label': 'Rushing Touchdowns', 'value': 'rushing_touchdowns'}
+                    ],
+                    value = "rushing_attempts",
+                    multi = False,
+                    clearable = False,
+                )
+            ]
+        ),
+        html.Div(
+            [
+                dcc.Graph(id='conference_rushing_stat_pie_graph')
+            ],
+            style={"width": "48%", "display": "inline-block", "padding": "1%", "verticalAlign": "top"}
+        ),
+        html.Div(
+            [
+                dcc.Graph(id='conference_rushing_stat_bar_graph')
+            ],
+            style={"width": "48%", "display": "inline-block", "padding": "1%", "verticalAlign": "top"}
+        ),
+        html.Div(
+            [
+                html.Label("Select a receiving stat to view distribution:"),
+                dcc.Dropdown(
+                    id='conference_receiving_stat_dropdown',
+                    options=[
+                        {'label': 'Receptions', 'value': 'receptions'},
+                        {'label': 'Receiving Yards', 'value': 'receiving_yards'},
+                        {'label': 'Receiving Touchdowns', 'value': 'receiving_touchdowns'}
+                    ],
+                    value = "receptions",
+                    multi = False,
+                    clearable = False,
+                )
+            ]
+        ),
+        html.Div(
+            [
+                dcc.Graph(id='conference_receiving_stat_pie_graph')
+            ],
+            style={"width": "48%", "display": "inline-block", "padding": "1%", "verticalAlign": "top"}
+        ),
+        html.Div(
+            [
+                dcc.Graph(id='conference_receiving_stat_bar_graph')
+            ],
+            style={"width": "48%", "display": "inline-block", "padding": "1%", "verticalAlign": "top"}
+        ),
+        html.Div(
+            [
+                html.Label("Select a passing stat to view distribution:"),
+                dcc.Dropdown(
+                    id='conference_passing_stat_dropdown',
+                    options=[
+                        {'label': 'Completions', 'value': 'completions'},
+                        {'label': 'Passing Attempts', 'value': 'passing_attempts'},
+                        {'label': 'Passing Yards', 'value': 'passing_yards'},
+                        {'label': 'Passing Touchdowns', 'value': 'passing_touchdowns'},
+                        {'label': 'Interceptions', 'value': 'interceptions'}
+                    ],
+                    value = "completions",
+                    multi = False,
+                    clearable = False,
+                )
+            ]
+        ),
+        html.Div(
+            [
+                dcc.Graph(id='conference_passing_stat_pie_graph')
+            ],
+            style={"width": "48%", "display": "inline-block", "padding": "1%", "verticalAlign": "top"}
+        ),
+        html.Div(
+            [
+                dcc.Graph(id='conference_passing_stat_bar_graph')
+            ],
+            style={"width": "48%", "display": "inline-block", "padding": "1%", "verticalAlign": "top"}
+        ),
+        html.Div(
+            [
+                html.Label("Select a stat to compare rushing vs passing distribution:"),
+                dcc.Dropdown(
+                    id='conference_rushing_vs_passing_stat_dropdown',
+                    options=[
+                        {'label': 'Attempts', 'value': 'attempts'},
+                        {'label': 'Yards', 'value': 'yards'},
+                        {'label': 'Touchdowns', 'value': 'touchdowns'}
+                    ],
+                    value = "attempts",
+                    multi = False,
+                    clearable = False,
+                )
+            ]
+        ),
+        html.Div(
+            [
+                dcc.Graph(id='conference_rushing_vs_passing_stat_pie_graph')
+            ]
+        ),
     ]
 
 # National subtabs
@@ -1197,6 +1851,273 @@ def render_national_individual_stats_tab():
         )
     ]
 
+def render_national_stats_over_time_tab():
+    return [
+        html.Div(
+            [
+                html.H3("National Stats Over Time")
+            ]
+        ),
+        html.Div(
+            [
+                html.Label("Select a national average offensive stat to view over time:"),
+                dcc.Dropdown(
+                    id='national_offense_dropdown',
+                    options=[
+                        {'label': "Points per Game", 'value': "points_per_game"},
+                        {'label': "Completions per Game", 'value': "completions_per_game"},
+                        {'label': "Passing Attempts per Game", 'value': "passing_attempts_per_game"},
+                        {'label': "Completion Percentage per Game", 'value': "completion_percentage_per_game"},
+                        {'label': "Passing Yards per Game", 'value': "passing_yards_per_game"},
+                        {'label': "Passing Touchdowns per Game", 'value': "passing_touchdowns_per_game"},
+                        {'label': "Rushing Attempts per Game", 'value': "rushing_attempts_per_game"},
+                        {'label': "Rushing Yards per Game", 'value': "rushing_yards_per_game"},
+                        {'label': "Rushing Yards per Attempt per Game", 'value': "rushing_yards_per_attempt_per_game"},
+                        {'label': "Rushing Touchdowns per Game", 'value': "rushing_touchdowns_per_game"},
+                        {'label': "Total Plays per Game", 'value': "total_plays_per_game"},
+                        {'label': "Total Yards per Game", 'value': "total_yards_per_game"},
+                        {'label': "Yards per Play per Game", 'value': "yards_per_play_per_game"},
+                        {'label': "Passing First Downs per Game", 'value': "passing_first_downs_per_game"},
+                        {'label': "Rushing First Downs per Game", 'value': "rushing_first_downs_per_game"},
+                        {'label': "Penalty First Downs per Game", 'value': "penalty_first_downs_per_game"},
+                        {'label': "Total First Downs per Game", 'value': "total_first_downs_per_game"},
+                        {'label': "Penalties per Game", 'value': "penalties_per_game"},
+                        {'label': "Penalty Yards per Game", 'value': "penalty_yards_per_game"},
+                        {'label': "Fumbles Lost per Game", 'value': "fumbles_lost_per_game"},
+                        {'label': "Interceptions per Game", 'value': "interceptions_per_game"},
+                        {'label': "Turnovers per Game", 'value': "turnovers_per_game"}
+                    ],
+                    value = "points_per_game",
+                    multi = False,
+                    clearable = False,
+                )
+            ]
+        ),
+        html.Div(
+            [
+                dcc.Graph(id='national_offense_over_time_graph')
+            ]
+        ),
+        html.Div(
+            [
+                html.Label("Select a national average defensive stat to view over time:"),
+                dcc.Dropdown(
+                    id='national_defense_dropdown',
+                    options=[
+                        {'label': 'Opponent Points per Game', 'value': 'opponent_points_per_game'},
+                        {'label': 'Opponent Completions per Game', 'value': 'opponent_completions_per_game'},
+                        {'label': 'Opponent Passing Attempts per Game', 'value': 'opponent_passing_attempts_per_game'},
+                        {'label': 'Opponent Completion Percentage per Game', 'value': 'opponent_completion_percentage_per_game'},
+                        {'label': 'Opponent Passing Yards per Game', 'value': 'opponent_passing_yards_per_game'},
+                        {'label': 'Opponent Passing Touchdowns per Game', 'value': 'opponent_passing_touchdowns_per_game'},
+                        {'label': 'Opponent Rushing Attempts per Game', 'value': 'opponent_rushing_attempts_per_game'},
+                        {'label': 'Opponent Rushing Yards per Game', 'value': 'opponent_rushing_yards_per_game'},
+                        {'label': 'Opponent Rushing Yards per Attempt per Game', 'value': 'opponent_rushing_yards_per_attempt_per_game'},
+                        {'label': 'Opponent Rushing Touchdowns per Game', 'value': 'opponent_rushing_touchdowns_per_game'},
+                        {'label': 'Opponent Total Plays per Game', 'value': 'opponent_total_plays_per_game'},
+                        {'label': 'Opponent Total Yards per Game', 'value': 'opponent_total_yards_per_game'},
+                        {'label': 'Opponent Yards per Play per Game', 'value': 'opponent_yards_per_play_per_game'},
+                        {'label': 'Opponent Passing First Downs per Game', 'value': 'opponent_passing_first_downs_per_game'},
+                        {'label': "Opponent Rushing First Downs per Game", "value": "opponent_rushing_first_downs_per_game"},
+                        {'label': "Opponent Penalty First Downs per Game", "value": "opponent_penalty_first_downs_per_game"},
+                        {'label': "Opponent Total First Downs per Game", "value": "opponent_total_first_downs_per_game"},
+                        {'label': "Opponent Penalties per Game", "value": "opponent_penalties_per_game"},
+                        {'label': "Opponent Penalty Yards per Game", "value": "opponent_penalty_yards_per_game"},
+                        {'label': "Opponent Fumbles Lost per Game", "value": "opponent_fumbles_lost_per_game"},
+                        {'label': "Opponent Interceptions per Game", "value": "opponent_interceptions_per_game"},
+                        {'label': "Opponent Turnovers per Game", "value": "opponent_turnovers_per_game"}
+                    ],
+                    value = "opponent_points_per_game",
+                    multi = False,
+                    clearable = False,
+                )
+            ]
+        ),
+        html.Div(
+            [
+                dcc.Graph(id='national_defense_over_time_graph')
+            ]
+        ),
+        html.Div(
+            [
+                html.Label("Select a national average special teams stat to view over time:"),
+                dcc.Dropdown(
+                    id='national_special_dropdown',
+                    options=[
+                        {'label': 'Extra Points Made per Game', 'value': 'extra_points_made_per_game'},
+                        {'label': 'Extra Points Attempted per Game', 'value': 'extra_points_attempted_per_game'},
+                        {'label': 'Extra Point Percentage', 'value': 'extra_point_percentage'},
+                        {'label': 'Field Goals Made per Game', 'value': 'field_goals_made_per_game'},
+                        {'label': 'Field Goals Attempted per Game', 'value': 'field_goals_attempted_per_game'},
+                        {'label': 'Field Goal Percentage', 'value': 'field_goal_percentage'},
+                        {'label': 'Kicking Points Scored per Game', 'value': 'kicking_points_scored_per_game'},
+                        {'label': 'Punts per Game', 'value': 'punts_per_game'},
+                        {'label': "Punt Yards per Game", "value": "punt_yards_per_game"},
+                        {'label': "Yards Per Punt per Game", "value": "yards_per_punt_per_game"},
+                        {'label': "Kickoff Returns per Game", "value": "kickoff_returns_per_game"},
+                        {'label': "Kickoff Return Yards per Game", "value": "kickoff_return_yards_per_game"},
+                        {'label': "Return Yards Per Kickoff Return per Game", "value": "return_yards_per_kickoff_return_per_game"},
+                        {'label': "Kickoff Return Touchdowns per Game", "value": "kickoff_return_touchdowns_per_game"},
+                        {'label': "Punt Returns per Game", "value": "punt_returns_per_game"},
+                        {'label': "Punt Return Yards per Game", "value": "punt_return_yards_per_game"},
+                        {'label': "Return Yards Per Punt Return per Game", "value": "return_yards_per_punt_return_per_game"},
+                        {'label': "Punt Return Touchdowns per Game", "value": "punt_return_touchdowns_per_game"}
+                    ],
+                    value = "extra_points_made_per_game",
+                    multi = False,
+                    clearable = False,
+                )
+            ]
+        ),
+        html.Div(
+            [
+                dcc.Graph(id='national_special_over_time_graph')
+            ]
+        ),
+        html.Div(
+            [
+                html.Label("Select a national average standings stat to view over time:"),
+                dcc.Dropdown(
+                    id='national_standings_dropdown',
+                    options=[
+                        {'label': 'Total Wins', 'value': 'total_wins'},
+                        {'label': 'Total Losses', 'value': 'total_losses'},
+                        {'label': 'Total Win Percentage', 'value': 'total_win_percentage'},
+                        {'label': 'Conference Wins', 'value': 'conference_wins'},
+                        {'label': 'Conference Losses', 'value': 'conference_losses'},
+                        {'label': 'Conference Win Percentage', 'value': 'conference_win_percentage'},
+                        {'label': 'Simple Rating System', 'value': 'simple_rating_system'},
+                        {'label': 'Strength of Schedule', 'value': 'strength_of_schedule'}
+                    ],
+                    value = "total_wins",
+                    multi = False,
+                    clearable = False,
+                )
+            ]
+        ),
+        html.Div(
+            [
+                dcc.Graph(id='national_standings_over_time_graph')
+            ]
+        )
+    ]
+
+def render_national_conference_stat_distribution_tab():
+    return [
+        html.Div(
+            [
+                html.H3(id='national_conference_stat_distribution_title')
+            ]
+        ),
+        html.Div(
+            [
+                html.Label("Select a rushing stat to view distribution:"),
+                dcc.Dropdown(
+                    id='national_rushing_stat_dropdown',
+                    options=[
+                        {'label': 'Rushing Attempts', 'value': 'rushing_attempts'},
+                        {'label': 'Rushing Yards', 'value': 'rushing_yards'},
+                        {'label': 'Rushing Touchdowns', 'value': 'rushing_touchdowns'}
+                    ],
+                    value = "rushing_attempts",
+                    multi = False,
+                    clearable = False,
+                )
+            ]
+        ),
+        html.Div(
+            [
+                dcc.Graph(id='national_rushing_stat_pie_graph')
+            ],
+            style={"width": "48%", "display": "inline-block", "padding": "1%", "verticalAlign": "top"}
+        ),
+        html.Div(
+            [
+                dcc.Graph(id='national_rushing_stat_bar_graph')
+            ],
+            style={"width": "48%", "display": "inline-block", "padding": "1%", "verticalAlign": "top"}
+        ),
+        html.Div(
+            [
+                html.Label("Select a receiving stat to view distribution:"),
+                dcc.Dropdown(
+                    id='national_receiving_stat_dropdown',
+                    options=[
+                        {'label': 'Receptions', 'value': 'receptions'},
+                        {'label': 'Receiving Yards', 'value': 'receiving_yards'},
+                        {'label': 'Receiving Touchdowns', 'value': 'receiving_touchdowns'}
+                    ],
+                    value = "receptions",
+                    multi = False,
+                    clearable = False,
+                )
+            ]
+        ),
+        html.Div(
+            [
+                dcc.Graph(id='national_receiving_stat_pie_graph')
+            ],
+            style={"width": "48%", "display": "inline-block", "padding": "1%", "verticalAlign": "top"}
+        ),
+        html.Div(
+            [
+                dcc.Graph(id='national_receiving_stat_bar_graph')
+            ],
+            style={"width": "48%", "display": "inline-block", "padding": "1%", "verticalAlign": "top"}
+        ),
+        html.Div(
+            [
+                html.Label("Select a passing stat to view distribution:"),
+                dcc.Dropdown(
+                    id='national_passing_stat_dropdown',
+                    options=[
+                        {'label': 'Completions', 'value': 'completions'},
+                        {'label': 'Passing Attempts', 'value': 'passing_attempts'},
+                        {'label': 'Passing Yards', 'value': 'passing_yards'},
+                        {'label': 'Passing Touchdowns', 'value': 'passing_touchdowns'},
+                        {'label': 'Interceptions', 'value': 'interceptions'}
+                    ],
+                    value = "completions",
+                    multi = False,
+                    clearable = False,
+                )
+            ]
+        ),
+        html.Div(
+            [
+                dcc.Graph(id='national_passing_stat_pie_graph')
+            ],
+            style={"width": "48%", "display": "inline-block", "padding": "1%", "verticalAlign": "top"}
+        ),
+        html.Div(
+            [
+                dcc.Graph(id='national_passing_stat_bar_graph')
+            ],
+            style={"width": "48%", "display": "inline-block", "padding": "1%", "verticalAlign": "top"}
+        ),
+        html.Div(
+            [
+                html.Label("Select a stat to compare rushing vs passing distribution:"),
+                dcc.Dropdown(
+                    id='national_rushing_vs_passing_stat_dropdown',
+                    options=[
+                        {'label': 'Attempts', 'value': 'attempts'},
+                        {'label': 'Yards', 'value': 'yards'},
+                        {'label': 'Touchdowns', 'value': 'touchdowns'}
+                    ],
+                    value = "attempts",
+                    multi = False,
+                    clearable = False,
+                )
+            ]
+        ),
+        html.Div(
+            [
+                dcc.Graph(id='national_rushing_vs_passing_stat_pie_graph')
+            ]
+        )
+    ]
+
 # Main Tabs
 def render_by_team_tab():
     return [
@@ -1270,6 +2191,8 @@ def render_by_team_tab():
             [
                 dcc.Tab(render_team_stats_tab(), label="Team Stats"),
                 dcc.Tab(render_individual_stats_tab(), label="Individual Stats"),
+                dcc.Tab(render_team_stats_over_time_tab(), label="Team Stats Over Time"),
+                dcc.Tab(render_team_player_stat_distribution(), label="Player Stat Distribution"),
             ]
         )
     ]
@@ -1352,6 +2275,8 @@ def render_by_conference_tab():
             [
                 dcc.Tab(render_conference_team_stats_tab(), label="Team Stats"),
                 dcc.Tab(render_conference_individual_stats_tab(), label="Individual Stats"),
+                dcc.Tab(render_conference_stats_over_time_tab(), label="Conference Stats Over Time"),
+                dcc.Tab(render_conference_team_stat_distribution_tab(), label="Team Stat Distribution"),
             ]
         )
 
@@ -1426,6 +2351,8 @@ def render_national_tab():
             [
                 dcc.Tab(render_national_team_stats_tab(), label="Team Stats"),
                 dcc.Tab(render_national_individual_stats_tab(), label="Individual Stats"),
+                dcc.Tab(render_national_stats_over_time_tab(), label="National Stats Over Time"),
+                dcc.Tab(render_national_conference_stat_distribution_tab(), label="Conference Stat Distribution"),
             ]
         ),
     ]
@@ -1977,6 +2904,505 @@ def update_individual_scoring_table(selected_year, selected_college):
     columns = [{'name': col, 'id': col} for col in df.columns]
     return df.to_dict('records'), page_size, columns
 
+# - Callbacks for by team/stats over time tab
+@callback(
+    Output(component_id='team_stats_over_time_title', component_property='children'),
+    Input(component_id='college_dropdown', component_property='value')
+)
+def update_team_stats_over_time_title(selected_college):
+    if not selected_college:
+        raise PreventUpdate
+    return f"{selected_college} Stats Over Time"
+
+@callback(
+    Output(component_id='team_offense_over_time_graph', component_property='figure'),
+    Input(component_id='college_dropdown', component_property='value'),
+    Input(component_id='team_offense_dropdown', component_property='value'),
+    Input(component_id='team_offense_dropdown', component_property='options'),
+    Input(component_id='team_offense_overlay', component_property='value'),
+    Input(component_id='year_dropdown', component_property='value')
+)
+def update_team_offense_over_time_graph(selected_college, selected_stat, options, overlay, selected_year):
+    if not selected_college or not selected_stat or not options:
+        raise PreventUpdate
+    selected_label = [x['label'] for x in options if x['value'] == selected_stat][0]
+    query = f"""
+            select
+                t.year as "Year",
+                toff.{selected_stat} as "{selected_label}"
+            from team_offense toff
+            inner join team t on toff.team_id = t.team_id
+            inner join college c on t.college_id = c.college_id
+            where c.college_name = "{selected_college}";
+            """
+    df = load_data_query(query)
+    df["Year"] = df["Year"].astype(str)
+    df["Legend"] = selected_college
+    if "conference_average" in overlay:
+        conference_query = f"""
+                            select
+                                con.conference_shorthand as "Conference"
+                            from team t
+                            inner join college c on t.college_id = c.college_id
+                            inner join conference con on t.conference_id = con.conference_id
+                            where c.college_name = "{selected_college}" and t.`year` = {selected_year};
+                            """
+        conference_df = load_data_query(conference_query)
+        conference_abbr = conference_df["Conference"].values[0]
+        conf_avg_query = f"""
+                        select
+                            t.`year` as "Year",
+                            avg(toff.{selected_stat}) as "{selected_label}"
+                        from team_offense toff
+                        inner join team t on toff.team_id = t.team_id
+                        inner join college c on t.college_id = c.college_id
+                        inner join conference con on t.conference_id = con.conference_id
+                        where con.conference_shorthand = "{conference_abbr}"
+                        group by t.`year`;
+                        """
+        conf_avg_df = load_data_query(conf_avg_query)
+        conf_avg_df["Year"] = conf_avg_df["Year"].astype(str)
+        conf_avg_df["Legend"] = f"{conference_abbr} Average"
+        df = pd.concat([df, conf_avg_df], ignore_index=True)
+    if "national_average" in overlay:
+        national_avg_query = f"""
+                            select
+                                t.`year` as "Year",
+                                avg(toff.{selected_stat}) as "{selected_label}"
+                            from team_offense toff
+                            inner join team t on toff.team_id = t.team_id
+                            group by t.`year`;
+                            """
+        national_avg_df = load_data_query(national_avg_query)
+        national_avg_df["Year"] = national_avg_df["Year"].astype(str)
+        national_avg_df["Legend"] = "National Average"
+        df = pd.concat([df, national_avg_df], ignore_index=True)
+    fig = px.line(df, x='Year', y=selected_label, title=f"{selected_college} {selected_label} Over Time", color='Legend')
+    fig.update_layout(xaxis_title="Year", yaxis_title=selected_label)  
+    return fig
+
+@callback(
+    Output(component_id='team_defense_over_time_graph', component_property='figure'),
+    Input(component_id='college_dropdown', component_property='value'),
+    Input(component_id='team_defense_dropdown', component_property='value'),
+    Input(component_id='team_defense_dropdown', component_property='options'),
+    Input(component_id='team_defense_overlay', component_property='value'),
+    Input(component_id='year_dropdown', component_property='value')
+)
+def update_team_defense_over_time_graph(selected_college, selected_stat, options, overlay, selected_year):
+    if not selected_college or not selected_stat or not options:
+        raise PreventUpdate
+    selected_label = [x['label'] for x in options if x['value'] == selected_stat][0]
+    query = f"""
+            select
+                t.year as "Year",
+                td.{selected_stat} as "{selected_label}"
+            from team_defense td
+            inner join team t on td.team_id = t.team_id
+            inner join college c on t.college_id = c.college_id
+            where c.college_name = "{selected_college}";
+            """
+    df = load_data_query(query)
+    df["Year"] = df["Year"].astype(str)
+    df["Legend"] = selected_college
+    if "conference_average" in overlay:
+        conference_query = f"""
+                            select
+                                con.conference_shorthand as "Conference"
+                            from team t
+                            inner join college c on t.college_id = c.college_id
+                            inner join conference con on t.conference_id = con.conference_id
+                            where c.college_name = "{selected_college}" and t.`year` = {selected_year};
+                            """
+        conference_df = load_data_query(conference_query)
+        conference_abbr = conference_df["Conference"].values[0]
+        conf_avg_query = f"""
+                        select
+                            t.`year` as "Year",
+                            avg(td.{selected_stat}) as "{selected_label}"
+                        from team_defense td
+                        inner join team t on td.team_id = t.team_id
+                        inner join college c on t.college_id = c.college_id
+                        inner join conference con on t.conference_id = con.conference_id
+                        where con.conference_shorthand = "{conference_abbr}"
+                        group by t.`year`;
+                        """
+        conf_avg_df = load_data_query(conf_avg_query)
+        conf_avg_df["Year"] = conf_avg_df["Year"].astype(str)
+        conf_avg_df["Legend"] = f"{conference_abbr} Average"
+        df = pd.concat([df, conf_avg_df], ignore_index=True)
+    if "national_average" in overlay:
+        national_avg_query = f"""
+                            select
+                                t.`year` as "Year",
+                                avg(td.{selected_stat}) as "{selected_label}"
+                            from team_defense td
+                            inner join team t on td.team_id = t.team_id
+                            group by t.`year`;
+                            """
+        national_avg_df = load_data_query(national_avg_query)
+        national_avg_df["Year"] = national_avg_df["Year"].astype(str)
+        national_avg_df["Legend"] = "National Average"
+        df = pd.concat([df, national_avg_df], ignore_index=True)
+    fig = px.line(df, x='Year', y=selected_label, title=f"{selected_college} {selected_label} Over Time", color='Legend')
+    fig.update_layout(xaxis_title="Year", yaxis_title=selected_label)
+    return fig
+
+@callback(
+    Output(component_id='team_special_over_time_graph', component_property='figure'),
+    Input(component_id='college_dropdown', component_property='value'),
+    Input(component_id='team_special_dropdown', component_property='value'),
+    Input(component_id='team_special_dropdown', component_property='options'),
+    Input(component_id='team_special_overlay', component_property='value'),
+    Input(component_id='year_dropdown', component_property='value')
+)
+def update_team_special_over_time_graph(selected_college, selected_stat, options, overlay, selected_year):
+    if not selected_college or not selected_stat or not options:
+        raise PreventUpdate
+    selected_label = [x['label'] for x in options if x['value'] == selected_stat][0]
+    query = f"""
+            select
+                t.year as "Year",
+                ts.{selected_stat} as "{selected_label}"
+            from team_special ts
+            inner join team t on ts.team_id = t.team_id
+            inner join college c on t.college_id = c.college_id
+            where c.college_name = "{selected_college}";
+            """
+    df = load_data_query(query)
+    df["Year"] = df["Year"].astype(str)
+    df["Legend"] = selected_college
+    if "conference_average" in overlay:
+        conference_query = f"""
+                            select
+                                con.conference_shorthand as "Conference"
+                            from team t
+                            inner join college c on t.college_id = c.college_id
+                            inner join conference con on t.conference_id = con.conference_id
+                            where c.college_name = "{selected_college}" and t.`year` = {selected_year};
+                            """
+        conference_df = load_data_query(conference_query)
+        conference_abbr = conference_df["Conference"].values[0]
+        conf_avg_query = f"""
+                        select
+                            t.`year` as "Year",
+                            avg(ts.{selected_stat}) as "{selected_label}"
+                        from team_special ts
+                        inner join team t on ts.team_id = t.team_id
+                        inner join college c on t.college_id = c.college_id
+                        inner join conference con on t.conference_id = con.conference_id
+                        where con.conference_shorthand = "{conference_abbr}"
+                        group by t.`year`;
+                        """
+        conf_avg_df = load_data_query(conf_avg_query)
+        conf_avg_df["Year"] = conf_avg_df["Year"].astype(str)
+        conf_avg_df["Legend"] = f"{conference_abbr} Average"
+        df = pd.concat([df, conf_avg_df], ignore_index=True)
+    if "national_average" in overlay:
+        national_avg_query = f"""
+                            select
+                                t.`year` as "Year",
+                                avg(ts.{selected_stat}) as "{selected_label}"
+                            from team_special ts
+                            inner join team t on ts.team_id = t.team_id
+                            group by t.`year`;
+                            """
+        national_avg_df = load_data_query(national_avg_query)
+        national_avg_df["Year"] = national_avg_df["Year"].astype(str)
+        national_avg_df["Legend"] = "National Average"
+        df = pd.concat([df, national_avg_df], ignore_index=True)
+    fig = px.line(df, x='Year', y=selected_label, title=f"{selected_college} {selected_label} Over Time", color='Legend')
+    fig.update_layout(xaxis_title="Year", yaxis_title=selected_label)
+    return fig
+
+@callback(
+    Output(component_id='team_standings_over_time_graph', component_property='figure'),
+    Input(component_id='college_dropdown', component_property='value'),
+    Input(component_id='team_standings_dropdown', component_property='value'),
+    Input(component_id='team_standings_dropdown', component_property='options'),
+    Input(component_id='team_standings_overlay', component_property='value'),
+    Input(component_id='year_dropdown', component_property='value')
+)
+def update_team_standings_over_time_graph(selected_college, selected_stat, options, overlay, selected_year):
+    if not selected_college or not selected_stat or not options:
+        raise PreventUpdate
+    selected_label = [x['label'] for x in options if x['value'] == selected_stat][0]
+    query = f"""
+            select
+                t.year as "Year",
+                ts.{selected_stat} as "{selected_label}"
+            from team_standing ts
+            inner join team t on ts.team_id = t.team_id
+            inner join college c on t.college_id = c.college_id
+            where c.college_name = "{selected_college}";
+            """
+    df = load_data_query(query)
+    df["Year"] = df["Year"].astype(str)
+    df["Legend"] = selected_college
+    if "conference_average" in overlay:
+        conference_query = f"""
+                            select
+                                con.conference_shorthand as "Conference"
+                            from team t
+                            inner join college c on t.college_id = c.college_id
+                            inner join conference con on t.conference_id = con.conference_id
+                            where c.college_name = "{selected_college}" and t.`year` = {selected_year};
+                            """
+        conference_df = load_data_query(conference_query)
+        conference_abbr = conference_df["Conference"].values[0]
+        conf_avg_query = f"""
+                        select
+                            t.`year` as "Year",
+                            avg(ts.{selected_stat}) as "{selected_label}"
+                        from team_standing ts
+                        inner join team t on ts.team_id = t.team_id
+                        inner join college c on t.college_id = c.college_id
+                        inner join conference con on t.conference_id = con.conference_id
+                        where con.conference_shorthand = "{conference_abbr}"
+                        group by t.`year`;
+                        """
+        conf_avg_df = load_data_query(conf_avg_query)
+        conf_avg_df["Year"] = conf_avg_df["Year"].astype(str)
+        conf_avg_df["Legend"] = f"{conference_abbr} Average"
+        df = pd.concat([df, conf_avg_df], ignore_index=True)
+    if "national_average" in overlay:
+        national_avg_query = f"""
+                            select
+                                t.`year` as "Year",
+                                avg(ts.{selected_stat}) as "{selected_label}"
+                            from team_standing ts
+                            inner join team t on ts.team_id = t.team_id
+                            group by t.`year`;
+                            """
+        national_avg_df = load_data_query(national_avg_query)
+        national_avg_df["Year"] = national_avg_df["Year"].astype(str)
+        national_avg_df["Legend"] = "National Average"
+        df = pd.concat([df, national_avg_df], ignore_index=True)
+    fig = px.line(df, x='Year', y=selected_label, title=f"{selected_college} {selected_label} Over Time", color='Legend')
+    fig.update_layout(xaxis_title="Year", yaxis_title=selected_label)
+    return fig
+
+# - Callbacks for by team/individual distribution tab
+@callback(
+    Output(component_id='team_player_stat_distribution_title', component_property='children'),
+    Input(component_id='college_dropdown', component_property='value'),
+    Input(component_id='year_dropdown', component_property='value')
+)
+def update_team_player_stat_distribution_title(selected_college, selected_year):
+    if not selected_college or not selected_year:
+        raise PreventUpdate
+    return f"{selected_year} {selected_college} Player Stats Distribution"
+
+@callback(
+    Output(component_id='player_rushing_stat_pie_graph', component_property='figure'),
+    Input(component_id='college_dropdown', component_property='value'),
+    Input(component_id='year_dropdown', component_property='value'),
+    Input(component_id='player_rushing_stat_dropdown', component_property='value'),
+    Input(component_id='player_rushing_stat_dropdown', component_property='options')
+)
+def update_player_rushing_stat_pie_graph(selected_college, selected_year, selected_stat, options):
+    if not selected_college or not selected_year or not selected_stat or not options:
+        raise PreventUpdate
+    selected_label = [x['label'] for x in options if x['value'] == selected_stat][0]
+    query = f"""
+            select
+                p.player_name as Player,
+                rs.{selected_stat} as "{selected_label}"
+            from rushing_stat rs
+            inner join roster r on rs.roster_id = r.roster_id
+            inner join player p on r.player_id = p.player_id
+            inner join team t on r.team_id = t.team_id
+            inner join college c on t.college_id = c.college_id
+            where c.college_name = "{selected_college}" and t.`year` = {selected_year};
+            """
+    df = load_data_query(query)
+    df = df[df[selected_label] > 0]
+    df = df.sort_values(by=selected_label, ascending=False)
+    fig = px.pie(df, values=selected_label, names='Player', title=f"{selected_year} {selected_college} {selected_label} Distribution")
+    return fig
+
+@callback(
+    Output(component_id='player_rushing_stat_bar_graph', component_property='figure'),
+    Input(component_id='college_dropdown', component_property='value'),
+    Input(component_id='year_dropdown', component_property='value'),
+    Input(component_id='player_rushing_stat_dropdown', component_property='value'),
+    Input(component_id='player_rushing_stat_dropdown', component_property='options')
+)
+def update_player_rushing_stat_bar_graph(selected_college, selected_year, selected_stat, options):
+    if not selected_college or not selected_year or not selected_stat or not options:
+        raise PreventUpdate
+    selected_label = [x['label'] for x in options if x['value'] == selected_stat][0]
+    query = f"""
+            select
+                p.player_name as Player,
+                rs.{selected_stat} as "{selected_label}"
+            from rushing_stat rs
+            inner join roster r on rs.roster_id = r.roster_id
+            inner join player p on r.player_id = p.player_id
+            inner join team t on r.team_id = t.team_id
+            inner join college c on t.college_id = c.college_id
+            where c.college_name = "{selected_college}" and t.`year` = {selected_year};
+            """
+    df = load_data_query(query)
+    df = df[df[selected_label] > 0]
+    df = df.sort_values(by=selected_label, ascending=False)
+    fig = px.bar(df, x='Player', y=selected_label, title=f"{selected_year} {selected_college} {selected_label} Distribution")
+    fig.update_layout(xaxis_title="Player", yaxis_title=selected_label)
+    return fig
+
+@callback(
+    Output(component_id='player_receiving_stat_pie_graph', component_property='figure'),
+    Input(component_id='college_dropdown', component_property='value'),
+    Input(component_id='year_dropdown', component_property='value'),
+    Input(component_id='player_receiving_stat_dropdown', component_property='value'),
+    Input(component_id='player_receiving_stat_dropdown', component_property='options')
+)
+def update_player_receiving_stat_pie_graph(selected_college, selected_year, selected_stat, options):
+    if not selected_college or not selected_year or not selected_stat or not options:
+        raise PreventUpdate
+    selected_label = [x['label'] for x in options if x['value'] == selected_stat][0]
+    query = f"""
+            select
+                p.player_name as Player,
+                rs.{selected_stat} as "{selected_label}"
+            from receiving_stat rs
+            inner join roster r on rs.roster_id = r.roster_id
+            inner join player p on r.player_id = p.player_id
+            inner join team t on r.team_id = t.team_id
+            inner join college c on t.college_id = c.college_id
+            where c.college_name = "{selected_college}" and t.`year` = {selected_year};
+            """
+    df = load_data_query(query)
+    df = df[df[selected_label] > 0]
+    df = df.sort_values(by=selected_label, ascending=False)
+    fig = px.pie(df, values=selected_label, names='Player', title=f"{selected_year} {selected_college} {selected_label} Distribution")
+    return fig
+
+@callback(
+    Output(component_id='player_receiving_stat_bar_graph', component_property='figure'),
+    Input(component_id='college_dropdown', component_property='value'),
+    Input(component_id='year_dropdown', component_property='value'),
+    Input(component_id='player_receiving_stat_dropdown', component_property='value'),
+    Input(component_id='player_receiving_stat_dropdown', component_property='options')
+)
+def update_player_receiving_stat_bar_graph(selected_college, selected_year, selected_stat, options):
+    if not selected_college or not selected_year or not selected_stat or not options:
+        raise PreventUpdate
+    selected_label = [x['label'] for x in options if x['value'] == selected_stat][0]
+    query = f"""
+            select
+                p.player_name as Player,
+                rs.{selected_stat} as "{selected_label}"
+            from receiving_stat rs
+            inner join roster r on rs.roster_id = r.roster_id
+            inner join player p on r.player_id = p.player_id
+            inner join team t on r.team_id = t.team_id
+            inner join college c on t.college_id = c.college_id
+            where c.college_name = "{selected_college}" and t.`year` = {selected_year};
+            """
+    df = load_data_query(query)
+    df = df[df[selected_label] > 0]
+    df = df.sort_values(by=selected_label, ascending=False)
+    fig = px.bar(df, x='Player', y=selected_label, title=f"{selected_year} {selected_college} {selected_label} Distribution")
+    fig.update_layout(xaxis_title="Player", yaxis_title=selected_label)
+    return fig
+
+@callback(
+    Output(component_id='player_passing_stat_pie_graph', component_property='figure'),
+    Input(component_id='college_dropdown', component_property='value'),
+    Input(component_id='year_dropdown', component_property='value'),
+    Input(component_id='player_passing_stat_dropdown', component_property='value'),
+    Input(component_id='player_passing_stat_dropdown', component_property='options')
+)
+def update_player_passing_stat_pie_graph(selected_college, selected_year, selected_stat, options):
+    if not selected_college or not selected_year or not selected_stat or not options:
+        raise PreventUpdate
+    selected_label = [x['label'] for x in options if x['value'] == selected_stat][0]
+    query = f"""
+            select
+                p.player_name as Player,
+                ps.{selected_stat} as "{selected_label}"
+            from passing_stat ps
+            inner join roster r on ps.roster_id = r.roster_id
+            inner join player p on r.player_id = p.player_id
+            inner join team t on r.team_id = t.team_id
+            inner join college c on t.college_id = c.college_id
+            where c.college_name = "{selected_college}" and t.`year` = {selected_year};
+            """
+    df = load_data_query(query)
+    df = df[df[selected_label] > 0]
+    df = df.sort_values(by=selected_label, ascending=False)
+    fig = px.pie(df, values=selected_label, names='Player', title=f"{selected_year} {selected_college} {selected_label} Distribution")
+    return fig
+
+@callback(
+    Output(component_id='player_passing_stat_bar_graph', component_property='figure'),
+    Input(component_id='college_dropdown', component_property='value'),
+    Input(component_id='year_dropdown', component_property='value'),
+    Input(component_id='player_passing_stat_dropdown', component_property='value'),
+    Input(component_id='player_passing_stat_dropdown', component_property='options')
+)
+def update_player_passing_stat_bar_graph(selected_college, selected_year, selected_stat, options):
+    if not selected_college or not selected_year or not selected_stat or not options:
+        raise PreventUpdate
+    selected_label = [x['label'] for x in options if x['value'] == selected_stat][0]
+    query = f"""
+            select
+                p.player_name as Player,
+                ps.{selected_stat} as "{selected_label}"
+            from passing_stat ps
+            inner join roster r on ps.roster_id = r.roster_id
+            inner join player p on r.player_id = p.player_id
+            inner join team t on r.team_id = t.team_id
+            inner join college c on t.college_id = c.college_id
+            where c.college_name = "{selected_college}" and t.`year` = {selected_year};
+            """
+    df = load_data_query(query)
+    df = df[df[selected_label] > 0]
+    df = df.sort_values(by=selected_label, ascending=False)
+    fig = px.bar(df, x='Player', y=selected_label, title=f"{selected_year} {selected_college} {selected_label} Distribution")
+    fig.update_layout(xaxis_title="Player", yaxis_title=selected_label)
+    return fig
+
+@callback(
+    Output(component_id='team_rushing_vs_passing_stat_pie_graph', component_property='figure'),
+    Input(component_id='college_dropdown', component_property='value'),
+    Input(component_id='year_dropdown', component_property='value'),
+    Input(component_id='team_rushing_vs_passing_stat_dropdown', component_property='value'),
+    Input(component_id='team_rushing_vs_passing_stat_dropdown', component_property='options')
+)
+def update_team_rushing_vs_passing_stat_pie_graph(selected_college, selected_year, selected_stat, options):
+    if not selected_college or not selected_year or not selected_stat or not options:
+        raise PreventUpdate
+    selected_label = [x['label'] for x in options if x['value'] == selected_stat][0]
+    rushing_query = f"""
+                    select
+                        "Rushing" as "Stat",
+                        sum(rs.rushing_{selected_stat}) as "{selected_label}"
+                    from rushing_stat rs
+                    inner join roster r on rs.roster_id = r.roster_id
+                    inner join team t on r.team_id = t.team_id
+                    inner join college c on t.college_id = c.college_id
+                    where c.college_name = "{selected_college}" and t.`year` = {selected_year}
+                    group by c.college_name;
+                    """
+    df = load_data_query(rushing_query)
+    passing_query = f"""
+                    select
+                        "Passing" as "Stat",
+                        sum(ps.passing_{selected_stat}) as "{selected_label}"
+                    from passing_stat ps
+                    inner join roster r on ps.roster_id = r.roster_id
+                    inner join team t on r.team_id = t.team_id
+                    inner join college c on t.college_id = c.college_id
+                    where c.college_name = "{selected_college}" and t.`year` = {selected_year}
+                    group by c.college_name;
+                    """
+    passing_df = load_data_query(passing_query)
+    df = pd.concat([df, passing_df], ignore_index=True)
+    fig = px.pie(df, values=selected_label, names='Stat', title=f"{selected_year} {selected_college} Rushing vs Passing {selected_label} Distribution")
+    return fig
+
 # Callbacks for by conference tab
 @callback(
     Output(component_id='conference_dropdown', component_property='options'),
@@ -2500,6 +3926,403 @@ def update_conference_individual_scoring_table(selected_year, selected_conferenc
     columns = [{'name': col, 'id': col} for col in df.columns]
     return df.to_dict('records'), columns
 
+# - Callbacks for confernce/stats over time tab
+@callback(
+    Output(component_id='conference_stats_over_time_title', component_property='children'),
+    Input(component_id='conference_dropdown', component_property='value')
+)
+def update_conference_stats_over_time_title(selected_conference):
+    if not selected_conference:
+        raise PreventUpdate
+    return f"{selected_conference} Stats Over Time"
+
+@callback(
+    Output(component_id='conference_offense_over_time_graph', component_property='figure'),
+    Input(component_id='conference_dropdown', component_property='value'),
+    Input(component_id='conference_offense_dropdown', component_property='value'),
+    Input(component_id='conference_offense_dropdown', component_property='options'),
+    Input(component_id='conference_offense_overlay', component_property='value')
+)
+def update_conference_offense_over_time_graph(selected_conference, selected_stat, options, overlay):
+    if not selected_conference or not selected_stat or not options:
+        raise PreventUpdate
+    selected_label = [x['label'] for x in options if x['value'] == selected_stat][0]
+    query = f"""
+            select 
+                t.`year` as "Year",
+                avg(toff.{selected_stat}) as "{selected_label}"
+            from team_offense toff
+            inner join team t on toff.team_id = t.team_id
+            inner join conference c on t.conference_id = c.conference_id
+            where c.conference_shorthand = "{selected_conference}"
+            group by t.`year`;
+            """
+    df = load_data_query(query)
+    df["Year"] = df["Year"].astype(str)
+    df["Legend"] = f"{selected_conference} Average"
+    if "national_average" in overlay:
+        national_avg_query = f"""
+                            select
+                                t.`year` as "Year",
+                                avg(toff.{selected_stat}) as "{selected_label}"
+                            from team_offense toff
+                            inner join team t on toff.team_id = t.team_id
+                            group by t.`year`;
+                            """
+        national_avg_df = load_data_query(national_avg_query)
+        national_avg_df["Year"] = national_avg_df["Year"].astype(str)
+        national_avg_df["Legend"] = "National Average"
+        df = pd.concat([df, national_avg_df], ignore_index=True)
+    fig = px.line(df, x='Year', y=selected_label, title=f"{selected_conference} Average {selected_label} Over Time", color='Legend')
+    fig.update_layout(xaxis_title="Year", yaxis_title=selected_label)
+    return fig
+
+@callback(
+    Output(component_id='conference_defense_over_time_graph', component_property='figure'),
+    Input(component_id='conference_dropdown', component_property='value'),
+    Input(component_id='conference_defense_dropdown', component_property='value'),
+    Input(component_id='conference_defense_dropdown', component_property='options'),
+    Input(component_id='conference_defense_overlay', component_property='value')
+)
+def update_conference_defense_over_time_graph(selected_conference, selected_stat, options, overlay):
+    if not selected_conference or not selected_stat or not options:
+        raise PreventUpdate
+    selected_label = [x['label'] for x in options if x['value'] == selected_stat][0]
+    query = f"""
+            select 
+                t.`year` as "Year",
+                avg(tdef.{selected_stat}) as "{selected_label}"
+            from team_defense tdef
+            inner join team t on tdef.team_id = t.team_id
+            inner join conference c on t.conference_id = c.conference_id
+            where c.conference_shorthand = "{selected_conference}"
+            group by t.`year`;
+            """
+    df = load_data_query(query)
+    df["Year"] = df["Year"].astype(str)
+    df["Legend"] = f"{selected_conference} Average"
+    if "national_average" in overlay:
+        national_avg_query = f"""
+                            select
+                                t.`year` as "Year",
+                                avg(tdef.{selected_stat}) as "{selected_label}"
+                            from team_defense tdef
+                            inner join team t on tdef.team_id = t.team_id
+                            group by t.`year`;
+                            """
+        national_avg_df = load_data_query(national_avg_query)
+        national_avg_df["Year"] = national_avg_df["Year"].astype(str)
+        national_avg_df["Legend"] = "National Average"
+        df = pd.concat([df, national_avg_df], ignore_index=True)
+    fig = px.line(df, x='Year', y=selected_label, title=f"{selected_conference} Average {selected_label} Over Time", color='Legend')
+    fig.update_layout(xaxis_title="Year", yaxis_title=selected_label)
+    return fig
+
+@callback(
+    Output(component_id='conference_special_over_time_graph', component_property='figure'),
+    Input(component_id='conference_dropdown', component_property='value'),
+    Input(component_id='conference_special_dropdown', component_property='value'),
+    Input(component_id='conference_special_dropdown', component_property='options'),
+    Input(component_id='conference_special_overlay', component_property='value')
+)
+def update_conference_special_over_time_graph(selected_conference, selected_stat, options, overlay):
+    if not selected_conference or not selected_stat or not options:
+        raise PreventUpdate
+    selected_label = [x['label'] for x in options if x['value'] == selected_stat][0]
+    query = f"""
+            select 
+                t.`year` as "Year",
+                avg(ts.{selected_stat}) as "{selected_label}"
+            from team_special ts
+            inner join team t on ts.team_id = t.team_id
+            inner join conference c on t.conference_id = c.conference_id
+            where c.conference_shorthand = "{selected_conference}"
+            group by t.`year`;
+            """
+    df = load_data_query(query)
+    df["Year"] = df["Year"].astype(str)
+    df["Legend"] = f"{selected_conference} Average"
+    if "national_average" in overlay:
+        national_avg_query = f"""
+                            select
+                                t.`year` as "Year",
+                                avg(ts.{selected_stat}) as "{selected_label}"
+                            from team_special ts
+                            inner join team t on ts.team_id = t.team_id
+                            group by t.`year`;
+                            """
+        national_avg_df = load_data_query(national_avg_query)
+        national_avg_df["Year"] = national_avg_df["Year"].astype(str)
+        national_avg_df["Legend"] = "National Average"
+        df = pd.concat([df, national_avg_df], ignore_index=True)
+    fig = px.line(df, x='Year', y=selected_label, title=f"{selected_conference} Average {selected_label} Over Time", color='Legend')
+    fig.update_layout(xaxis_title="Year", yaxis_title=selected_label)
+    return fig
+
+@callback(
+    Output(component_id='conference_standings_over_time_graph', component_property='figure'),
+    Input(component_id='conference_dropdown', component_property='value'),
+    Input(component_id='conference_standings_dropdown', component_property='value'),
+    Input(component_id='conference_standings_dropdown', component_property='options'),
+    Input(component_id='conference_standings_overlay', component_property='value')
+)
+def update_conference_standings_over_time_graph(selected_conference, selected_stat, options, overlay):
+    if not selected_conference or not selected_stat or not options:
+        raise PreventUpdate
+    selected_label = [x['label'] for x in options if x['value'] == selected_stat][0]
+    query = f"""
+            select 
+                t.`year` as "Year",
+                avg(ts.{selected_stat}) as "{selected_label}"
+            from team_standing ts
+            inner join team t on ts.team_id = t.team_id
+            inner join conference c on t.conference_id = c.conference_id
+            where c.conference_shorthand = "{selected_conference}"
+            group by t.`year`;
+            """
+    df = load_data_query(query)
+    df["Year"] = df["Year"].astype(str)
+    df["Legend"] = f"{selected_conference} Average"
+    if "national_average" in overlay:
+        national_avg_query = f"""
+                            select
+                                t.`year` as "Year",
+                                avg(ts.{selected_stat}) as "{selected_label}"
+                            from team_standing ts
+                            inner join team t on ts.team_id = t.team_id
+                            group by t.`year`;
+                            """
+        national_avg_df = load_data_query(national_avg_query)
+        national_avg_df["Year"] = national_avg_df["Year"].astype(str)
+        national_avg_df["Legend"] = "National Average"
+        df = pd.concat([df, national_avg_df], ignore_index=True)
+    fig = px.line(df, x='Year', y=selected_label, title=f"{selected_conference} Average {selected_label} Over Time", color='Legend')
+    fig.update_layout(xaxis_title="Year", yaxis_title=selected_label)
+    return fig
+
+# - Callbacks for conferece/team distribution tab
+@callback(
+    Output(component_id='conference_team_stat_distribution_title', component_property='children'),
+    Input(component_id='conference_year_dropdown', component_property='value'),
+    Input(component_id='conference_dropdown', component_property='value')
+)
+def update_conference_team_stat_distribution_title(selected_year, selected_conference):
+    if not selected_year or not selected_conference:
+        raise PreventUpdate
+    return f"{selected_year} {selected_conference} Team Stat Distribution"
+
+@callback(
+    Output(component_id='conference_rushing_stat_pie_graph', component_property='figure'),
+    Input(component_id='conference_year_dropdown', component_property='value'),
+    Input(component_id='conference_dropdown', component_property='value'),
+    Input(component_id='conference_rushing_stat_dropdown', component_property='value'),
+    Input(component_id='conference_rushing_stat_dropdown', component_property='options')
+)
+def update_conference_rushing_stat_pie_graph(selected_year, selected_conference, selected_stat, options):
+    if not selected_year or not selected_conference or not selected_stat or not options:
+        raise PreventUpdate
+    selected_label = [x['label'] for x in options if x['value'] == selected_stat][0]
+    query = f"""
+            select
+                c.college_name as College,
+                sum(rs.{selected_stat}) as "{selected_label}"
+            from rushing_stat rs
+            inner join roster r on rs.roster_id = r.roster_id
+            inner join team t on r.team_id = t.team_id
+            inner join college c on t.college_id = c.college_id
+            inner join conference con on t.conference_id = con.conference_id
+            where con.conference_shorthand = "{selected_conference}" and t.`year` = {selected_year}
+            group by c.college_name;
+            """
+    df = load_data_query(query)
+    df = df.sort_values(by=selected_label, ascending=False)
+    fig = px.pie(df, values=selected_label, names='College', title=f"{selected_year} {selected_conference} {selected_label} Distribution")
+    return fig
+
+@callback(
+    Output(component_id='conference_rushing_stat_bar_graph', component_property='figure'),
+    Input(component_id='conference_year_dropdown', component_property='value'),
+    Input(component_id='conference_dropdown', component_property='value'),
+    Input(component_id='conference_rushing_stat_dropdown', component_property='value'),
+    Input(component_id='conference_rushing_stat_dropdown', component_property='options')
+)
+def update_conference_rushing_stat_bar_graph(selected_year, selected_conference, selected_stat, options):
+    if not selected_year or not selected_conference or not selected_stat or not options:
+        raise PreventUpdate
+    selected_label = [x['label'] for x in options if x['value'] == selected_stat][0]
+    query = f"""
+            select
+                c.college_name as College,
+                sum(rs.{selected_stat}) as "{selected_label}"
+            from rushing_stat rs
+            inner join roster r on rs.roster_id = r.roster_id
+            inner join team t on r.team_id = t.team_id
+            inner join college c on t.college_id = c.college_id
+            inner join conference con on t.conference_id = con.conference_id
+            where con.conference_shorthand = "{selected_conference}" and t.`year` = {selected_year}
+            group by c.college_name;
+            """
+    df = load_data_query(query)
+    df = df.sort_values(by=selected_label, ascending=False)
+    fig = px.bar(df, x='College', y=selected_label, title=f"{selected_year} {selected_conference} {selected_label} Distribution")
+    fig.update_layout(xaxis_title="College", yaxis_title=selected_label)
+    return fig
+
+@callback(
+    Output(component_id='conference_receiving_stat_pie_graph', component_property='figure'),
+    Input(component_id='conference_year_dropdown', component_property='value'),
+    Input(component_id='conference_dropdown', component_property='value'),
+    Input(component_id='conference_receiving_stat_dropdown', component_property='value'),
+    Input(component_id='conference_receiving_stat_dropdown', component_property='options') 
+)
+def update_conference_receiving_stat_pie_graph(selected_year, selected_conference, selected_stat, options):
+    if not selected_year or not selected_conference or not selected_stat or not options:
+        raise PreventUpdate
+    selected_label = [x['label'] for x in options if x['value'] == selected_stat][0]
+    query = f"""
+            select
+                c.college_name as College,
+                sum(rs.{selected_stat}) as "{selected_label}"
+            from receiving_stat rs
+            inner join roster r on rs.roster_id = r.roster_id
+            inner join team t on r.team_id = t.team_id
+            inner join college c on t.college_id = c.college_id
+            inner join conference con on t.conference_id = con.conference_id
+            where con.conference_shorthand = "{selected_conference}" and t.`year` = {selected_year}
+            group by c.college_name;
+            """
+    df = load_data_query(query)
+    df = df.sort_values(by=selected_label, ascending=False)
+    fig = px.pie(df, values=selected_label, names='College', title=f"{selected_year} {selected_conference} {selected_label} Distribution")
+    return fig
+
+@callback(
+    Output(component_id='conference_receiving_stat_bar_graph', component_property='figure'),
+    Input(component_id='conference_year_dropdown', component_property='value'),
+    Input(component_id='conference_dropdown', component_property='value'),
+    Input(component_id='conference_receiving_stat_dropdown', component_property='value'),
+    Input(component_id='conference_receiving_stat_dropdown', component_property='options')
+)
+def update_receiving_stat_bar_graph(selected_year, selected_conference, selected_stat, options):
+    if not selected_year or not selected_conference or not selected_stat or not options:
+        raise PreventUpdate
+    selected_label = [x['label'] for x in options if x['value'] == selected_stat][0]
+    query = f"""
+            select
+                c.college_name as College,
+                sum(rs.{selected_stat}) as "{selected_label}"
+            from receiving_stat rs
+            inner join roster r on rs.roster_id = r.roster_id
+            inner join team t on r.team_id = t.team_id
+            inner join college c on t.college_id = c.college_id
+            inner join conference con on t.conference_id = con.conference_id
+            where con.conference_shorthand = "{selected_conference}" and t.`year` = {selected_year}
+            group by c.college_name;
+            """
+    df = load_data_query(query)
+    df = df.sort_values(by=selected_label, ascending=False)
+    fig = px.bar(df, x='College', y=selected_label, title=f"{selected_year} {selected_conference} {selected_label} Distribution")
+    fig.update_layout(xaxis_title="College", yaxis_title=selected_label)
+    return fig
+
+@callback(
+    Output(component_id='conference_passing_stat_pie_graph', component_property='figure'),
+    Input(component_id='conference_year_dropdown', component_property='value'),
+    Input(component_id='conference_dropdown', component_property='value'),
+    Input(component_id='conference_passing_stat_dropdown', component_property='value'),
+    Input(component_id='conference_passing_stat_dropdown', component_property='options')
+)
+def update_conference_passing_stat_pie_graph(selected_year, selected_conference, selected_stat, options):
+    if not selected_year or not selected_conference or not selected_stat or not options:
+        raise PreventUpdate
+    selected_label = [x['label'] for x in options if x['value'] == selected_stat][0]
+    query = f"""
+            select
+                c.college_name as College,
+                sum(ps.{selected_stat}) as "{selected_label}"
+            from passing_stat ps
+            inner join roster r on ps.roster_id = r.roster_id
+            inner join team t on r.team_id = t.team_id
+            inner join college c on t.college_id = c.college_id
+            inner join conference con on t.conference_id = con.conference_id
+            where con.conference_shorthand = "{selected_conference}" and t.`year` = {selected_year}
+            group by c.college_name;
+            """
+    df = load_data_query(query)
+    df = df.sort_values(by=selected_label, ascending=False)
+
+    fig = px.pie(df, values=selected_label, names='College', title=f"{selected_year} {selected_conference} {selected_label} Distribution")
+    return fig
+
+@callback(
+    Output(component_id='conference_passing_stat_bar_graph', component_property='figure'),
+    Input(component_id='conference_year_dropdown', component_property='value'),
+    Input(component_id='conference_dropdown', component_property='value'),
+    Input(component_id='conference_passing_stat_dropdown', component_property='value'),
+    Input(component_id='conference_passing_stat_dropdown', component_property='options')
+)
+def update_conference_passing_stat_bar_graph(selected_year, selected_conference, selected_stat, options):
+    if not selected_year or not selected_conference or not selected_stat or not options:
+        raise PreventUpdate
+    selected_label = [x['label'] for x in options if x['value'] == selected_stat][0]
+    query = f"""
+            select
+                c.college_name as College,
+                sum(ps.{selected_stat}) as "{selected_label}"
+            from passing_stat ps
+            inner join roster r on ps.roster_id = r.roster_id
+            inner join team t on r.team_id = t.team_id
+            inner join college c on t.college_id = c.college_id
+            inner join conference con on t.conference_id = con.conference_id
+            where con.conference_shorthand = "{selected_conference}" and t.`year` = {selected_year}
+            group by c.college_name;
+            """
+    df = load_data_query(query)
+    df = df.sort_values(by=selected_label, ascending=False)
+    fig = px.bar(df, x='College', y=selected_label, title=f"{selected_year} {selected_conference} {selected_label} Distribution")
+    fig.update_layout(xaxis_title="College", yaxis_title=selected_label)
+    return fig
+
+@callback(
+    Output(component_id='conference_rushing_vs_passing_stat_pie_graph', component_property='figure'),
+    Input(component_id='conference_year_dropdown', component_property='value'),
+    Input(component_id='conference_dropdown', component_property='value'),
+    Input(component_id='conference_rushing_vs_passing_stat_dropdown', component_property='value'),
+    Input(component_id='conference_rushing_vs_passing_stat_dropdown', component_property='options')
+)
+def update_conference_rushing_vs_passing_stat_pie_graph(selected_year, selected_conference, selected_stat, options):
+    if not selected_year or not selected_conference or not selected_stat or not options:
+        raise PreventUpdate
+    selected_label = [x['label'] for x in options if x['value'] == selected_stat][0]
+    rushing_query = f"""
+                    select
+                        "Rushing" as "Type",
+                        sum(rs.rushing_{selected_stat}) as "{selected_label}"
+                    from rushing_stat rs
+                    inner join roster r on rs.roster_id = r.roster_id
+                    inner join team t on r.team_id = t.team_id
+                    inner join conference con on t.conference_id = con.conference_id
+                    where con.conference_shorthand = "{selected_conference}" and t.`year` = {selected_year}
+                    group by con.conference_shorthand;
+                    """
+    df = load_data_query(rushing_query)
+    passing_query = f"""
+                    select
+                        "Passing" as "Type",
+                        sum(ps.passing_{selected_stat}) as "{selected_label}"
+                    from passing_stat ps
+                    inner join roster r on ps.roster_id = r.roster_id
+                    inner join team t on r.team_id = t.team_id
+                    inner join conference con on t.conference_id = con.conference_id
+                    where con.conference_shorthand = "{selected_conference}" and t.`year` = {selected_year}
+                    group by con.conference_shorthand;
+                    """
+    passing_df = load_data_query(passing_query)
+    df = pd.concat([df, passing_df], ignore_index=True)
+    fig = px.pie(df, values=selected_label, names='Type', title=f"{selected_year} {selected_conference} Rushing vs Passing {selected_label} Distribution")
+
+    return fig
+
 # Callbacks for national tab
 @callback(
     Output(component_id='national_page_title', component_property='children'),
@@ -2973,5 +4796,309 @@ def update_national_individual_scoring_table(selected_year):
     df = load_data_query(query)
     columns = [{'name': col, 'id': col} for col in df.columns]
     return df.to_dict('records'), columns
+
+# - Callbacks for national/stats over time tab
+@callback(
+    Output(component_id='national_offense_over_time_graph', component_property='figure'),
+    Input(component_id='national_offense_dropdown', component_property='value'),
+    Input(component_id='national_offense_dropdown', component_property='options'),
+)
+def update_national_offense_over_time_graph(selected_stat, options):
+    if not selected_stat or not options:
+        raise PreventUpdate
+    selected_label = [x['label'] for x in options if x['value'] == selected_stat][0]
+    query = f"""
+            select 
+                t.`year` as "Year",
+                avg(toff.{selected_stat}) as "{selected_label}"
+            from team_offense toff
+            inner join team t on toff.team_id = t.team_id
+            group by t.`year`;
+            """
+    df = load_data_query(query)
+    df["Year"] = df["Year"].astype(str)
+    fig = px.line(df, x='Year', y=selected_label, title=f"National Average {selected_label} Over Time")
+    fig.update_layout(xaxis_title="Year", yaxis_title=selected_label)
+    return fig
+
+@callback(
+    Output(component_id='national_defense_over_time_graph', component_property='figure'),
+    Input(component_id='national_defense_dropdown', component_property='value'),
+    Input(component_id='national_defense_dropdown', component_property='options'),
+)
+def update_national_defense_over_time_graph(selected_stat, options):
+    if not selected_stat or not options:
+        raise PreventUpdate
+    selected_label = [x['label'] for x in options if x['value'] == selected_stat][0]
+    query = f"""
+            select 
+                t.`year` as "Year",
+                avg(tdef.{selected_stat}) as "{selected_label}"
+            from team_defense tdef
+            inner join team t on tdef.team_id = t.team_id
+            group by t.`year`;
+            """
+    df = load_data_query(query)
+    df["Year"] = df["Year"].astype(str)
+    fig = px.line(df, x='Year', y=selected_label, title=f"National Average {selected_label} Over Time")
+    fig.update_layout(xaxis_title="Year", yaxis_title=selected_label)
+    return fig
+
+@callback(
+    Output(component_id='national_special_over_time_graph', component_property='figure'),
+    Input(component_id='national_special_dropdown', component_property='value'),
+    Input(component_id='national_special_dropdown', component_property='options'),
+)
+def update_national_special_over_time_graph(selected_stat, options):
+    if not selected_stat or not options:
+        raise PreventUpdate
+    selected_label = [x['label'] for x in options if x['value'] == selected_stat][0]
+    query = f"""
+            select 
+                t.`year` as "Year",
+                avg(ts.{selected_stat}) as "{selected_label}"
+            from team_special ts
+            inner join team t on ts.team_id = t.team_id
+            group by t.`year`;
+            """
+    df = load_data_query(query)
+    df["Year"] = df["Year"].astype(str)
+    fig = px.line(df, x='Year', y=selected_label, title=f"National Average {selected_label} Over Time")
+    fig.update_layout(xaxis_title="Year", yaxis_title=selected_label)
+    return fig
+
+@callback(
+    Output(component_id='national_standings_over_time_graph', component_property='figure'),
+    Input(component_id='national_standings_dropdown', component_property='value'),
+    Input(component_id='national_standings_dropdown', component_property='options'),
+)
+def update_national_standings_over_time_graph(selected_stat, options):
+    if not selected_stat or not options:
+        raise PreventUpdate
+    selected_label = [x['label'] for x in options if x['value'] == selected_stat][0]
+    query = f"""
+            select 
+                t.`year` as "Year",
+                avg(ts.{selected_stat}) as "{selected_label}"
+            from team_standing ts
+            inner join team t on ts.team_id = t.team_id
+            group by t.`year`;
+            """
+    df = load_data_query(query)
+    df["Year"] = df["Year"].astype(str)
+    fig = px.line(df, x='Year', y=selected_label, title=f"National Average {selected_label} Over Time")
+    fig.update_layout(xaxis_title="Year", yaxis_title=selected_label)
+    return fig
+
+# - Callbacks for national/conference stat distribution tab
+@callback(
+    Output(component_id='national_conference_stat_distribution_title', component_property='children'),
+    Input(component_id='national_year_dropdown', component_property='value')
+)
+def update_national_conference_stat_distribution_title(selected_year):
+    if not selected_year:
+        raise PreventUpdate
+    return f"{selected_year} National Conference Stat Distribution"
+
+@callback(
+    Output(component_id='national_rushing_stat_pie_graph', component_property='figure'),
+    Input(component_id='national_year_dropdown', component_property='value'),
+    Input(component_id='national_rushing_stat_dropdown', component_property='value'),
+    Input(component_id='national_rushing_stat_dropdown', component_property='options')
+)
+def update_national_rushing_stat_pie_graph(selected_year, selected_stat, options):
+    if not selected_year or not selected_stat or not options:
+        raise PreventUpdate
+    selected_label = [x['label'] for x in options if x['value'] == selected_stat][0]
+    query = f"""
+            select
+                con.conference_shorthand as Conference,
+                sum(rs.{selected_stat}) as "{selected_label}"
+            from rushing_stat rs
+            inner join roster r on rs.roster_id = r.roster_id
+            inner join team t on r.team_id = t.team_id
+            inner join college c on t.college_id = c.college_id
+            inner join conference con on t.conference_id = con.conference_id
+            where t.`year` = {selected_year}
+            group by con.conference_shorthand;
+            """
+    df = load_data_query(query)
+    df = df.sort_values(by=selected_label, ascending=False)
+    fig = px.pie(df, values=selected_label, names='Conference', title=f"{selected_year} {selected_label} Distribution")
+    return fig
+
+@callback(
+    Output(component_id='national_rushing_stat_bar_graph', component_property='figure'),
+    Input(component_id='national_year_dropdown', component_property='value'),
+    Input(component_id='national_rushing_stat_dropdown', component_property='value'),
+    Input(component_id='national_rushing_stat_dropdown', component_property='options')
+)
+def update_national_rushing_stat_bar_graph(selected_year, selected_stat, options):
+    if not selected_year or not selected_stat or not options:
+        raise PreventUpdate
+    selected_label = [x['label'] for x in options if x['value'] == selected_stat][0]
+    query = f"""
+            select
+                con.conference_shorthand as Conference,
+                sum(rs.{selected_stat}) as "{selected_label}"
+            from rushing_stat rs
+            inner join roster r on rs.roster_id = r.roster_id
+            inner join team t on r.team_id = t.team_id
+            inner join college c on t.college_id = c.college_id
+            inner join conference con on t.conference_id = con.conference_id
+            where t.`year` = {selected_year}
+            group by con.conference_shorthand;
+            """
+    df = load_data_query(query)
+    df = df.sort_values(by=selected_label, ascending=False)
+    fig = px.bar(df, x='Conference', y=selected_label, title=f"{selected_year} {selected_label} Distribution")
+    fig.update_layout(xaxis_title="Conference", yaxis_title=selected_label)
+    return fig
+
+@callback(
+    Output(component_id='national_receiving_stat_pie_graph', component_property='figure'),
+    Input(component_id='national_year_dropdown', component_property='value'),
+    Input(component_id='national_receiving_stat_dropdown', component_property='value'),
+    Input(component_id='national_receiving_stat_dropdown', component_property='options')
+)
+def update_national_receiving_stat_pie_graph(selected_year, selected_stat, options):
+    if not selected_year or not selected_stat or not options:
+        raise PreventUpdate
+    selected_label = [x['label'] for x in options if x['value'] == selected_stat][0]
+    query = f"""
+            select
+                con.conference_shorthand as Conference,
+                sum(rs.{selected_stat}) as "{selected_label}"
+            from receiving_stat rs
+            inner join roster r on rs.roster_id = r.roster_id
+            inner join team t on r.team_id = t.team_id
+            inner join college c on t.college_id = c.college_id
+            inner join conference con on t.conference_id = con.conference_id
+            where t.`year` = {selected_year}
+            group by con.conference_shorthand;
+            """
+    df = load_data_query(query)
+    df = df.sort_values(by=selected_label, ascending=False)
+    fig = px.pie(df, values=selected_label, names='Conference', title=f"{selected_year} {selected_label} Distribution")
+    return fig
+
+@callback(
+    Output(component_id='national_receiving_stat_bar_graph', component_property='figure'),
+    Input(component_id='national_year_dropdown', component_property='value'),
+    Input(component_id='national_receiving_stat_dropdown', component_property='value'),
+    Input(component_id='national_receiving_stat_dropdown', component_property='options')
+)
+def update_national_receiving_stat_bar_graph(selected_year, selected_stat, options):
+    if not selected_year or not selected_stat or not options:
+        raise PreventUpdate
+    selected_label = [x['label'] for x in options if x['value'] == selected_stat][0]
+    query = f"""
+            select
+                con.conference_shorthand as Conference,
+                sum(rs.{selected_stat}) as "{selected_label}"
+            from receiving_stat rs
+            inner join roster r on rs.roster_id = r.roster_id
+            inner join team t on r.team_id = t.team_id
+            inner join college c on t.college_id = c.college_id
+            inner join conference con on t.conference_id = con.conference_id
+            where t.`year` = {selected_year}
+            group by con.conference_shorthand;
+            """
+    df = load_data_query(query)
+    df = df.sort_values(by=selected_label, ascending=False)
+    fig = px.bar(df, x='Conference', y=selected_label, title=f"{selected_year} {selected_label} Distribution")
+    fig.update_layout(xaxis_title="Conference", yaxis_title=selected_label)
+    return fig
+
+@callback(
+    Output(component_id='national_passing_stat_pie_graph', component_property='figure'),
+    Input(component_id='national_year_dropdown', component_property='value'),
+    Input(component_id='national_passing_stat_dropdown', component_property='value'),
+    Input(component_id='national_passing_stat_dropdown', component_property='options')
+)
+def update_national_passing_stat_pie_graph(selected_year, selected_stat, options):
+    if not selected_year or not selected_stat or not options:
+        raise PreventUpdate
+    selected_label = [x['label'] for x in options if x['value'] == selected_stat][0]
+    query = f"""
+            select
+                con.conference_shorthand as Conference,
+                sum(ps.{selected_stat}) as "{selected_label}"
+            from passing_stat ps
+            inner join roster r on ps.roster_id = r.roster_id
+            inner join team t on r.team_id = t.team_id
+            inner join college c on t.college_id = c.college_id
+            inner join conference con on t.conference_id = con.conference_id
+            where t.`year` = {selected_year}
+            group by con.conference_shorthand;
+            """
+    df = load_data_query(query)
+    df = df.sort_values(by=selected_label, ascending=False)
+    fig = px.pie(df, values=selected_label, names='Conference', title=f"{selected_year} {selected_label} Distribution")
+    return fig
+
+@callback(
+    Output(component_id='national_passing_stat_bar_graph', component_property='figure'),
+    Input(component_id='national_year_dropdown', component_property='value'),
+    Input(component_id='national_passing_stat_dropdown', component_property='value'),
+    Input(component_id='national_passing_stat_dropdown', component_property='options')
+)
+def update_national_passing_stat_bar_graph(selected_year, selected_stat, options):
+    if not selected_year or not selected_stat or not options:
+        raise PreventUpdate
+    selected_label = [x['label'] for x in options if x['value'] == selected_stat][0]
+    query = f"""
+            select
+                con.conference_shorthand as Conference,
+                sum(ps.{selected_stat}) as "{selected_label}"
+            from passing_stat ps
+            inner join roster r on ps.roster_id = r.roster_id
+            inner join team t on r.team_id = t.team_id
+            inner join college c on t.college_id = c.college_id
+            inner join conference con on t.conference_id = con.conference_id
+            where t.`year` = {selected_year}
+            group by con.conference_shorthand;
+            """
+    df = load_data_query(query)
+    df = df.sort_values(by=selected_label, ascending=False)
+    fig = px.bar(df, x='Conference', y=selected_label, title=f"{selected_year} {selected_label} Distribution")
+    fig.update_layout(xaxis_title="Conference", yaxis_title=selected_label)
+    return fig
+
+@callback(
+    Output(component_id='national_rushing_vs_passing_stat_pie_graph', component_property='figure'),
+    Input(component_id='national_year_dropdown', component_property='value'),
+    Input(component_id='national_rushing_vs_passing_stat_dropdown', component_property='value'),
+    Input(component_id='national_rushing_vs_passing_stat_dropdown', component_property='options')
+)
+def update_national_rushing_vs_receiving_stat_pie_graph(selected_year, selected_stat, options):
+    if not selected_year or not selected_stat or not options:
+        raise PreventUpdate
+    selected_label = [x['label'] for x in options if x['value'] == selected_stat][0]
+    rushing_query = f"""
+                    select
+                        "Rushing" as "Type",
+                        sum(rs.rushing_{selected_stat}) as "{selected_label}"
+                    from rushing_stat rs
+                    inner join roster r on rs.roster_id = r.roster_id
+                    inner join team t on r.team_id = t.team_id
+                    where t.`year` = {selected_year}
+                    group by t.`year`;
+                    """
+    df = load_data_query(rushing_query)
+    passing_query = f"""
+                    select
+                        "Passing" as "Type",
+                        sum(ps.passing_{selected_stat}) as "{selected_label}"
+                    from passing_stat ps
+                    inner join roster r on ps.roster_id = r.roster_id
+                    inner join team t on r.team_id = t.team_id
+                    where t.`year` = {selected_year}
+                    group by t.`year`;
+                    """
+    passing_df = load_data_query(passing_query)
+    df = pd.concat([df, passing_df], ignore_index=True)
+    fig = px.pie(df, values=selected_label, names='Type', title=f"{selected_year} {selected_label} Distribution")
+    return fig
 
 app.run(debug=True, host='0.0.0.0', port=8050)
